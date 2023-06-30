@@ -3,3 +3,5 @@
 [![Build Status](https://app.travis-ci.com/opencats/OpenCATS.svg?branch=master)](https://app.travis-ci.com/opencats/OpenCATS)
 
 new imagery and some (slow) bootstrap changes.
+
+Logon page - bootstrapped
