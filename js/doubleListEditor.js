@@ -300,7 +300,7 @@ function doubleListEditorDumpListLeft()
     {
         sOut = sOut + ',' + sOutModified;
     }
-    
+
     //Saftey:  Unless we have deleted something, don't allow deletes.
     if (doubleAllowDeleteLeft)
     {
@@ -316,8 +316,8 @@ function doubleListGetArrayFromCSVText(theText)
     if (theText.indexOf('&DELETEALLOWED&') != -1)
     {
          theText = theText.substring(0,theText.indexOf('&DELETEALLOWED&'));
-    }    
-    
+    }
+
     if (theText == '')
     {
         return Array();
@@ -402,8 +402,8 @@ function doubleListEditorNewValue()
 
 function doubleListEditorDeleteValue()
 {
-    doubleAllowDeleteRight = true;    
-    
+    doubleAllowDeleteRight = true;
+
     var listObject = document.getElementById('doubleListEditorSelectRight');
 
     if (listObject.value == '')
@@ -441,8 +441,8 @@ function doubleListEditorDeleteValue()
 
 function doubleListEditorRemoveValue()
 {
-    doubleAllowDeleteLeft = true; 
-    
+    doubleAllowDeleteLeft = true;
+
     var listObject = document.getElementById('doubleListEditorSelectLeft');
 
     if (listObject.value == '')

@@ -38,11 +38,11 @@ function startBackup(AJAXFunction, extraPOSTData)
 {
     document.getElementById('backupRunning').style.display = '';
     document.getElementById('progress').innerHTML = '';
-    
-    
+
+
     var htmlObjectID = 'tempJs';
     var http = AJAX_getXMLHttpObject();
-    
+
     /* Build HTTP POST data. */
     var POSTData = '';
     POSTData += '&a=start';
@@ -109,7 +109,7 @@ function watchBackup(directoryName, extraPOSTData, AJAXFunction)
 
         setProgress(1);
         backupFinished();
-        
+
     }
 
     backingUp = true;
@@ -177,7 +177,7 @@ function refreshBackup()
     var handleResponse = function()
     {
         var htmlObjectID = 'tempJs';
-    
+
         if (httpGet.readyState == 4)
         {
             response = httpGet.responseText;
@@ -186,7 +186,7 @@ function refreshBackup()
             {
                 execJS(response);
             }
-    
+
             httpGet = AJAX_getXMLHttpObject();
             setTimeout('refreshBackup()', 1000);
         }

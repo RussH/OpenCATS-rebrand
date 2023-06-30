@@ -143,7 +143,7 @@ class awAxis {
 	public function auto($auto) {
 		$this->auto = (bool)$auto;
 	}
-	
+
 	/**
 	 * Enable/disable auto-scaling mode
 	 *

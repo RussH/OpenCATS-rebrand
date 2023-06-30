@@ -150,7 +150,7 @@ function ContactDepartments_populate(companyID, sessionCookie)
         {
             document.getElementById('departmentsCSV').value = '';
         }
-        
+
         listEditorUpdateSelectFromCSV('departmentSelect', 'departmentsCSV', false);
         document.getElementById('departmentSelect').disabled = false;
     }

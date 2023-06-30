@@ -68,7 +68,7 @@ class ModuleUtility
 
         $moduleClass = $modules[$moduleName][0];
 
-        include_once(LEGACY_ROOT . 
+        include_once(LEGACY_ROOT .
             '/modules/' . $moduleName . '/'
             . $moduleClass . '.php'
         );
@@ -121,7 +121,7 @@ class ModuleUtility
 
         $moduleClass = $modules[$moduleName][0];
 
-        include_once(LEGACY_ROOT . 
+        include_once(LEGACY_ROOT .
             '/modules/' . $moduleName . '/'
             . $moduleClass . '.php'
         );
@@ -427,7 +427,7 @@ class ModuleUtility
             ORDER BY
                 name ASC"
         );
-        
+
         return $db->getAllAssoc($sql);
     }
 

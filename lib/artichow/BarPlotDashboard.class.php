@@ -124,7 +124,7 @@ class awBarPlotDashboard extends awPlot implements awLegendable {
         }
 
 		$this->setValues($values);
-		
+
 		$this->setXMax($maxValue);
 		$this->maxValue = $maxValue;
 		$this->yAxis->forcedMax = $maxValue;
@@ -253,7 +253,7 @@ class awBarPlotDashboard extends awPlot implements awLegendable {
 
 	public function drawComponent(awDrawer $drawer, $x1, $y1, $x2, $y2, $aliasing) {
 		$this->label->setFont(new Tuffy(8));
-    	
+
     	$datayReal = $this->datay;
     	$dataySkewed = array();
 
@@ -416,23 +416,23 @@ class awBarPlotDashboard extends awPlot implements awLegendable {
     		    $tabImage = imagecreatefrompng('images/tab3.png');
     		    imagecopy($drawer->resource, $tabImage, 399, 0, 0, 0, 63, 73);
     		    break;
-    		    		    
+
 		    case DASHBOARD_GRAPH_MONTHLY:
     		    $tabImage = imagecreatefrompng('images/tab2.png');
     		    imagecopy($drawer->resource, $tabImage, 399, 0, 0, 0, 63, 73);
     		    break;
-    				    
+
 		    case DASHBOARD_GRAPH_WEEKLY:
 		    default:
     		    $tabImage = imagecreatefrompng('images/tab1.png');
     		    imagecopy($drawer->resource, $tabImage, 399, 0, 0, 0, 63, 73);
     		    break;
 	    }
-	    
+
 	    if ($this->noData)
 	    {
 		    $noDataImage = imagecreatefromjpeg('images/graphNoData.jpg');
-		    imagecopy($drawer->resource, $noDataImage, 27, 13, 0, 0, 363, 195);	        
+		    imagecopy($drawer->resource, $noDataImage, 27, 13, 0, 0, 363, 195);
         }
 	}
 

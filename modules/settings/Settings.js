@@ -31,12 +31,12 @@ var currentModuleToAdd = null;
 function customizeDashboard_showAddComponent(moduleName)
 {
     customizeDashboard_hideAll();
-    
+
     document.getElementById('addComponentB0').style.display = '';
     document.getElementById('addComponentB1').style.display = '';
     document.getElementById('addComponentB2').style.display = '';
     document.getElementById('addComponent_' + moduleName).style.display = '';
-    
+
     currentModuleToAdd = moduleName;
 }
 
@@ -56,7 +56,7 @@ function customizeDashboard_addToColumn(columnID, position)
 function customizeDashboardViewEdit(componentID)
 {
     customizeDashboard_hideAll();
-    
+
     document.getElementById('editComponent' + componentID).style.display = '';
 }
 
@@ -94,7 +94,7 @@ function testEmailSettings(sessionCookie)
     var POSTData = '';
     POSTData += '&testEmailAddress=' + urlEncode(testEmailAddress);
     POSTData += '&fromAddress='      + urlEncode(fromAddress);
-    
+
     /* Anonymous callback function triggered when HTTP response is received. */
     var callBack = function ()
     {

@@ -59,7 +59,7 @@ class AttachmentsUI extends UserInterface
             case 'getAttachment':
                 $this->getAttachment();
                 break;
-                
+
             default:
                 break;
         }
@@ -69,8 +69,8 @@ class AttachmentsUI extends UserInterface
     private function getAttachment()
     {
         // FIXME: Do we really need to mess with memory limits here? We're only reading ~80KB at a time...
-        @ini_set('memory_limit', '128M'); 
-        
+        @ini_set('memory_limit', '128M');
+
         if (!$this->isRequiredIDValid('id', $_GET))
         {
             CommonErrors::fatal(
@@ -91,7 +91,7 @@ class AttachmentsUI extends UserInterface
                 'Invalid id / directory / filename, or you do not have permission to access this attachment.'
             );
         }
-        
+
         $directoryName = $rs['directoryName'];
         $fileName      = $rs['storedFilename'];
         $filePath      = sprintf('attachments/%s/%s', $directoryName, $fileName);
@@ -105,7 +105,7 @@ class AttachmentsUI extends UserInterface
                 'The specified backup file no longer exists. Please go back and regenerate the backup before downloading. We are sorry for the inconvenience.'
             );
         }
-        
+
         // FIXME: Stream file rather than redirect? (depends on download preparer working).
         if (!eval(Hooks::get('ATTACHMENT_RETRIEVAL'))) return;
 
@@ -129,7 +129,7 @@ class AttachmentsUI extends UserInterface
         header('Content-Length: ' . filesize($filePath));
         header('Pragma: no-cache');
         header('Expires: 0');
-        
+
         /* Read the file in ATTACHMENT_BLOCK_SIZE-sized chunks from disk and
          * output to the browser.
          */
@@ -137,9 +137,9 @@ class AttachmentsUI extends UserInterface
         {
             print fread($fp, self::ATTACHMENT_BLOCK_SIZE);
         }
-        
+
         fclose($fp);
-        
+
         /* Exit to prevent output after the attachment. */
         exit();
     }

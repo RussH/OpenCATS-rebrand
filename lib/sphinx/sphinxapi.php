@@ -342,7 +342,7 @@ class SphinxClient
 	/// WARNING: grouping is done in fixed memory and thus its results
 	/// are only approximate; so there might be more groups reported
 	/// in total_found than actually present. @count might also
-	/// be underestimated. 
+	/// be underestimated.
 	///
 	/// for example, if sorting by relevance and grouping by "published"
 	/// attribute with SPH_GROUPBY_DAY function, then the result set will

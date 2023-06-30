@@ -1206,7 +1206,7 @@ class CareersUI extends UserInterface
             CommonErrors::fatal(COMMONERROR_BADINDEX, $this, 'The specified job order could not be found.');
             return;
         }
-	    
+
     /* funciton getSanitisedInput used to fix XSS vuln in public portal */
         $lastName       = $this->getSanitisedInput('lastName', $_POST);
         $middleName     = $this->getSanitisedInput('middleName', $_POST);

@@ -35,28 +35,28 @@ include (LEGACY_ROOT . '/lib/Candidates.php');
     {
         die ('Invalid E-Mail address.');
     }
-    
+
     $siteID = $interface->getSiteID();
-    
+
     $phone = $_REQUEST['phone'];
-    
+
     $candidates = new Candidates($siteID);
-    
+
     $output = "<data>\n";
-    
+
     $candidateID = $candidates->getIDByPhone($phone);
-    
+
     if ($candidateID == -1)
     {
         $output .=
             "    <candidate>\n" .
             "        <id>-1</id>\n" .
-            "    </candidate>\n";        
+            "    </candidate>\n";
     }
     else
     {
         $candidateRS = $candidates->get($candidateID);
-    
+
         $output .=
             "    <candidate>\n" .
             "        <id>"         . $candidateID . "</id>\n" .
@@ -65,10 +65,10 @@ include (LEGACY_ROOT . '/lib/Candidates.php');
     }
     $output .=
         "</data>\n";
-    
+
     /* Send back the XML data. */
     $interface->outputXMLPage($output);
-  
+
 ?>
 
 

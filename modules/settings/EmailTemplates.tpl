@@ -18,7 +18,7 @@
             <p class="note">E-Mail Templates</p>
 
             <script type="text/javascript">
-                $(document).ready(function() { 
+                $(document).ready(function() {
                     $("select option:last").attr("selected", "selected");
                     showLastTemplate();
                 });
@@ -136,7 +136,7 @@
                                                     </td>
                                                 </tr>
                                                 <?php endif; ?>
-                                                
+
                                                 <tr style="vertical-align:top;">
                                                     <td>
                                                         <textarea class="inputbox" name="messageText" <?php if ($data['disabled'] == 1) echo('disabled'); ?> id="messageText<?php echo($data['emailTemplateID']); ?>" style="width:450px; height:280px;" onclick="document.getElementById('selectorSpan').style.display='none'; document.getElementById('templateTitleSpan<?php echo($data['emailTemplateID']); ?>').style.display='';" ><?php echo($this->_($data['text'])); ?></textarea>

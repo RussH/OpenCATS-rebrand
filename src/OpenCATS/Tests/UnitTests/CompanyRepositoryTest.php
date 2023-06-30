@@ -29,7 +29,7 @@ class CompanyRepositoryTests extends TestCase
     const ENTERED_BY = 1; // USER ID
     const OWNER = 1; // USER ID
     const COMPANY_ID = 1;
-    
+
     function test_persist_CreatesNewCompany_InputValuesAreEscaped()
     {
         $databaseConnectionMock = $this->getDatabaseConnectionMock();
@@ -62,7 +62,7 @@ class CompanyRepositoryTests extends TestCase
         $CompanyRepository = new CompanyRepository($databaseConnectionMock);
         $CompanyRepository->persist($this->createCompany(), $historyMock);
     }
-    
+
     function test_persist_CreateNewCompany_ExecutesSqlQuery()
     {
         $databaseConnectionMock = $this->getDatabaseConnectionMock();
@@ -73,7 +73,7 @@ class CompanyRepositoryTests extends TestCase
         $CompanyRepository = new CompanyRepository($databaseConnectionMock);
         $CompanyRepository->persist($this->createCompany(), $historyMock);
     }
-    
+
     function test_persist_CreateNewCompany_StoresHistoryWithCompanyId()
     {
         $databaseConnectionMock = $this->getDatabaseConnectionMock();
@@ -90,7 +90,7 @@ class CompanyRepositoryTests extends TestCase
         $CompanyRepository = new CompanyRepository($databaseConnectionMock);
         $CompanyRepository->persist($this->createCompany(), $historyMock);
     }
-    
+
     /**
      * @expectedException OpenCATS\Entity\CompanyRepositoryException
      */
@@ -103,19 +103,19 @@ class CompanyRepositoryTests extends TestCase
         $CompanyRepository = new CompanyRepository($databaseConnectionMock);
         $CompanyRepository->persist($this->createCompany(), $historyMock);
     }
-    
+
     private function getHistoryMock()
     {
         return $this->createMock(\History::class);
     }
-    
+
     private function getDatabaseConnectionMock()
     {
         return $this->getMockBuilder('\DatabaseConnection')
             ->setMethods(['makeQueryString', 'makeQueryInteger', 'query', 'getLastInsertID'])
             ->getMock();
     }
-    
+
     private function createCompany()
     {
         return Company::create(
@@ -125,9 +125,9 @@ class CompanyRepositoryTests extends TestCase
             self::CITY,
             self::STATE,
             self::ZIP_CODE,
-            self::PHONE_NUMBER_ONE, 
+            self::PHONE_NUMBER_ONE,
             self::PHONE_NUMBER_TWO,
-            self::FAX_NUMBER, 
+            self::FAX_NUMBER,
             self::URL,
             self::KEY_TECHNOLOGIES,
             self::IS_HOT,

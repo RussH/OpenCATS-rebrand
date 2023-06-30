@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
 * Candidates link duplicity template
 * @package OpenCATS

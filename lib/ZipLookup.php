@@ -41,7 +41,7 @@ class ZipLookup
 					$loc_level_3 = (string) $value->long_name;
 				}
 				if ($value->type[0] == 'country') {
-					$loc_level_4 = (string) $value->long_name;	
+					$loc_level_4 = (string) $value->long_name;
 				}
 			}
 		} else {
@@ -58,11 +58,11 @@ class ZipLookup
 	} else {
 		$aAddress[3] = $loc_level_2;
 	}
-	    
+
 	return $aAddress;
 
     }
-    
+
     /**
      * Returns an array of SQL clauses that returns the distance from a zipcode for each record.
      *
@@ -73,7 +73,7 @@ class ZipLookup
     public function getDistanceFromPointQuery($zipcode, $zipcodeColumn)
     {
         //based on kilometers = (3958*3.1415926*sqrt(($lat2-$lat1)*($lat2-$lat1) + cos($lat2/57.29578)*cos($lat1/57.29578)*($lon2-$lon1)*($lon2-$lon1))/180);
-        
+
         $select = "(3958*3.1415926*sqrt((zipcode_searching.lat-zipcode_record.lat)*(zipcode_searching.lat-zipcode_record.lat) + cos(zipcode_searching.lat/57.29578)*cos(zipcode_record.lat/57.29578)*(zipcode_searching.lng-zipcode_record.lng)*(zipcode_searching.lng-zipcode_record.lng))/180) as distance_km";
         $join = "LEFT JOIN zipcodes as zipcode_searching ON zipcode_searching.zipcode = ".$zipcode." LEFT JOIN zipcodes as zipcode_record ON zipcode_record.zipcode = ".$zipcodeColumn;
         return array("select" => $select, "join" => $join);

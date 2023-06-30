@@ -419,7 +419,7 @@ class Candidates
             DATA_ITEM_CANDIDATE
         );
         $this->_db->query($sql);
-        
+
         /* Delete from candidate_duplicates. */
         $sql = sprintf(
             "DELETE FROM
@@ -556,11 +556,11 @@ class Candidates
 
         return $this->_db->getAssoc($sql);
     }
-    
+
     public function getWithDuplicity($candidateID)
     {
         $data = $this->get($candidateID);
-        
+
         $sql = sprintf(
             "SELECT
                 candidate_duplicates.old_candidate_id AS duplicateTo
@@ -647,12 +647,12 @@ class Candidates
         if (count($IDs) != 0)
         {
             $IDsValidated = array();
-            
+
             foreach ($IDs as $id)
             {
                 $IDsValidated[] = $this->_db->makeQueryInteger($id);
             }
-            
+
             $criterion = 'AND candidate.candidate_id IN ('.implode(',', $IDsValidated).')';
         }
         else
@@ -739,15 +739,15 @@ class Candidates
             $this->_siteID
         );
         $rs = $this->_db->getAssoc($sql);
-         
+
         if (empty($rs))
         {
             return -1;
         }
-         
+
         return $rs['candidateID'];
     }
-     
+
 
     /**
      * Returns the number of candidates in the system.  Useful
@@ -1113,7 +1113,7 @@ class Candidates
      * @param integer Candidate ID.
      * @param boolean Administratively hide this candidate?
      * @return boolean Was the query executed successfully?
-     */    
+     */
     public function administrativeHideShow($candidateID, $state)
     {
         $sql = sprintf(
@@ -1154,11 +1154,11 @@ class Candidates
             $this->_db->makeQueryStringOrNULL($firstName),
             $this->_db->makeQueryStringOrNULL($lastName)
         );
-        
+
         $rs = $this->_db->getAllAssoc($sql);
-        
+
         $duplicatesID = array();
-        
+
         if($rs && !$this->_db->isEOF())
         {
             $phoneNumbers = array();
@@ -1166,20 +1166,20 @@ class Candidates
             if($phoneHome != ""){array_push($phoneNumbers, preg_replace('/\s+/', '', $phoneHome));}
             if($phoneCell != ""){array_push($phoneNumbers, preg_replace('/\s+/', '', $phoneCell));}
             if($phoneWork != ""){array_push($phoneNumbers, preg_replace('/\s+/', '', $phoneWork));}
-            
+
             $phoneNumbers = array_map('strtolower', $phoneNumbers);
             $phoneNumbers = array_map('trim', $phoneNumbers);
-            
-            
+
+
             foreach($rs as $row)
-            {   
+            {
                 $phoneNumbersDB = array();
                 if($row['phoneHome'] != ""){array_push($phoneNumbersDB, preg_replace('/\s+/', '', $row['phoneHome']));}
                 if($row['phoneCell'] != ""){array_push($phoneNumbersDB, preg_replace('/\s+/', '', $row['phoneCell']));}
                 if($row['phoneWork'] != ""){array_push($phoneNumbersDB, preg_replace('/\s+/', '', $row['phoneWork']));}
                 $phoneNumbersDB = array_map('strtolower', $phoneNumbersDB);
                 $phoneNumbersDB = array_map('trim', $phoneNumbersDB);
-                
+
                 if (strtolower($row['middleName']) == strtolower($middleName) && $middleName != "")
                 {
                     array_push($duplicatesID, $row['candidateID']);
@@ -1205,10 +1205,10 @@ class Candidates
         }
         else
         {
-            return $duplicatesID;    
-        }   
+            return $duplicatesID;
+        }
     }
-    
+
      /**
      * Returns the number of duplicates in the system.
      *
@@ -1219,8 +1219,8 @@ class Candidates
         $sql = sprintf(
             "SELECT
                 COUNT(*) AS totalDuplicates
-            FROM 
-                (SELECT * 
+            FROM
+                (SELECT *
                     FROM candidate_duplicates
                 WHERE
                     candidate_duplicates.site_id = %s
@@ -1240,7 +1240,7 @@ class Candidates
      public function removeDuplicity($oldCandidateID, $newCandidateID)
     {
         $sql = sprintf(
-                "DELETE FROM 
+                "DELETE FROM
                     candidate_duplicates
                 WHERE
                     candidate_duplicates.old_candidate_id = %s
@@ -1251,7 +1251,7 @@ class Candidates
             );
         $this->_db->query($sql);
     }
-    
+
     /**
      * Adds a duplicate to the database.
      *
@@ -1259,7 +1259,7 @@ class Candidates
      * @param $duplicates string second candidate ID.
      * @return int 1 on success, or -1 on failure.
      */
-    
+
     public function addDuplicates($candidateID, $duplicates)
     {
         if(is_array($duplicates))
@@ -1304,13 +1304,13 @@ class Candidates
                 $this->_db->query($sql);
         }
     }
-    
-    
-    
+
+
+
     public function mergeDuplicates($params, $rs)
     {
         $oldCandidateID = $params['oldCandidateID'];
-        $newCandidateID = $params['newCandidateID']; 
+        $newCandidateID = $params['newCandidateID'];
          $sql = sprintf(
             "UPDATE
                 activity
@@ -1326,7 +1326,7 @@ class Candidates
         );
 
         $this->_db->query($sql);
-        
+
         $sql = sprintf(
             "UPDATE
                 attachment
@@ -1342,7 +1342,7 @@ class Candidates
         );
 
         $this->_db->query($sql);
-        
+
         $sql = sprintf(
             "UPDATE
                 calendar_event
@@ -1358,7 +1358,7 @@ class Candidates
         );
 
         $this->_db->query($sql);
-        
+
         $sql = sprintf(
             "DELETE FROM
                 candidate_duplicates
@@ -1370,9 +1370,9 @@ class Candidates
         $this->_db->query($sql);
 
         $sql = sprintf(
-            "SELECT 
+            "SELECT
                 new_candidate_id AS newID
-            FROM 
+            FROM
                 candidate_duplicates
             WHERE
                 old_candidate_id = %s
@@ -1432,7 +1432,7 @@ class Candidates
 
         $update = " ";
         $comma = false;
-        
+
         if($params['firstName'] == "1")
         {
             $update .= "first_name = '" . $rs['firstName']."'";
@@ -1521,18 +1521,18 @@ class Candidates
             $comma = false;
         }
         if($comma){
-           $update .= ", "; 
+           $update .= ", ";
         }
         $dateAvailable = $rs['dateAvailable'];
         $dateParts = explode("-", $dateAvailable);
         $dateAvailable = "20" . $dateParts[2] . "-" . $dateParts[0] . "-" . $dateParts[1] . " 00:00:00";
         $update .= "is_active = " . $rs['isActive'] . ", " .
                     "current_employer = '" . $rs['currentEmployer'] . "', " .
-                    "current_pay = '" . $rs['currentPay'] . "', " .     
-                    "desired_pay = '" . $rs['desiredPay'] . "', " .  
-                    "can_relocate = " . $rs['canRelocate'] . ", " .  
+                    "current_pay = '" . $rs['currentPay'] . "', " .
+                    "desired_pay = '" . $rs['desiredPay'] . "', " .
+                    "can_relocate = " . $rs['canRelocate'] . ", " .
                     "best_time_to_call = '" . $rs['bestTimeToCall'] . "', " .
-                    "is_hot = " . $rs['isHot'] . ", " . 
+                    "is_hot = " . $rs['isHot'] . ", " .
                     "date_modified = NOW()";
         $comma = true;
         if($rs['source'] != "" && $rs['source'] != "(none)")
@@ -1542,28 +1542,28 @@ class Candidates
             $comma = true;
         }
         if($rs['keySkills'] != "")
-        {   
-            if($comma){$update .= ", ";}    
+        {
+            if($comma){$update .= ", ";}
             $update .= "key_skills = IFNULL(CONCAT(key_skills, ', ".$rs['keySkills']."'), '" . $rs['keySkills'] . "')";
             $comma = true;
         }
         if($rs['notes'] != "")
-        { 
-            if($comma){$update .= ", ";}  
+        {
+            if($comma){$update .= ", ";}
             $update .= "notes = IFNULL(CONCAT(notes, ', ".$rs['notes']."'), '" . $rs['notes'] . "')";
             $comma = true;
         }
         if($rs['date_available'] != "")
-        { 
-            if($comma){$update .= ", ";}  
+        {
+            if($comma){$update .= ", ";}
             $update .= "date_available = '".$dateAvailable."' ";
         }
-        
+
         $sql = sprintf(
             "UPDATE
                 candidate
             SET
-                %s 
+                %s
             WHERE
                 candidate_id = %s
             AND
@@ -1572,7 +1572,7 @@ class Candidates
             $this->_db->makeQueryInteger($oldCandidateID),
             $this->_siteID
         );
-        
+
         if($this->_db->query($sql))
         {
             $sql = sprintf(
@@ -1591,12 +1591,12 @@ class Candidates
         $sql = sprintf("
             SELECT
                 saved_list_id AS listID
-            FROM 
+            FROM
                 saved_list_entry
             WHERE
                 data_item_id IN(%s, %s)
-            AND 
-                data_item_type = %s 
+            AND
+                data_item_type = %s
             AND
                 site_id = %s
             GROUP BY
@@ -1632,7 +1632,7 @@ class Candidates
                 data_item_id = %s
             AND
                 saved_list_id NOT IN(%s)
-            AND 
+            AND
                 site_id = %s",
             $this->_db->makeQueryInteger($oldCandidateID),
             $this->_db->makeQueryInteger($newCandidateID),
@@ -1648,10 +1648,10 @@ class Candidates
                 DELETE FROM
                     saved_list_entry
                 WHERE
-                    data_item_id = %s 
-                AND 
-                    data_item_type = %s 
-                AND 
+                    data_item_id = %s
+                AND
+                    data_item_type = %s
+                AND
                     site_id = %s",
             $this->_db->makeQueryInteger($newCandidateID),
             DATA_ITEM_CANDIDATE,
@@ -1667,7 +1667,7 @@ class Candidates
                     number_entries = number_entries - 1
                 WHERE
                     saved_list_id = %s
-                AND 
+                AND
                     site_id = %s",
 
                 $this->_db->makeQueryInteger($row['listID']),
@@ -1682,11 +1682,11 @@ class Candidates
         $sql = sprintf("
             SELECT
                 joborder_id AS jobOrderID
-            FROM 
+            FROM
                 candidate_joborder
             WHERE
                 candidate_id IN(%s, %s)
-            AND 
+            AND
                 site_id = %s
             GROUP BY
                 joborder_id
@@ -1760,10 +1760,10 @@ class Candidates
                 FROM
                     candidate_joborder
                 WHERE
-                    joborder_id = %s 
-                AND 
+                    joborder_id = %s
+                AND
                     candidate_id IN (%s, %s)
-                AND 
+                AND
                     site_id = %s
                 ORDER BY
                     status DESC",
@@ -1780,7 +1780,7 @@ class Candidates
                         candidate_joborder
                     WHERE
                         candidate_joborder_id = %s
-                    AND 
+                    AND
                         site_id = %s",
                 $this->_db->makeQueryInteger($rs2[1]['candidateJobOrderID']),
                 $this->_db->makeQueryInteger($this->_siteID)
@@ -1795,7 +1795,7 @@ class Candidates
                         candidate_joborder_status_history
                     WHERE
                         candidate_id = %s
-                    AND 
+                    AND
                         site_id = %s",
                     $this->_db->makeQueryInteger($newCandidateID),
                     $this->_db->makeQueryInteger($this->_siteID)
@@ -1809,7 +1809,7 @@ class Candidates
                         candidate_joborder_status_history
                     WHERE
                         candidate_id = %s
-                    AND 
+                    AND
                         site_id = %s",
                     $this->_db->makeQueryInteger($oldCandidateID),
                     $this->_db->makeQueryInteger($this->_siteID)
@@ -1849,16 +1849,16 @@ class Candidates
         }
         /*end: take care of candidates that are in the same lists and would cause duplicates if merged */
     }
-    
+
     public function checkIfLinked($oldCandidateID, $newCandidateID)
     {
         if($oldCandidateID == $newCandidateID)
         {
             return true;
         }
-        
+
         $sql = sprintf(
-            "SELECT 
+            "SELECT
                 candidate_duplicates.old_candidate_id as oldCandidateID,
                 candidate_duplicates.new_candidate_id as newCandidateID
             FROM
@@ -1877,7 +1877,7 @@ class Candidates
             $this->_db->makeQueryInteger($oldCandidateID)
         );
         $rs = $this->_db->getAllAssoc($sql);
-        
+
         if($rs && !$this->_db->isEOF())
         {
             return true;
@@ -1890,26 +1890,26 @@ class Candidates
 
     public function getListsForCandidate($candidateID){
         $sql = sprintf("
-            SELECT 
+            SELECT
                 saved_list.description AS name,
                 saved_list.saved_list_id AS listID
             FROM
                 saved_list
-            WHERE 
-                data_item_type = %s 
-            AND 
-                site_id = %s 
-            AND 
+            WHERE
+                data_item_type = %s
+            AND
+                site_id = %s
+            AND
                 saved_list_id IN (
                   SELECT
                       saved_list_entry.saved_list_id
                   FROM
                       saved_list_entry
                   WHERE
-                      site_id = %s 
+                      site_id = %s
                   AND
-                      data_item_type = %s 
-                  AND 
+                      data_item_type = %s
+                  AND
                       data_item_id = %s
                 )",
             DATA_ITEM_CANDIDATE,
@@ -1948,7 +1948,7 @@ class CandidatesDataGrid extends DataGrid
                                                     {
                                                         $return = \'<img src="images/mru/blank.gif" alt="" width="16" height="16" />\';
                                                     }
-                                     
+
                                                     if ($rsData[\'submitted\'] == 1)
                                                     {
                                                         $return .= \'<img src="images/job_orders.gif" alt="" width="16" height="16" title="Submitted for a Job Order" />\';
@@ -1976,10 +1976,10 @@ class CandidatesDataGrid extends DataGrid
                                                         ON candidate_joborder_submitted.candidate_id = candidate.candidate_id
                                                         AND candidate_joborder_submitted.status >= '.PIPELINE_STATUS_SUBMITTED.'
                                                         AND candidate_joborder_submitted.site_id = '.$this->_siteID.'
-                                                        AND candidate_joborder_submitted.status != '.PIPELINE_STATUS_NOTINCONSIDERATION.' LEFT JOIN candidate_duplicates 
-                                                        ON candidate.candidate_id = 
+                                                        AND candidate_joborder_submitted.status != '.PIPELINE_STATUS_NOTINCONSIDERATION.' LEFT JOIN candidate_duplicates
+                                                        ON candidate.candidate_id =
                                                         candidate_duplicates.new_candidate_id'
-                                                    
+
                                    ,
                                      'pagerWidth'    => 100,
                                      'pagerOptional' => true,
@@ -2250,7 +2250,7 @@ class CandidatesDataGrid extends DataGrid
                                          WHERE t2.site_id = 1 AND t2.tag_id IN (". implode(",",$arguments)."))";
                                      ')
         );
-        
+
         if (US_ZIPS_ENABLED)
         {
             $this->_classColumns['Near Zipcode'] =
@@ -2313,7 +2313,7 @@ class CandidatesDataGrid extends DataGrid
             $joinSQL  .= ' LEFT JOIN saved_list_entry
                                     ON saved_list_entry.data_item_type = '.DATA_ITEM_CANDIDATE.'
                                     AND saved_list_entry.data_item_id = candidate.candidate_id
-                                    AND saved_list_entry.site_id = '.$this->_siteID;         
+                                    AND saved_list_entry.site_id = '.$this->_siteID;
         }
 
         $sql = sprintf(

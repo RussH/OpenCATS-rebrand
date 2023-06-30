@@ -20,7 +20,7 @@
             <form name="jobOrderReportForm" id="jobOrderReportForm" action="<?php echo(CATSUtility::getIndexName()); ?>" method="get">
                 <input type="hidden" name="m" value="reports">
                 <input type="hidden" name="a" value="generateEEOReportPreview">
-                
+
                 <table>
                     <tr>
                         <td style="vertical-align: top;">
@@ -49,7 +49,7 @@
                             </table>
                             <input type="submit" class="button" name="submit" value="Preview Report" />&nbsp;
                         </td>
-                        
+
                         <?php if (isset($this->EEOReportStatistics)): ?>
                             <td style="vertical-align: top;">
                                 <table class="selectView" width="705">
@@ -117,7 +117,7 @@
                                                             </table>
                                                         </td>
                                                     </tr>
-                                                </table> 
+                                                </table>
                                             <?php endif; ?>
                                             <br />
                                             <table>

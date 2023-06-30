@@ -228,7 +228,7 @@
                 <p class="note">Other</p>
 
                 <table class="editTable">
-                    
+
                     <?php for ($i = 0; $i < count($this->extraFieldRS); $i++): ?>
                         <tr>
                             <td class="tdVertical" id="extraFieldTd<?php echo($i); ?>">
@@ -241,7 +241,7 @@
                             </td>
                         </tr>
                     <?php endfor; ?>
-                    
+
                     <tr>
                         <td class="tdVertical">
                             <label id="ownerLabel" for="owner">Owner:</label>

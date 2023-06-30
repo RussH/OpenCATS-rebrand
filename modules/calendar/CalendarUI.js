@@ -142,7 +142,7 @@ function generateCalendarEntryDayView(time, title, position, idDiv, idEntry, sep
     string += title + " - " + entry.getData('enteredByFirstName') + " " + entry.getData('enteredByLastName');
 
     string +='</td></tr></table>';
-    
+
     return string;
 }
 

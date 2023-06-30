@@ -86,7 +86,7 @@ class AddressParser
 
         /* Extract and remove the e-mail address first; it's easy to identify. */
         $this->_email = $this->_extractEmailAddress();
-        
+
         /* Attempt to find a company name. */
         //FIXME: Use a scoring system.
         foreach ($this->_addressBlock as $lineNumber => $line)
@@ -97,12 +97,12 @@ class AddressParser
                 break;
             }
         }
-        
+
         /* Reverse the array before searching, as it is more probable to find a
          * "City, State Zip" line tword the end of the address block.
          */
         $reversedAddressBlock = array_reverse($this->_addressBlock, true);
-        
+
         /* Find the "City, State Zip" line and use it to guide the rest of our
          * parsing.
          */
@@ -115,7 +115,7 @@ class AddressParser
                 break;
             }
         }
-        
+
         /* Using the "City, State Zip" line as a guiding point, find the
          * "address address line one.
          */
@@ -129,8 +129,8 @@ class AddressParser
                 break;
             }
         }
-        
-        
+
+
         /* Get address line one number and text from the "line, text" array. */
         $addressOneLineOffset  = $addressOneLineArray[0];
         $this->_addressLineOne = $addressOneLineArray[1];
@@ -230,7 +230,7 @@ class AddressParser
         $this->_addressBlock = $addressBlockArray;
         $this->_mode = $mode;
     }
-    
+
     // FIXME: Document me.
     protected function _isStreetAddress($string)
     {
@@ -252,12 +252,12 @@ class AddressParser
             'thirty', 'fourty', 'fifty', 'seventy', 'eighty', 'ninety',
             'PO', 'P\.O\.', 'Post Office', 'Postal', 'Rural'
         );
-        
+
         /* Build a regular expression to match street addresses. */
         $regex = '/^(?:\d+(?:-\d+)?,? |(?:'
             . implode('|', $validAddressPrefixes)
             . ').* |R\.?\s*R\.?\s*\d+)/i';
-            
+
         /* Does it match? */
         if (!preg_match($regex, $string))
         {
@@ -279,13 +279,13 @@ class AddressParser
         $statePrefixes = array(
             'new', 'north', 'south', 'west', 'rhode', 'district\sof', 'puerto'
         );
-        
+
         $cityStateZip = '[a-z\s.-]+[;,\s-]+(?:(?:'
             . implode('|', $statePrefixes)
             . ')\s+)?[a-z]{2,}[;.,\s-]+\d{5}(-\d{4})?';
 
         $POBox = 'P(?:ost|\.)?\s*O(?:ffice|\.)?\s+Box\s+';
-        
+
         if (preg_match('/^' . $cityStateZip . '$/i', $string) &&
             !preg_match('/^' . $POBox . '/i', $string))
         {
@@ -306,7 +306,7 @@ class AddressParser
     {
         $company = ',?\s+(?:Inc|LLC|GmbH|Ltd|Co|Company|Corp|Corporation|Enterprises)\b';
         $title = '\b(?:Manager|Director)\b';
-        
+
         if (preg_match('/' . $company . '/i', $string) &&
             !preg_match('/' . $title . '/i', $string))
         {
@@ -335,7 +335,7 @@ class AddressParser
         /* Heuristics to make sure we aren't matching a company name. */
         $company = ',?\s+(?:Inc|LLC|Ltd|Corp(?:\b|oration))\b';
         $company = ',?\s(?:Inc|LLC|GmbH|Ltd|Co|Company|Corp|Corporation|Enterprises)\b';
-        
+
         if (preg_match('/^(?:' . $matchFirstMILast . '|' . $matchLastFirstMI . ')$/i', $string) &&
             !preg_match('/' . $company . '/i', $string))
         {
@@ -379,7 +379,7 @@ class AddressParser
         {
             return $fullNameArray;
         }
-        
+
         $fullName = $possibleFirstName;
 
         /* Is it Lastname, Firstname; or Firstname Lastname? */
@@ -454,14 +454,14 @@ class AddressParser
         $city  = '';
         $state = '';
         $zip   = '';
-        
+
         /* Count the number of "words" / tokens in the line. */
         $tokenCount = StringUtility::countTokens(";, \t", $cityStateZipLine);
         if ($tokenCount < 2)
         {
             return array('city' => '', 'state' => '', 'zip' => '');
         }
-        
+
         /* Split the string into an array of tokens. */
         $tokens = StringUtility::tokenize(";, \t", $cityStateZipLine);
         if ($tokenCount == 3)
@@ -479,7 +479,7 @@ class AddressParser
             $threeWordState = ArrayUtility::implodeRange(
                 ' ', $tokens, ($tokenCount - 4), ($tokenCount - 2)
             );
-            
+
             /* Known two- and three- word states / provinces. */
             $twoWordStates = array(
                 'New Hampshire',
@@ -492,15 +492,15 @@ class AddressParser
                 'South Carolina',
                 'West Virginia',
                 'Rhode Island',
-                
+
                 'American Samoa',
                 'Puerto Rico',
-                
+
                 'British Columbia',
                 'New Brunswick',
                 'Nova Scotia',
                 'Northwest Territories',
-                
+
                 /* Account for spelling errors. */
                 'South Dekota',
                 'North Dekota',
@@ -511,7 +511,7 @@ class AddressParser
                 'District Of Columbia',
                 'Prince Edward Island'
             );
-            
+
             /* Do we have a two-word state? */
             if (in_array(ucwords($twoWordState), $twoWordStates))
             {
@@ -525,7 +525,7 @@ class AddressParser
                 $state = $twoWordState;
                 $zip   = $tokens[$tokenCount - 1];
             }
-            
+
             /* If we didn't find a two-word state and we have enough words for
              * there to be a three-word state, check for one.
              */
@@ -542,7 +542,7 @@ class AddressParser
                 $state = $threeWordState;
                 $zip   = $tokens[$tokenCount - 1];
             }
-            
+
             /* Otherwise, assume a one word state with extra words belonging
              * to the city.
              */
@@ -559,12 +559,12 @@ class AddressParser
                 $zip   = $tokens[$tokenCount - 1];
             }
         }
-    
+
         /* Regular expression to match US state abbreviations. */
         $USStateABBR = 'A[AEKLPRSZ]|C[AOT]|D[CE]|F[LM]|G[AU]|HI|I[ADLN]'
             . '|K[SY]|LA|M[ADEHINOPST]|N[CDEH]|N[JMVY]|O[HKR]|P[ARW]|RI'
             . '|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]';
-            
+
         /* If the state is a United States Postal Service state abbreviation,
          * we can apply additional formatting.
          */
@@ -588,7 +588,7 @@ class AddressParser
             'New Hampshire'
         );
         $state = str_replace($search, $replace, $state);
-        
+
         // FIXME: Convert US state names to abbreviations.
         // FIXME: Proper title case.
         return array(
@@ -646,7 +646,7 @@ class AddressParser
 
         $unknownNumbers = array();
         $numbers = array();
-        
+
         /* Loop through each line of the address block and attempt to extract
          * and identify phone numbers.
          */
@@ -657,7 +657,7 @@ class AddressParser
             {
                 continue;
             }
-            
+
             /* Regular expressions to help identify phone number types. */
             $cell    = '/cell|[\x28\x5b][CM][\x29\x5d]|mob(:?ile|\b)|\bc[:\x5d]|\bm[:\x5d]/i';
             $home    = '/[\x28\x5b]H[\x29\x5d]|home|evening|night|house/i';
@@ -757,13 +757,13 @@ class AddressParser
         $cellPhoneRow = ResultSetUtility::findRowByColumnValue(
             $numbers, 'type', 'cell'
         );
-            
+
         /* Did we find any unknown phone numbers? If so, we have to try to
          * guess their types.
          */
         $unknownCount = count($unknownNumbers);
         if ($unknownCount == 1)
-        {   
+        {
             /* If we're only missing one of the three phone number types, and we
              * found a number on a line by itself, we will assume that the extra
              * number is one of the missing ones.
@@ -838,7 +838,7 @@ class AddressParser
                             $type = 'unknown';
                         }
                         break;
-                        
+
                     case ADDRESSPARSER_MODE_CONTACT:
                         /* 'Contacts' are more likely to list a work or cell
                          * number than a home number.
@@ -860,19 +860,19 @@ class AddressParser
                             $type = 'unknown';
                         }
                         break;
-                        
+
                     case ADDRESSPARSER_MODE_COMPANY:
                         // FIXME: Here we should be looking for "general".
                         // We could also have two phone phone numbers.
                         $type = 'general';
                         break;
-                        
+
                     default:
                         /* Error! Invalid mode. */
                         $type = 'unknown';
                         break;
                 }
-                
+
                 $numbers[] = array(
                     'number' => $unknownNumbers[0],
                     'type'   => $type

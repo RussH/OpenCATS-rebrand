@@ -29,7 +29,7 @@
  * @copyright Copyright (C) 2005 - 2007 Cognizo Technologies, Inc.
  * @version    $Id: DateUtility.php 3592 2007-11-13 17:30:46Z brian $
  */
- 
+
 /**
  *	Date Utility Library
  *	@package    CATS
@@ -147,7 +147,7 @@ class DateUtility
         /* Return the date in the correct format. */
         return strftime($dateFormat, mktime(0, 0, 0, $month, $day, $year));
     }
-  
+
 
     /**
      * Returns true if the specified date string is a valid date in
@@ -387,7 +387,7 @@ class DateUtility
 
         return date($format, $unixTime);
     }
-    
+
     /**
      * Returns a human readable representation of a period of time in seconds.
      *
@@ -406,7 +406,7 @@ class DateUtility
             'minute' => 'min',
             'second' => 'sec'
         );
-    
+
         $periods = array(
             'year'   => (60 * 60 * 24 * 365),
             'week'   => (60 * 60 * 24 * 7),
@@ -415,18 +415,18 @@ class DateUtility
             'minute' => (60),
             'second' => (1)
         );
-    
+
         $seconds = (float) $seconds;
         foreach ($periods as $period => $divisor)
-        {   
+        {
             $value = floor($seconds / $divisor);
             if ($value == 0)
             {
                 continue;
             }
-        
+
             $seconds = ($seconds % $divisor);
-        
+
             if ($short)
             {
                 $segment = $value . $abbreviations[$period];
@@ -442,21 +442,21 @@ class DateUtility
             }
 
             $segments[] = $segment;
-        
+
             if ($round === $period)
             {
                 break;
             }
         }
-    
+
         if ($short)
         {
             return implode(' ', $segments);
         }
-    
+
         return implode(', ', $segments);
     }
-    
+
     /**
      * Returns a human readable representation of a UNIX date.
      *
@@ -494,7 +494,7 @@ class DateUtility
                 );
                 break;
         }
-        
+
         return false;
     }
 
@@ -512,12 +512,12 @@ class DateUtility
         {
             $dateFormat = DATE_FORMAT_YYYYMMDD;
         }
-        
+
         $currentUnixTime = time();
         $currentDay      = date('j', $currentUnixTime);
         $currentMonth    = date('m', $currentUnixTime);
         $currentYear     = date('Y', $currentUnixTime);
-        
+
         switch ($period)
         {
             case TIME_PERIOD_TODAY:
@@ -534,7 +534,7 @@ class DateUtility
                     date('j', $currentUnixTime) - 1,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 $startDate = self::getFormattedDate($startUnixTime, $dateFormat);
                 $endDate   = $startDate;
                 break;
@@ -549,7 +549,7 @@ class DateUtility
                     date('j', $currentUnixTime) - $currentWeekday,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 $endUnixTime = mktime(
                     0,
                     0,
@@ -558,7 +558,7 @@ class DateUtility
                     date('j', $currentUnixTime) - $currentWeekday + 6,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 $startDate = self::getFormattedDate($startUnixTime, $dateFormat);
                 $endDate   = self::getFormattedDate($endUnixTime, $dateFormat);
                 break;
@@ -573,7 +573,7 @@ class DateUtility
                     date('j', $currentUnixTime) - $currentWeekday - 7,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 $endUnixTime = mktime(
                     0,
                     0,
@@ -582,7 +582,7 @@ class DateUtility
                     date('j', $currentUnixTime) - $currentWeekday - 1,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 $startDate = self::getFormattedDate($startUnixTime, $dateFormat);
                 $endDate   = self::getFormattedDate($endUnixTime, $dateFormat);
                 break;
@@ -597,7 +597,7 @@ class DateUtility
                     date('j', $currentUnixTime) - $currentWeekday - 7,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 $endUnixTime = mktime(
                     0,
                     0,
@@ -606,7 +606,7 @@ class DateUtility
                     date('j', $currentUnixTime) - $currentWeekday + 6,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 $startDate = self::getFormattedDate($startUnixTime, $dateFormat);
                 $endDate   = self::getFormattedDate($endUnixTime, $dateFormat);
                 break;
@@ -620,7 +620,7 @@ class DateUtility
                     1,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 $lastDayOfMonth = self::getDaysInMonth(
                     $currentMonth,
                     $currentYear
@@ -633,7 +633,7 @@ class DateUtility
                     $lastDayOfMonth,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 $startDate = self::getFormattedDate($startUnixTime, $dateFormat);
                 $endDate   = self::getFormattedDate($endUnixTime, $dateFormat);
                 break;
@@ -648,7 +648,7 @@ class DateUtility
                     1,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 /* The last day of 1 month ago. */
                 $lastDayOfMonth = self::getDaysInMonth(
                     date('m', $startUnixTime),
@@ -662,7 +662,7 @@ class DateUtility
                     $lastDayOfMonth,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 $startDate = self::getFormattedDate($startUnixTime, $dateFormat);
                 $endDate   = self::getFormattedDate($endUnixTime, $dateFormat);
                 break;
@@ -677,7 +677,7 @@ class DateUtility
                     1,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 /* December 31st of the current year. */
                 $endUnixTime = mktime(
                     0,
@@ -687,7 +687,7 @@ class DateUtility
                     31,
                     date('Y', $currentUnixTime)
                 );
-                
+
                 $startDate = self::getFormattedDate($startUnixTime, $dateFormat);
                 $endDate   = self::getFormattedDate($endUnixTime, $dateFormat);
                 break;
@@ -702,7 +702,7 @@ class DateUtility
                     1,
                     date('Y', $currentUnixTime) - 1
                 );
-                
+
                 /* December 31st of the previous year. */
                 $endUnixTime = mktime(
                     0,
@@ -712,7 +712,7 @@ class DateUtility
                     31,
                     date('Y', $currentUnixTime) - 1
                 );
-                
+
                 $startDate = self::getFormattedDate($startUnixTime, $dateFormat);
                 $endDate   = self::getFormattedDate($endUnixTime, $dateFormat);
                 break;
@@ -723,7 +723,7 @@ class DateUtility
                 $endDate   = false;
                 break;
         }
-        
+
         return array(
             'startDate' => $startDate,
             'endDate'   => $endDate

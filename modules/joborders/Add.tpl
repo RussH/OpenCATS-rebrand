@@ -126,7 +126,7 @@
                             <td class="tdData">
                                 <select tabindex="7" id="type" name="type" class="inputbox" style="width: 150px;">
                                 <?php foreach($this->jobTypes as $jobTypeShort => $jobTypeLong): ?>
-                                    <option value="<?php echo $jobTypeShort ?>" 
+                                    <option value="<?php echo $jobTypeShort ?>"
                                             <?php if(isset($this->jobOrderSourceRS['type']) && $this->jobOrderSourceRS['type'] == $jobTypeShort) echo('selected'); ?>>
                                             <?php echo $jobTypeShort." (".$jobTypeLong.")";?>
                                     </option>
@@ -306,7 +306,7 @@
                     <input type="reset"  tabindex="21" class="button" name="reset"  value="Reset" />&nbsp;
                     <input type="button" tabindex="22" class="button" name="back"   value="Back to Job Orders" onclick="javascript:goToURL('<?php echo(CATSUtility::getIndexName()); ?>?m=joborders&amp;a=listByView');" />
                 </form>
-                
+
                 <script type="text/javascript">
                     placeCkEditorIn('description');
                 </script>

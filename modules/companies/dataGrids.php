@@ -1,9 +1,9 @@
-<?php 
+<?php
 /*
  * CATS
  * Companies Datagrid
  *
- * CATS Version: 0.9.7.2
+ * CATS Version: 0.9.7.2.1
  *
  * Copyright (C) 2005 - 2007 Cognizo Technologies, Inc.
  *
@@ -30,7 +30,7 @@
  *
  * $Id: dataGrids.php 3096 2007-09-25 19:27:04Z brian $
  */
- 
+
 include_once(LEGACY_ROOT . '/lib/Companies.php');
 include_once(LEGACY_ROOT . '/lib/Hooks.php');
 include_once(LEGACY_ROOT . '/lib/Width.php');
@@ -50,8 +50,8 @@ class CompaniesListByViewDataGrid extends CompaniesDataGrid
 
         $this->defaultSortBy = 'dateCreatedSort';
         $this->defaultSortDirection = 'DESC';
-   
-        $this->_defaultColumns = array( 
+
+        $this->_defaultColumns = array(
             array('name' => 'Attachments', 'width' => 10),
             array('name' => 'Name', 'width' => 255),
             array('name' => 'Jobs', 'width' => 40),
@@ -62,19 +62,19 @@ class CompaniesListByViewDataGrid extends CompaniesDataGrid
             array('name' => 'Created', 'width' => 60),
             array('name' => 'Modified', 'width' => 60),
         );
-   
-        parent::__construct("companies:CompaniesListByViewDataGrid", 
+
+        parent::__construct("companies:CompaniesListByViewDataGrid",
                              $siteID, $parameters, $misc
                         );
     }
-    
+
 
     /**
-     * Adds more options to the action area on the pager.  Overloads 
+     * Adds more options to the action area on the pager.  Overloads
      * DataGrid Inner Action Area function.
      *
      * @return html innerActionArea commands.
-     */    
+     */
     public function getInnerActionArea()
     {
         //TODO: Add items:
@@ -107,8 +107,8 @@ class companiesSavedListByViewDataGrid extends CompaniesDataGrid
 
         $this->defaultSortBy = 'dateCreatedSort';
         $this->defaultSortDirection = 'DESC';
-   
-        $this->_defaultColumns = array( 
+
+        $this->_defaultColumns = array(
             array('name' => 'Attachments', 'width' => 10),
             array('name' => 'Name', 'width' => 255),
             array('name' => 'Jobs', 'width' => 40),
@@ -119,19 +119,19 @@ class companiesSavedListByViewDataGrid extends CompaniesDataGrid
             array('name' => 'Created', 'width' => 60),
             array('name' => 'Modified', 'width' => 60),
         );
-   
-        parent::__construct("companies:companiesSavedListByViewDataGrid", 
+
+        parent::__construct("companies:companiesSavedListByViewDataGrid",
                              $siteID, $parameters, $misc
                         );
     }
-    
+
 
     /**
-     * Adds more options to the action area on the pager.  Overloads 
+     * Adds more options to the action area on the pager.  Overloads
      * DataGrid Inner Action Area function.
      *
      * @return html innerActionArea commands.
-     */    
+     */
     public function getInnerActionArea()
     {
         //TODO: Add items:

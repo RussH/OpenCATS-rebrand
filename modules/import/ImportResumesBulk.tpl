@@ -4,7 +4,7 @@
 <?php TemplateUtility::printTabs($this->active, ''); ?>
     <div id="main">
         <?php TemplateUtility::printQuickSearch(); ?>
-        
+
         <div id="contents">
             <table>
                 <tr>
@@ -44,7 +44,7 @@
                 </table>
 
                 <br />
-                
+
            <?php endif; ?>
             <table class="searchTable" id="importTable1" width="100%">
                 <tr>
@@ -52,11 +52,11 @@
                     understand how to use. Do not discard the original data!
                     </td>
                 </tr>
-                
+
             </table>
-            
+
             <br />
-            
+
             <form name="importDataForm" id="importDataForm" action="<?php echo(CATSUtility::getIndexName()); ?>?m=import&amp;a=importUploadResume" enctype="multipart/form-data" method="post" autocomplete="off" onsubmit="document.getElementById('nextSpan').style.display='none'; document.getElementById('uploadingSpan').style.display='';">
                 <table class="searchTable" width="100%" id="importHide3">
                     <tr>
@@ -68,7 +68,7 @@
                             <span style="font-style: italic;">This will not create candidates, it will only add resumes to the <a href="<?php echo(CATSUtility::getIndexName()); ?>?m=candidates&a=search">resume search</a>!</span>
                         </td>
                     </tr>
-                    
+
                     <tr id="importSingle">
                         <td class="tdVertical">
                             <label id="fileLabel" for="file">
@@ -114,16 +114,16 @@
                             <br />
                         </td>
                     </tr>
-    
-                </table>    
+
+                </table>
             </form>
         </div>
     </div>
-    
+
     <script type="text/javascript">
         initPopUp();
-        
+
         totalFiles = <?php echo(count($this->foundFiles)); ?>;
     </script>
-    
+
 <?php TemplateUtility::printFooter(); ?>

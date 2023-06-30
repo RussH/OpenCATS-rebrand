@@ -384,7 +384,7 @@ class UserInterface
     /**
      * getSanitisedInput is getTrimmedInput but with XSS protection for public facing career portal
      */
-    
+
    protected function getSanitisedInput($key, $request)
     {
         if (isset($request[$key]))
@@ -392,8 +392,8 @@ class UserInterface
 		return trim(htmlspecialchars($request[$key], ENT_QUOTES, FALSE));
 		}
         return '';
-    } 
-    
+    }
+
     /**
      * Returns valid subtabs for this module.
      *
@@ -421,7 +421,7 @@ class UserInterface
 
         return $ret;
     }
-    
+
      /**
      * Returns access level of logged in user for securedObject
      * Intended to be used in UI classes (deriving from UserInterface) to check if user has acces to particular module and it's action.

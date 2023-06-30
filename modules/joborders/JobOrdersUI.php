@@ -714,7 +714,7 @@ class JobOrdersUI extends UserInterface
 
         if (isset($_POST['openings']) && !empty($_POST['openings']) &&
             !ctype_digit((string) trim($_POST['openings'])))
-        {        	
+        {
             CommonErrors::fatal(COMMONERROR_MISSINGFIELDS, $this, 'Invalid number of openings.');
         }
 
@@ -766,7 +766,7 @@ class JobOrdersUI extends UserInterface
         $department  = $this->getTrimmedInput('department', $_POST);
         $maxRate     = $this->getSanitisedInput('maxRate', $_POST);
         $salary      = $this->getSanitisedInput('salary', $_POST);
-        $description = $this->getSanitisedInput('description', $_POST);
+        $description = $this->getTrimmedInput('description', $_POST);
         $notes       = $this->getSanitisedInput('notes', $_POST);
 
         /* Bail out if any of the required fields are empty. */
@@ -1110,7 +1110,7 @@ class JobOrdersUI extends UserInterface
         $department  = $this->getTrimmedInput('department', $_POST);
         $maxRate     = $this->getSanitisedInput('maxRate', $_POST);
         $salary      = $this->getSanitisedInput('salary', $_POST);
-        $description = $this->getSanitisedInput('description', $_POST);
+        $description = $this->getTrimmedInput('description', $_POST);
         $notes       = $this->getSanitisedInput('notes', $_POST);
 
         /* Bail out if any of the required fields are empty. */

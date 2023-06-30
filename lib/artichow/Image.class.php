@@ -38,7 +38,7 @@ class awImage {
 	 * @var int
 	 */
 	public $height;
-	
+
 	/**
 	 * Background width:
 	 *
@@ -241,12 +241,12 @@ class awImage {
 
 			// Draw image background
 			$this->drawer->filledRectangle(new Color(255, 255, 255, 0), new awLine($p1, $p3));
-			
+
 			if (!isset($this->noBorder))
 			{
 			    $this->drawer->filledRectangle($this->background, new awLine($p1, $p2));
 		    }
-		    
+
 			$this->background->free();
 
 			// Draw image border

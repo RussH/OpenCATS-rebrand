@@ -4,7 +4,7 @@
 <?php TemplateUtility::printTabs($this->active); ?>
     <div id="main">
         <?php TemplateUtility::printQuickSearch(); ?>
-        
+
         <div id="contents">
             <table>
                 <tr>
@@ -14,9 +14,9 @@
                     <td><h2>Contacts: Cold Call List</h2></td>
                 </tr>
             </table>
-        
+
             <p class="note">Cold Call List (Only Contacts with Phone Numbers)</p>
-        
+
             <?php if (!empty($this->rs)): ?>
                 <table class="sortable" rules="all" onmouseover="javascript:trackTableHighlight(event)">
                     <tr>
@@ -26,7 +26,7 @@
                         <th align="left">Title</th>
                         <th align="left" nowrap="nowrap">Work Phone</th>
                     </tr>
-        
+
                     <?php foreach ($this->rs as $rowNumber => $data): ?>
                         <tr class="<?php TemplateUtility::printAlternatingRowClass($rowNumber); ?>">
                             <td valign="top" align="left"><?php $this->_($data['companyName']); ?></td>

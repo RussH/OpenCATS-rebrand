@@ -8,7 +8,7 @@
      * any of its dependencies.
      */
     /* Version check before we include this. */
-   
+
     $phpVersion = phpversion();
     $phpVersionParts = explode('.', $phpVersion);
     if ($phpVersionParts[0] >= 5)
@@ -98,7 +98,7 @@
                                             <p style="text-align: justify; margin-top: 15px;">This process will help you set up the OpenCATS environment
                                             for the first time. Before we begin, OpenCATS needs to run some tests on your system to make sure that your
                                             web environment can support OpenCATS and is configured properly.</p>
-                                            
+
                                             <br />
                                             <span style="font-weight: bold;">Test Results</span>
                                             <table class="test_output">

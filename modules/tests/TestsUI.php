@@ -66,10 +66,10 @@ class TestsUI extends UserInterface
         $this->_moduleName = 'tests';
         $this->_moduleDirectory = 'tests';
         $this->_testCaseList = new TestCaseList();
-        
+
         $microTimeArray = explode(' ', microtime());
         $microTimeStart = $microTimeArray[1] + $microTimeArray[0];
-        
+
         $this->reporter = new CATSTestReporter($microTimeStart);
         $this->reporter->showPasses = true;
         $this->reporter->showFails = true;

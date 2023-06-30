@@ -191,10 +191,10 @@ class awTTFFont extends awFont {
        		$offsetTop += 3;
        		$offsetRight -= 7;
    		}
-   		
+
 		$textParts = explode("\n", $textWorking);
 		$textFirstPart = $textParts[0];
-   		
+
 		$text->setText($textWorking." ");
 
 		$color = $text->getColor();

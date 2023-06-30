@@ -11,7 +11,7 @@ class TestCaseList
             array('SettingsWebTest',   'Settings Module System Tests'),
         );
     }
-    
+
     public function getAjaxTests() {
         return array(
             array('ActivityTest',                         'Activity AJAX Tests'),

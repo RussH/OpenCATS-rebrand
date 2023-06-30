@@ -29,7 +29,7 @@
  * @copyright Copyright (C) 2005 - 2007 Cognizo Technologies, Inc.
  * @version    $Id: Export.php 3813 2007-12-05 23:16:22Z brian $
  */
- 
+
 include_once(LEGACY_ROOT . '/lib/Candidates.php');
 include_once(LEGACY_ROOT . '/lib/Contacts.php');
 include_once(LEGACY_ROOT . '/lib/Companies.php');
@@ -134,7 +134,7 @@ class Export
             case DATA_ITEM_CANDIDATE:
                 $dataItem = new Candidates($this->_siteID);
                 break;
-                
+
             default:
                 return false;
                 break;

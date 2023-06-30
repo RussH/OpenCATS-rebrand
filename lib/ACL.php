@@ -12,7 +12,7 @@ include_once("./config.php");
 class ACL
 {
 
-    /* Constant to define root secured object for retrieveing access level 
+    /* Constant to define root secured object for retrieveing access level
     */
     const SECOBJ_ROOT = '';
     const CATEGORY_EMPTY = '';
@@ -46,7 +46,7 @@ class ACL
     */
 
 
-    /* Returns accessLevel to securedObjectName for user with userCategories 
+    /* Returns accessLevel to securedObjectName for user with userCategories
      * current implementation evaluates only first user category
     */
     public static function getAccessLevel($securedObjectName, $userCategories, $defaultAccessLevel)
@@ -84,7 +84,7 @@ class ACL
     }
 
     public static function _hasACLEntry($aclmap, $userCategory, $securedObjectName)
-    { 
+    {
         return array_key_exists($userCategory, $aclmap)
             && array_key_exists($securedObjectName, $aclmap[$userCategory])
             && NULL !== $aclmap[$userCategory][$securedObjectName];

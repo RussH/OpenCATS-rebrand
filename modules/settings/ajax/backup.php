@@ -79,7 +79,7 @@ if ($action == 'start')
         $companyID,
         "AND content_type = 'catsbackup'"
     );
-    
+
     /* Build title string. */
     if ($attachmentsOnly)
     {
@@ -99,7 +99,7 @@ if ($action == 'start')
     {
         die($attachmentCreator->getError());
     }
-    
+
     $attachmentID = $attachmentCreator->getAttachmentID();
     $directory = $attachmentCreator->getContainingDirectory();
 
@@ -120,7 +120,7 @@ if ($action == 'start')
 if ($action == 'backup')
 {
     include_once(LEGACY_ROOT . '/lib/FileCompressor.php');
-    
+
 	if( ini_get('safe_mode') )
 	{
 		//don't do anything in safe mode
@@ -130,7 +130,7 @@ if ($action == 'backup')
 		/* Don't limit the execution time during backup. */
 		set_time_limit(0);
 	}
-    
+
     // FIXME: Make this configurable.
     @ini_set('memory_limit', '192M');
 
@@ -141,7 +141,7 @@ if ($action == 'backup')
 
     $attachmentID    = $_REQUEST['attachmentID'];
     $attachmentsOnly = $interface->isChecked('attachmentsOnly');
-    
+
     $siteID = $_SESSION['CATS']->getSiteID();
     $db = DatabaseConnection::getInstance();
 
@@ -165,9 +165,9 @@ if ($action == 'backup')
     if (!$attachmentsOnly)
     {
         include_once(LEGACY_ROOT . '/modules/install/backupDB.php');
-        
+
         $SQLDumpPath = $directory . 'catsbackup.sql';
-    
+
         /* Dump SQL tables to the filesystem. This will dump both a complete
          * schema and special CATS restore files split into ~1MB chunks.
          */
@@ -195,7 +195,7 @@ if ($action == 'backup')
         for ($i = 0; $i < $totalFiles; ++$i)
         {
             $fileNumber = $i + 1;
-        
+
             setStatusBackup(
                 sprintf(
                     'Compressing database (%s of %s files processed)...',
@@ -217,7 +217,7 @@ if ($action == 'backup')
                 $zipFileCreator->abort();
                 die('Failed to add database part to zip file.');
             }
-        
+
             @unlink($SQLDumpPath . '.' . $i);
         }
         markCompleted('Compressing database for CATS restore...');
@@ -274,9 +274,9 @@ if ($action == 'backup')
             ($attachmentCount / $totalAttachments)
         );
         $attachmentID = $row['attachment_id'];
-        
+
         if (!eval(Hooks::get('FORCE_ATTACHMENT_LOCAL'))) return;
-        
+
         $status = $zipFileCreator->addFileFromDisk(
             $relativePath, $relativePath
         );

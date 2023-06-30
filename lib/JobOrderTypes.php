@@ -10,7 +10,7 @@
 class JobOrderTypes
 {
     private $_defaultTypes;
-        
+
 
     public function __construct() {
         $this->_defaultTypes = array(
@@ -31,8 +31,8 @@ class JobOrderTypes
         if( class_exists('JOB_TYPES') && !empty(JOB_TYPES::$LIST) )
         {
             return JOB_TYPES::$LIST;
-        } 
-        else 
+        }
+        else
         {
             return $this->_defaultTypes;
         }

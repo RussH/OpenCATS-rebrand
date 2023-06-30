@@ -54,12 +54,12 @@ class candidatesListByViewDataGrid extends CandidatesDataGrid
         $html = '';
 
         $html .= $this->getInnerActionAreaItemPopup('Add To List', CATSUtility::getIndexName().'?m=lists&amp;a=addToListFromDatagridModal&amp;dataItemType='.DATA_ITEM_CANDIDATE, 450, 350);
-        
-        if($_SESSION['CATS']->getAccessLevel('pipelines.addToPipeline') >= ACCESS_LEVEL_EDIT) 
+
+        if($_SESSION['CATS']->getAccessLevel('pipelines.addToPipeline') >= ACCESS_LEVEL_EDIT)
         {
             $html .= $this->getInnerActionAreaItemPopup('Add To Job Order', CATSUtility::getIndexName().'?m=candidates&amp;a=considerForJobSearch', 750, 460);
         }
-        
+
         if(MAIL_MAILER != 0 && $_SESSION['CATS']->getAccessLevel('candidates.emailCandidates') >= ACCESS_LEVEL_SA)
         {
             $html .= $this->getInnerActionAreaItem('Send E-Mail', CATSUtility::getIndexName().'?m=candidates&amp;a=emailCandidates');

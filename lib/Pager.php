@@ -271,7 +271,7 @@ class Pager
             'name', 'city', 'state', 'clientName', 'title', 'firstName', 'lastName'
         );
 
-        
+
         /* Try to get default column data if not on an alpha column. */
         if ($defaultSortBy != '' && (method_exists($this, 'getNavigation') || method_exists($this, '_getNavigation')))
         {
@@ -297,7 +297,7 @@ class Pager
         }
 
         $rsNav = null;
-            
+
         $indexName = CATSUtility::getIndexName();
 
         /* If there is a previous page, show "<< Previous" as a link; otherwise

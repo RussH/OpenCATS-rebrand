@@ -160,7 +160,7 @@ function getArrayFromCSVText(theText)
     {
          theText = theText.substring(0,theText.indexOf('&DELETEALLOWED&'));
     }
-    
+
     listEditorList = Array();
     listEditorModifiedList = Array();
 
@@ -494,7 +494,7 @@ function listEditorSaveValue()
 function listEditorDeleteValue()
 {
     allowDelete = true;
-    
+
     var listObject = document.getElementById('listEditorSelect');
 
     if (listObject.value == '')
@@ -515,7 +515,7 @@ function listEditorDeleteValue()
     }
     listEditorBuildSelect();
     listEditorDumpList();
-    
+
     return;
 }
 

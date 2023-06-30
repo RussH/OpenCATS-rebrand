@@ -65,7 +65,7 @@ class MRU
         and database references can not be stored in the session. */
         $db = DatabaseConnection::getInstance();
 
-        
+
         $URL = self::makeMRUURL($dataItemType, $dataItemID);
 
         /* If this item is already in the MRU, remove it. */
@@ -117,7 +117,7 @@ class MRU
         /* Locally initiated because the MRU object is stored in the session,
         and database references can not be stored in the session. */
         $db = DatabaseConnection::getInstance();
-        
+
         $HTML = array();
 
         $sql = sprintf(
@@ -135,7 +135,7 @@ class MRU
             $this->_siteID,
             $this->_userID
         );
-        
+
         $rs = $db->getAllAssoc($sql);
 
         foreach ($rs as $rowIndex => $row)
@@ -173,7 +173,7 @@ class MRU
         /* Locally initiated because the MRU object is stored in the session,
         and database references can not be stored in the session. */
         $db = DatabaseConnection::getInstance();
-        
+
         $URL = self::makeMRUURL($dataItemType, $dataItemID);
 
         $sql = sprintf(
@@ -203,7 +203,7 @@ class MRU
         /* Locally initiated because the MRU object is stored in the session,
         and database references can not be stored in the session. */
         $db = DatabaseConnection::getInstance();
-        
+
         $sql = sprintf(
             "SELECT
                 COUNT(*) AS count

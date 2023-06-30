@@ -91,16 +91,16 @@ class ArrayUtility
      * @param string Function name to execute.
      * @param array Array to process.
      * @return array Processed array.
-     */    
+     */
     public static function arrayMapKeys($function, $array)
     {
         $returnArray = array();
-        
+
         foreach ($array as $index => $data)
         {
             $returnArray[eval('return ' . $function . '($index);')] = $data;
         }
-        
+
         return $returnArray;
     }
 }

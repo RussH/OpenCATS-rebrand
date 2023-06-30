@@ -41,13 +41,13 @@ class ImportUtility
     public static function getDirectoryFiles($dirName)
     {
         $files = array();
-        
+
         $handle = opendir($dirName);
         if (!$handle)
         {
             return -1;
         }
-        
+
         while (false !== ($file = readdir($handle)))
         {
             if ($file == '.' || $file == '..') continue;

@@ -171,7 +171,7 @@ class GraphPie
         $plot = new Pie($this->xValues, $colors);
         $plot->setCenter(0.5, 0.45);
         $plot->setAbsSize(160, 160);
-        
+
         $plot->setLegend($this->xLabels);
         $plot->legend->setModel(Legend::MODEL_BOTTOM);
         $plot->legend->setPosition(NULL, 1.25); /*$this->legendOffset*/
@@ -278,7 +278,7 @@ class pipelineStatisticsGraph
     private $legend3;
     private $view;
     private $noData;
-    
+
 
     public function __construct($xLabels, $xValues, $colorArray, $width, $height, $legend1, $legend2, $legend3, $view, $noData)
     {

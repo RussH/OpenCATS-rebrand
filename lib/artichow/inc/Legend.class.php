@@ -658,7 +658,7 @@ class awLegend implements awPositionable {
 			new Tuffy(8),
 			new Color(0, 0, 0, 0),
 			0);
-			
+
 		$text3 = new awText(
 			'Yearly',
 			new Tuffy(8),
@@ -668,18 +668,18 @@ class awLegend implements awPositionable {
 		$point1 = new awPoint(
 			412,
 			7
-		);	 
-		
+		);
+
 		$point2 = new awPoint(
 			412,
 			30
-		);	
-		
+		);
+
 		$point3 = new awPoint(
 			412,
 			54
-		);	
-		   
+		);
+
         $drawer->string($text1, $point1);
         $drawer->string($text2, $point2);
         $drawer->string($text3, $point3);

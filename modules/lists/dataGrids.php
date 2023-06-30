@@ -1,9 +1,9 @@
-<?php 
+<?php
 /*
  * CATS
  * Companies Datagrid
  *
- * CATS Version: 0.9.7.2
+ * CATS Version: 0.9.7.2.1
  *
  * Copyright (C) 2005 - 2007 Cognizo Technologies, Inc.
  *
@@ -30,13 +30,13 @@
  *
  * $Id: dataGrids.php 3566 2007-11-12 09:46:35Z will $
  */
- 
+
 include_once(LEGACY_ROOT . '/lib/Companies.php');
 include_once(LEGACY_ROOT . '/lib/Hooks.php');
 include_once(LEGACY_ROOT . '/lib/Width.php');
 
 class ListsDataGrid extends DataGrid
-{   
+{
     // FIXME: Fix ugly indenting - ~400 character lines = bad.
     public function __construct($siteID, $parameters, $misc)
     {
@@ -51,8 +51,8 @@ class ListsDataGrid extends DataGrid
 
         $this->defaultSortBy = 'description';
         $this->defaultSortDirection = 'DESC';
-   
-        $this->_defaultColumns = array( 
+
+        $this->_defaultColumns = array(
             array('name' => 'Attachments', 'width' => 10),
             array('name' => 'Name', 'width' => 255),
             array('name' => 'Jobs', 'width' => 40),
@@ -63,7 +63,7 @@ class ListsDataGrid extends DataGrid
             array('name' => 'Created', 'width' => 60),
             array('name' => 'Modified', 'width' => 60),
         );
-   
+
         $this->_classColumns = array(
             'Count' =>         array ('select'          => 'number_entries as numberEntries',
                                       'pagerRender'     => 'return $rsData[\'numberEntries\'];',
@@ -73,7 +73,7 @@ class ListsDataGrid extends DataGrid
                                       'sortableColumn'  => 'number_entries',
                                       'filter'          => 'number_entries',
                                       'filterTypes'     => '===>=<'),
-            'Description' =>   array('select'         => '', 
+            'Description' =>   array('select'         => '',
                                       'pagerRender'    => 'return \'<a href="'.CATSUtility::getIndexName().'?m=lists&amp;a=showList&amp;savedListID=\'.$rsData[\'savedListID\'].\'">\'.htmlspecialchars($rsData[\'description\']).\'</a>\';',
                                       'sortableColumn' => 'description',
                                       'pagerWidth'     => 355,
@@ -84,7 +84,7 @@ class ListsDataGrid extends DataGrid
                                       'pagerWidth'     => 75,
                                       'pagerOptional'  => true,
                                       'filter'         => 'data_item_type.short_description'),
-            'Data Type' =>      array('select'         => 'data_item_type.short_description AS dataItemTypeSortDesc', 
+            'Data Type' =>      array('select'         => 'data_item_type.short_description AS dataItemTypeSortDesc',
                                       'join'           => 'LEFT JOIN data_item_type on data_item_type.data_item_type_id = saved_list.data_item_type',
                                       'pagerRender'    => 'return ($rsData[\'dataItemTypeSortDesc\']);',
                                       'sortableColumn' => 'dataItemTypeSortDesc',
@@ -123,17 +123,17 @@ class ListsDataGrid extends DataGrid
             array('name' => 'Created', 'width' => 60),
             array('name' => 'Modified', 'width' => 60),
         );
-   
+
         parent::__construct("lists:ListsDataGrid", $parameters, $misc);
     }
-    
+
     /**
      * Returns the sql statment for the pager.
      *
      * @return array clients data
      */
     public function getSQL($selectSQL, $joinSQL, $whereSQL, $havingSQL, $orderSQL, $limitSQL, $distinct = '')
-    {   
+    {
         $sql = sprintf(
             "SELECT SQL_CALC_FOUND_ROWS %s
                 saved_list_id as savedListID,
@@ -170,17 +170,17 @@ class ListsDataGrid extends DataGrid
     }
 
     /**
-     * Adds more options to the action area on the pager.  Overloads 
+     * Adds more options to the action area on the pager.  Overloads
      * DataGrid Inner Action Area function.
      *
      * @return html innerActionArea commands.
-     */    
+     */
     public function getInnerActionArea()
     {
         $html = parent::getInnerActionArea();
-        
+
         $newParameterArray = $this->_parameters;
-        
+
         $newParameterArray['exportIDs'] = '<dynamic>';
 
         $html .= sprintf(
@@ -191,11 +191,11 @@ class ListsDataGrid extends DataGrid
             urlencode($this->_instanceName),
             md5($this->_instanceName)
         );
-         
+
         //$html .= sprintf(
         //            '<a href="">Delete Selected</a><br />'
-        //         );       
-        
+        //         );
+
         return $html;
     }
 }

@@ -31,7 +31,7 @@
  */
 
 // FIXME: Clean me up!
- 
+
 include_once(LEGACY_ROOT . '/lib/WebForm.php');
 
 define('CP_LISTVIEW',       1 << 1); // Predefined section for list view

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
 * Candidate merge duplicates template
 * @package OpenCATS
@@ -18,12 +18,12 @@
             <form id="chooseMergeInformation" name="chooseMergeInformationForm" action="<?php echo(CATSUtility::getIndexName()); ?>?m=candidates&amp;a=mergeInfo" method="post">
                 <input type="hidden" id="oldCandidateID" name="oldCandidateID" value=<?php echo $this->oldCandidateID; ?> />
                 <input type="hidden" id="newCandidateID" name="newCandidateID" value=<?php echo $this->newCandidateID; ?> />
-                
+
                 <tr>
                     <td colspan=2 align="right">Original candidate&nbsp;</td>
                     <td colspan=2 align="left">Duplicate candidate&nbsp;</td>
                 </tr>
-                
+
                 <tr>
                     <td colspan=4 align="center">First Name&nbsp;</td>
                 </tr>
@@ -33,8 +33,8 @@
                     <td align="center"><input type="radio" name="firstName" value=1 checked/></td>
                     <td align="left"><?php echo($this->rsNew['firstName']); ?></td>
                 </tr>
-                
-                
+
+
                 <tr>
                     <td colspan=4 align="center">Middle Name&nbsp;</td>
                 </tr>
@@ -44,7 +44,7 @@
                     <td align="center"><input type="radio" name="middleName" value=1 checked/></td>
                     <td align="left"><?php echo($this->rsNew['middleName']); ?></td>
                 </tr>
-                
+
                 <tr>
                     <td colspan=4 align="center">Last Name&nbsp;</td>
                 </tr>
@@ -54,8 +54,8 @@
                     <td align="center"><input type="radio" name="lastName" value=1 checked/></td>
                     <td align="left"><?php echo($this->rsNew['lastName']); ?></td>
                 </tr>
-                
-                
+
+
                 <tr>
                     <td colspan=4 align="center">E-mails (max. 2)&nbsp;</td>
                 </tr>
@@ -80,7 +80,7 @@
                     <td align="center"><input type="radio" name="phoneCell" value=1 checked/></td>
                     <td align="left"><?php echo($this->rsNew['phoneCell'] == '') ? '(none)' : ($this->rsNew['phoneCell']); ?></td>
                 </tr>
-                
+
                 <tr>
                     <td colspan=4 align="center">Home phone&nbsp;</td>
                 </tr>
@@ -90,7 +90,7 @@
                     <td align="center"><input type="radio" name="phoneHome" value=1 checked/></td>
                     <td align="left"><?php echo($this->rsNew['phoneHome'] == '') ? '(none)' : ($this->rsNew['phoneHome']); ?></td>
                 </tr>
-                
+
                 <tr>
                     <td colspan=4 align="center">Work phone&nbsp;</td>
                 </tr>
@@ -100,7 +100,7 @@
                     <td align="center"><input type="radio" name="phoneWork" value=1 checked/></td>
                     <td align="left"><?php echo($this->rsNew['phoneWork'] == '') ? '(none)' : ($this->rsNew['phoneWork']); ?></td>
                 </tr>
-                
+
                 <tr>
                     <td colspan=4 align="center">Website&nbsp;</td>
                 </tr>
@@ -110,7 +110,7 @@
                     <td align="center"><input type="radio" name="website" value=1 checked/></td>
                     <td align="left"><?php echo($this->rsNew['webSite'] == '') ? '(none)' : ($this->rsNew['webSite']); ?></td>
                 </tr>
-                
+
                 <tr>
                     <td colspan=4 align="center">Address&nbsp;</td>
                 </tr>
@@ -128,11 +128,11 @@
                         <td align="left"><?php echo($this->rsNew['address'].'<br/>'.$this->rsNew['city']." ".$this->rsNew['zip'].'<br/>'.$this->rsNew['state']);  ?></td>
                     <?php endif; ?>
                 </tr>
-                
+
                 <tr>
                     <td colspan=4 align="center"><input type="submit" class="button" id="mergeInfo" name="mergeInfo" value="Merge" /></td>
                 </tr>
-                
+
                 <tr>
                     <td>&nbsp;</td>
                 </tr>

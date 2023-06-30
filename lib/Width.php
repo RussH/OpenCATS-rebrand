@@ -1,15 +1,15 @@
 <?php
 
-class Width 
+class Width
 {
     private $digit;
     private $unit;
-    
+
     function __construct($digit, $unit = "px") {
         $this->digit = $digit;
         $this->unit = $unit;
     }
-    
+
     function asString($makeLargerThanDisplayableArea = false) {
         if ($this->unit == 'px') {
             $out = $this->digit + ($makeLargerThanDisplayableArea ? 10 : 0);
@@ -20,10 +20,10 @@ class Width
         }
         return $out . $this->unit;
     }
-    
+
     function getDigit() {
         return $this->digit;
     }
-    
+
 }
 ?>

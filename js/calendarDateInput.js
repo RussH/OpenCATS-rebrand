@@ -353,7 +353,7 @@ function dateObject() {
 		//alert('B - ' + arguments[ArgumentStart+0]);
 		ParentObject.date = new Date(arguments[ArgumentStart+0], arguments[ArgumentStart+1], arguments[ArgumentStart+2]);
 	}
-	
+
    ParentObject.yearValue = ParentObject.date.getFullYear();
    if (ParentObject.yearValue < 1995) ParentObject.yearValue += 100;
    ParentObject.monthIndex = ParentObject.date.getMonth();
@@ -766,7 +766,7 @@ function DateInputForDOM(DateName, Required, DateFormat, DefaultDate, TabIndex)
         var tabIndexB = '';
         var tabIndexC = '';
     }
-    
+
 
     var outCode = '';
 
@@ -860,7 +860,7 @@ function DateInputForDOM(DateName, Required, DateFormat, DefaultDate, TabIndex)
     outCode += ('</td>');
     outCode += ('</tr>');
     outCode += ('</table>');
-    
+
     return outCode;
 }
 
@@ -878,11 +878,11 @@ function SetDateInputDate(DateName, DateFormat, NewDate)
 
     /* Get a reference to DateName's object. */
     eval('var object = ' + DateName + '_Object;');
-	
+
 	var year;
 	var month;
 	var day;
-	
+
     if (DateFormat == 'YYYYMMDD' && (/^(\d{4})(\d{2})(\d{2})$/.test(NewDate)))
     {
         year = parseInt(RegExp.$1, 10);

@@ -52,13 +52,13 @@ class LDAP
 	}
 
 	public function authenticate($username, $password)
-	{   
-		if ($this->_connection) 
+	{
+		if ($this->_connection)
 		{
-			if (LDAP_BIND_DN != "") 
+			if (LDAP_BIND_DN != "")
 			{
 				$this->_bind = @ldap_bind($this->_connection, LDAP_BIND_DN, LDAP_BIND_PASSWORD);
-				if(!$this->_bind) 
+				if(!$this->_bind)
 				{
 					error_log(ldap_error($this->_connection));
 					$this->_bind = NULL;
@@ -66,20 +66,20 @@ class LDAP
 				}
 
 				$search = @ldap_search( $this->_connection, LDAP_BASEDN, LDAP_ATTRIBUTE_UID . '=' . $username);
-				if (!$search) 
+				if (!$search)
 				{
 					error_log(ldap_error($this->_connection));
 					return false;
 				}
 
 				$result = @ldap_get_entries( $this->_connection, $search);
-				if ($result[0]) 
+				if ($result[0])
 				{
-					if (ldap_bind( $this->_connection, $result[0][LDAP_ATTRIBUTE_DN], $password) ) 
+					if (ldap_bind( $this->_connection, $result[0][LDAP_ATTRIBUTE_DN], $password) )
 					{
 						return true;
 					}
-					else 
+					else
 					{
 						error_log(ldap_error($this->_connection));
 						return false;
@@ -90,12 +90,12 @@ class LDAP
 					error_log("No user with attribute " . LDAP_ATTRIBUTE_UID . "=" . $username);
 				}
 			}
-			else 
+			else
 			{
 				$trans = array('{$username}' => $username);
 				$username = strtr(LDAP_ACCOUNT, $trans);
 				$this->_bind = @ldap_bind($this->_connection, $username, $password);
-				if(!$this->_bind) 
+				if(!$this->_bind)
 				{
 					error_log(ldap_error($this->_connection));
 					$this->_bind = NULL;
@@ -110,14 +110,14 @@ class LDAP
 	{
 		$search = @ldap_search( $this->_connection,
 				LDAP_BASEDN, LDAP_ATTRIBUTE_UID . '=' . $username);
-		if ($search) 
+		if ($search)
 		{
 			$result = @ldap_get_entries( $this->_connection, $search);
-			if ($result[0]) 
+			if ($result[0])
 			{
 				return true;
 			}
-			else 
+			else
 			{
 				return NULL;
 			}
@@ -128,7 +128,7 @@ class LDAP
 	{
 		$this->_bind = @ldap_bind($this->_connection, LDAP_BIND_DN, LDAP_BIND_PASSWORD);
 		$search = @ldap_search( $this->_connection, LDAP_BASEDN, LDAP_ATTRIBUTE_UID . '=' . $username);
-		
+
 		if ($search)
 		{
 			$result = @ldap_get_entries( $this->_connection, $search);

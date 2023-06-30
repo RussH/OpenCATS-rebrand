@@ -26,16 +26,16 @@
  *
  * $Id: ExtraFields.php 3767 2007-11-29 16:49:10Z brian $
  */
- 
+
 include_once(LEGACY_ROOT . '/lib/Site.php');
- 
+
 /**
  *	Extra Fields Library
  *	@package    CATS
  *	@subpackage Library
  */
- 
-class ExtraFields 
+
+class ExtraFields
 {
     private $_db;
     private $_siteID;
@@ -107,10 +107,10 @@ class ExtraFields
              $this->_db->makeQueryInteger($fieldType)
         );
         $this->_db->query($sql);
-        
+
         /* Force this new extra field to have a position. */
         $sql = sprintf(
-            "UPDATE 
+            "UPDATE
                 extra_field_settings
              SET
                 position = %s
@@ -124,7 +124,7 @@ class ExtraFields
         );
         $this->_db->query($sql);
     }
-    
+
     /**
      * Deletes an extra field for a record type in a site.
      *
@@ -147,7 +147,7 @@ class ExtraFields
              $this->_dataItemType
         );
         $this->_db->query($sql);
-    }    
+    }
 
     /**
      * Creates a new option under a field which allows
@@ -176,9 +176,9 @@ class ExtraFields
         );
 
         $rs = $this->_db->getAssoc($sql);
-       
+
         $options = explode(',', $rs['extraFieldOptions']);
-       
+
         /* First delete it if it is already an option... */
         foreach ($options as $index => $data)
         {
@@ -187,9 +187,9 @@ class ExtraFields
               unset($options[$index]);
            }
         }
-        
+
         $options[] = urlencode($optionName);
-       
+
         $sql = sprintf(
             "UPDATE
                extra_field_settings
@@ -211,7 +211,7 @@ class ExtraFields
     }
 
     /**
-     * Deletes an option under a field which allows  multiple options 
+     * Deletes an option under a field which allows  multiple options
      * (dropdown, radio boxes)
      *
      * @param string field name
@@ -237,9 +237,9 @@ class ExtraFields
         );
 
         $rs = $this->_db->getAssoc($sql);
-       
+
         $options = explode(',', $rs['extraFieldOptions']);
-       
+
         foreach ($options as $index => $data)
         {
            if ($data == urlencode($optionName))
@@ -247,7 +247,7 @@ class ExtraFields
               unset($options[$index]);
            }
         }
-       
+
         $sql = sprintf(
             "UPDATE
                extra_field_settings
@@ -275,7 +275,7 @@ class ExtraFields
      * @param string field name
      * @param string field name 2
      * @return boolean query response
-     */    
+     */
     public function swapColumns($fieldName1, $fieldName2)
     {
         $sql = sprintf(
@@ -293,9 +293,9 @@ class ExtraFields
             $this->_dataItemType,
             $this->_db->makeQueryString($fieldName1)
         );
-        
+
         $rs = $this->_db->getAssoc($sql);
-        
+
         $fieldPosition1 = $rs['position'];
 
         $sql = sprintf(
@@ -313,15 +313,15 @@ class ExtraFields
             $this->_dataItemType,
             $this->_db->makeQueryString($fieldName2)
         );
-        
+
         $rs = $this->_db->getAssoc($sql);
-        
+
         $fieldPosition2 = $rs['position'];
- 
+
         $sql = sprintf(
             "UPDATE
                 extra_field_settings
-            SET 
+            SET
                 extra_field_settings.position = %s
             WHERE
                 extra_field_settings.site_id = %s
@@ -334,13 +334,13 @@ class ExtraFields
             $this->_dataItemType,
             $this->_db->makeQueryString($fieldName1)
         );
-        
+
         $rs = $this->_db->query($sql);
-        
+
         $sql = sprintf(
             "UPDATE
                 extra_field_settings
-            SET 
+            SET
                 extra_field_settings.position = %s
             WHERE
                 extra_field_settings.site_id = %s
@@ -353,10 +353,10 @@ class ExtraFields
             $this->_dataItemType,
             $this->_db->makeQueryString($fieldName2)
         );
-        
-        $rs = $this->_db->query($sql);  
+
+        $rs = $this->_db->query($sql);
     }
-    
+
     /**
      * Swaps 2 columns position parameter.  Usefull for reordering extra fields.
      * //FIXME: Sanity Checks
@@ -364,13 +364,13 @@ class ExtraFields
      * @param string field name
      * @param string field name 2
      * @return boolean query response
-     */    
+     */
     public function renameColumn($oldName, $newName)
-    { 
+    {
         $sql = sprintf(
             "UPDATE
                 extra_field_settings
-            SET 
+            SET
                 extra_field_settings.field_name = %s
             WHERE
                 extra_field_settings.site_id = %s
@@ -383,13 +383,13 @@ class ExtraFields
             $this->_dataItemType,
             $this->_db->makeQueryString($oldName)
         );
-        
+
         $rs = $this->_db->query($sql);
-        
+
         $sql = sprintf(
             "UPDATE
                 extra_field
-            SET 
+            SET
                 extra_field.field_name = %s
             WHERE
                 extra_field.site_id = %s
@@ -402,8 +402,8 @@ class ExtraFields
             $this->_dataItemType,
             $this->_db->makeQueryString($oldName)
         );
-        
-        $rs = $this->_db->query($sql);   
+
+        $rs = $this->_db->query($sql);
     }
 
     /**
@@ -431,7 +431,7 @@ class ExtraFields
             $this->_db->makeQueryInteger($candidateID),
             $this->_dataItemType,
             $this->_siteID
-            
+
         );
 
         return $this->_db->getAllAssoc($sql);
@@ -498,7 +498,7 @@ class ExtraFields
 
         return (boolean) $this->_db->query($sql);
     }
-    
+
     /**
      * Deletes all extra fields associated with a candidate.
      *
@@ -523,7 +523,7 @@ class ExtraFields
 
         return (boolean) $this->_db->query($sql);
     }
-    
+
     /**
      * Returns an array of extra fields which are HTML formatted to be displayed
      * on the associated data item's show() method.
@@ -534,7 +534,7 @@ class ExtraFields
     public function getValuesForShow($dataItemID)
     {
         $extraFields = $this->_getValuesWithSettings($dataItemID);
-        
+
         foreach ($extraFields as $index => $data)
         {
             switch ($data['extraFieldType'])
@@ -549,33 +549,33 @@ class ExtraFields
                         $extraFields[$index]['display'] = $extraFields[$index]['value'];
                     }
                 break;
-                
+
                 case EXTRA_FIELD_TEXTAREA:
                     $extraFields[$index]['display'] = nl2br(htmlspecialchars($extraFields[$index]['value']));
                 break;
-                
+
                 case EXTRA_FIELD_DATE:
                     $dmy = false;
-                    
+
                     if (isset($_SESSION['CATS']) && $_SESSION['CATS']->isLoggedIn())
                     {
                         if ($_SESSION['CATS']->isDateDMY())
                         {
                             $dmy = true;
                         }
-                    } 
-                    else 
+                    }
+                    else
                     {
                         // Look up the sites preference. (This would happen on careersUI)
                         $site = new Site($this->_siteID);
                         $siteRS = $site->getSiteBySiteID($this->_siteID);
-                        
+
                         if ($siteRS['dateFormatDDMMYY'] == 1)
                         {
-                            $dmy = true; 
+                            $dmy = true;
                         }
                     }
-                    
+
                     if ($dmy)
                     {
                         $dateParts = explode('-', $extraFields[$index]['value']);
@@ -586,7 +586,7 @@ class ExtraFields
                             $dateParts[1] = $t;
                         }
                         $date = implode('-', $dateParts);
-                        
+
                         $extraFields[$index]['display'] = htmlspecialchars($date);
                     }
                     else
@@ -594,7 +594,7 @@ class ExtraFields
                         $extraFields[$index]['display'] = htmlspecialchars($extraFields[$index]['value']);
                     }
                 break;
-                
+
                 case EXTRA_FIELD_TEXT:
                 case EXTRA_FIELD_DROPDOWN:
                 case EXTRA_FIELD_RADIO:
@@ -603,10 +603,10 @@ class ExtraFields
                 break;
             }
         }
-        
+
         return $extraFields;
     }
-    
+
     /**
      * Returns an array of extra fields which are HTML formatted to be displayed
      * on the associated data item's add() method with associated input elements.
@@ -616,7 +616,7 @@ class ExtraFields
     public function getValuesForAdd()
     {
         $extraFields = $this->getSettings();
-        
+
         foreach ($extraFields as $index => $data)
         {
             switch ($data['extraFieldType'])
@@ -627,7 +627,7 @@ class ExtraFields
                         <input type="hidden" id="extraField'.$index.'" name="extraField'.$index.'" />
                     ';
                 break;
-                
+
                 case EXTRA_FIELD_TEXTAREA:
                     $extraFields[$index]['addHTML'] = '
                         <textarea id="extraField'.$index.'" class="inputbox" name="extraField'.$index.'" style="width: 150px;" ></textarea>
@@ -636,7 +636,7 @@ class ExtraFields
                         <textarea id="extraField'.$index.'" class="inputBoxArea" name="extraField'.$index.'"></textarea>
                     ';
                 break;
-                
+
                 case EXTRA_FIELD_DROPDOWN:
                     $extraFields[$index]['addHTML'] = '
                         <select id="extraField'.$index.'" class="selectBox" name="extraField'.$index.'" style="width: 150px;">
@@ -646,9 +646,9 @@ class ExtraFields
                         <select id="extraField'.$index.'" class="inputBoxNormal" name="extraField'.$index.'">
                            <option value="" selected>- Select from List -</option>
                     ';
-                    
+
                     $options = explode(',', $data['extraFieldOptions']);
-                    
+
                     foreach($options as $option)
                     {
                         if ($option != '')
@@ -657,16 +657,16 @@ class ExtraFields
                            $extraFields[$index]['careersAddHTML'] .= '<option value="'.htmlspecialchars(urldecode($option)).'">'.htmlspecialchars(urldecode($option)).'</option>';
                         }
                     }
-                    
+
                     $extraFields[$index]['addHTML'] .= '</select>';
                     $extraFields[$index]['careersAddHTML'] .= '</select>';
                 break;
 
                 case EXTRA_FIELD_RADIO:
                     $options = explode(',', $data['extraFieldOptions']);
-                    
+
                     $extraFields[$index]['addHTML'] ='';
-                    
+
                     foreach($options as $option)
                     {
                         if ($option != '')
@@ -675,11 +675,11 @@ class ExtraFields
                         }
                     }
                 break;
-                
+
                 case EXTRA_FIELD_DATE:
                     $extraFields[$index]['addHTML'] = '<script type="text/javascript">DateInput(\'extraField'.$index.'\', false, \'MM-DD-YY\', \'\');</script>';
                 break;
-                
+
                 case EXTRA_FIELD_TEXT:
                 default:
                     $extraFields[$index]['addHTML'] = '
@@ -691,15 +691,15 @@ class ExtraFields
                 break;
             }
         }
-        
+
         return $extraFields;
-    }    
-    
+    }
+
     /**
      * Returns a row to add to an associated data item's datagrid,
      * which allows the extra fields to be displayed on the datagrid.
      * FIXME: Why are we passing a database handle?
-     * 
+     *
      * @param string md5 unique index name for this datagrid
      * @param array data extra field definition
      * @param handle database handle
@@ -712,7 +712,7 @@ class ExtraFields
             case DATA_ITEM_JOBORDER:
                 $column = 'joborder.joborder_id';
                 break;
-                
+
             case DATA_ITEM_CANDIDATE:
                 $column = 'candidate.candidate_id';
                 break;
@@ -726,7 +726,7 @@ class ExtraFields
                 $column = 'company.company_id';
                 break;
         }
-        
+
         switch ($data['extraFieldType'])
         {
             case EXTRA_FIELD_CHECKBOX:
@@ -741,7 +741,7 @@ class ExtraFields
                           'pagerWidth'  => 45,
                           'filter' => 'IF (extra_field'.$uniqueIndex.'.value = "Yes", "Yes", "No")');
             break;
-            
+
             case EXTRA_FIELD_DATE:
                 return array('select'  => 'extra_field'.$uniqueIndex.'.value AS extra_field_value'.$uniqueIndex,
                           'join'    => 'LEFT JOIN extra_field AS extra_field' . $uniqueIndex . ' '.
@@ -783,7 +783,7 @@ class ExtraFields
                           'sortableColumn'       => 'extra_field_value' . $uniqueIndex,
                           'pagerWidth' => 110,
                           'filter' => 'extra_field'.$uniqueIndex.'.value');
-            
+
             case EXTRA_FIELD_TEXT:
             default:
                 return array('select'  => 'extra_field'.$uniqueIndex.'.value AS extra_field_value'.$uniqueIndex,
@@ -799,7 +799,7 @@ class ExtraFields
             break;
         }
     }
-    
+
     /**
      * Returns an array of extra fields which are HTML formatted to be displayed
      * on the associated data item's edit() method with associated input elements.
@@ -810,7 +810,7 @@ class ExtraFields
     public function getValuesForEdit($dataItemID)
     {
         $extraFields = $this->_getValuesWithSettings($dataItemID);
-        
+
         foreach ($extraFields as $index => $data)
         {
             switch ($data['extraFieldType'])
@@ -821,21 +821,21 @@ class ExtraFields
                         <input type="hidden" id="extraField'.$index.'" name="extraField'.$index.'" value="'.htmlspecialchars($data['value']).'" />
                     ';
                 break;
-                
+
                 case EXTRA_FIELD_TEXTAREA:
                     $extraFields[$index]['editHTML'] = '
                         <textarea id="extraField'.$index.'" class="inputbox" name="extraField'.$index.'" style="width: 150px;" >'.htmlspecialchars($data['value']).'</textarea>
                     ';
                 break;
-                
+
                 case EXTRA_FIELD_DROPDOWN:
                     $extraFields[$index]['editHTML'] = '
                         <select id="extraField'.$index.'" class="selectBox" name="extraField'.$index.'" style="width: 150px;">
                            <option value=""></option>
                     ';
-                    
+
                     $options = explode(',', $data['extraFieldOptions']);
-                    
+
                     foreach($options as $option)
                     {
                         if ($option != '')
@@ -843,20 +843,20 @@ class ExtraFields
                            $extraFields[$index]['editHTML'] .= '<option value="'.htmlspecialchars(urldecode($option)).'" '.(urldecode($option) == $data['value'] ? 'selected' : '').'>'.htmlspecialchars(urldecode($option)).'</option>';
                         }
                     }
-                    
+
                     if (!in_array($data['value'], $options))
                     {
                            $extraFields[$index]['editHTML'] .= '<option value="'.htmlspecialchars($data['value']).'" selected>'.htmlspecialchars($data['value']).'</option>';
                     }
-                    
+
                     $extraFields[$index]['editHTML'] .= '</select>';
                 break;
-                
+
                 case EXTRA_FIELD_RADIO:
                     $options = explode(',', $data['extraFieldOptions']);
-                    
+
                     $extraFields[$index]['editHTML'] = '';
-                    
+
                     foreach($options as $option)
                     {
                         if ($option != '')
@@ -865,11 +865,11 @@ class ExtraFields
                         }
                     }
                 break;
-                
+
                 case EXTRA_FIELD_DATE:
                     $extraFields[$index]['editHTML'] = '<script type="text/javascript">DateInput(\'extraField'.$index.'\', false, \'MM-DD-YY\', \''.$data['value'].'\');</script>';
                 break;
-                                    
+
                 case EXTRA_FIELD_TEXT:
                 default:
                     $extraFields[$index]['editHTML'] = '
@@ -878,10 +878,10 @@ class ExtraFields
                 break;
             }
         }
-        
+
         return $extraFields;
     }
-    
+
     /**
      * Checks $_POST for values set by onEdit, and updates the associated extra fields
      * for the data item.
@@ -901,7 +901,7 @@ class ExtraFields
             }
         }
     }
-    
+
     /**
      * Returns a static array of the types of extra fields which can be set with the extra
      * field editor.
@@ -936,30 +936,30 @@ class ExtraFields
                 'hasOptions' => false
                 ),
           );
-    }            
-    
+    }
+
     //TODO: PHPDOC
     //Takes the extra field settings result set and populates it with any values set for the extra fields.
     private function _getValuesWithSettings($dataItemID)
     {
         $extraFieldSettingsRS = $this->getSettings();
         $extraFieldRS = $this->getValues($dataItemID);
-        
+
         foreach ($extraFieldSettingsRS as $index => $data)
         {
             $extraFieldSettingsRS[$index]['value'] = '';
-            
+
             foreach ($extraFieldRS as $index2 => $data2)
             {
                 if ($data2['fieldName'] == $data['fieldName'])
                 {
                     $extraFieldSettingsRS[$index]['value'] = $data2['value'];
                 }
-            }        
+            }
         }
 
         return $extraFieldSettingsRS;
     }
-    
+
 
 }

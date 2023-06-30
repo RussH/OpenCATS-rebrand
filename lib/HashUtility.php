@@ -68,20 +68,20 @@ class HashUtility
     {
         /* PHP's hash_file() is faster if available (PHP 5.2.1+). */
         if (function_exists('hash_file') && !$forcePHPImplementation && false)
-        {            
+        {
             $rawHash = @hash_file('crc32b', $filename, true);
             if ($rawHash === false)
             {
                 return false;
             }
-            
+
             // FIXME: Should this be in machine byte order, or always little endian?
             list(,$hash) = unpack('V', $rawHash);
             return $hash;
         }
 
         $bytesLeftToRead = @filesize($filename);
-        
+
         $fileHandle = @fopen($filename,'rb');
         if ($fileHandle === false)
         {
@@ -93,27 +93,27 @@ class HashUtility
         while ($bytesLeftToRead > 0)
         {
             $maxBytesToRead = min($bytesLeftToRead, self::CRC32_READ_BLOCKSIZE);
-            
+
             $buffer = @fread($fileHandle, $maxBytesToRead);
             if ($buffer === false)
             {
                 return false;
             }
-            
+
             $crc32 = crc32($crc32String . $buffer);
-            
+
             $bytesLeftToRead -= $maxBytesToRead;
             if ($bytesLeftToRead)
             {
                 $crc32String = self::crc32Reverse($crc32);
             }
         }
-        
+
         @fclose($fileHandle);
 
         return $crc32;
    }
-    
+
     private static function crc32Reverse($crc)
     {
         $crc ^= self::CRC32_INITXOR;
@@ -129,22 +129,22 @@ class HashUtility
             {
                 $newCRC = (($newCRC >> 1) & self::INT_MAX);
             }
-    
+
             if (($crc & 1) != 0)
             {
                 $newCRC ^= self::CRC32_CRCINV;
             }
-            
+
             $crc = (($crc >> 1) & self::INT_MAX);
         }
 
         $newCRC ^= self::CRC32_FINALXOR;
-        
+
         $buffer  = chr($newCRC & 0xFF);
         $buffer .= chr($newCRC >> 8 & 0xFF);
         $buffer .= chr($newCRC >> 16 & 0xFF);
         $buffer .= chr($newCRC >> 24 & 0xFF);
-        
+
         return $buffer;
     }
 }

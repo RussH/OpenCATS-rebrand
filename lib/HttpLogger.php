@@ -90,7 +90,7 @@ class HTTPLogger
             $db->makeQueryInteger($siteID),
             $db->makeQueryString(date("Y-m-d H:i:s"))
         );
-        
+
         return (boolean) $db->query($sql);
     }
 
@@ -118,13 +118,13 @@ class HTTPLogger
                 default_log_type DESC",
             $db->makeQueryString($logTypeName)
         );
-        
+
         $result = $db->getColumn($sql, 0, 0);
         if ($result === false)
         {
             return -1;
         }
-        
+
         return $result;
     }
 }

@@ -2,7 +2,7 @@
     include_once('./lib/EmailTemplates.php');
     include_once('./lib/DateUtility.php');
     include_once('./lib/Candidates.php');
-    
+
     $interface = new SecureAJAXInterface();
 
     if (!$interface->isRequiredIDValid('candidateID', false))
@@ -43,7 +43,7 @@
             $replacementStrings,
             $emailTemplateText
         );
-    
+
     /* Send back the XML data. */
     $interface->outputXMLPage(
         "<data>\n" .

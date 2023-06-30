@@ -1,9 +1,9 @@
-<?php 
+<?php
 /*
  * CATS
  * Joborder Datagrid
  *
- * CATS Version: 0.9.7.2
+ * CATS Version: 0.9.7.2.1
  *
  * Copyright (C) 2005 - 2007 Cognizo Technologies, Inc.
  *
@@ -30,7 +30,7 @@
  *
  * $Id: dataGrids.php 3096 2007-09-25 19:27:04Z brian $
  */
- 
+
 include_once(LEGACY_ROOT . '/lib/JobOrders.php');
 include_once(LEGACY_ROOT . '/lib/Hooks.php');
 include_once(LEGACY_ROOT . '/lib/Width.php');
@@ -50,10 +50,10 @@ class JobOrdersListByViewDataGrid extends JobOrdersDataGrid
 
         $this->defaultSortBy = 'dateCreatedSort';
         $this->defaultSortDirection = 'DESC';
-   
+
         $this->_defaultColumns = array(
             array('name' => 'Attachments', 'width' => 10),
-            array('name' => 'ID', 'width' => 26),   
+            array('name' => 'ID', 'width' => 26),
             array('name' => 'Title', 'width' => 170),
             array('name' => 'Company', 'width' => 135),
             array('name' => 'Type', 'width' => 30),
@@ -65,21 +65,21 @@ class JobOrdersListByViewDataGrid extends JobOrdersDataGrid
             array('name' => 'Recruiter', 'width' => 65),
             array('name' => 'Owner', 'width' => 55),
         );
-   
+
         if (!eval(Hooks::get('JOBORDERS_DATAGRID_DEFAULTS'))) return;
-   
-        parent::__construct("joborders:JobOrdersListByViewDataGrid", 
+
+        parent::__construct("joborders:JobOrdersListByViewDataGrid",
                              $siteID, $parameters, $misc
                         );
     }
-    
+
 
     /**
-     * Adds more options to the action area on the pager.  Overloads 
+     * Adds more options to the action area on the pager.  Overloads
      * DataGrid Inner Action Area function.
      *
      * @return html innerActionArea commands.
-     */    
+     */
     public function getInnerActionArea()
     {
         $html = '';
@@ -109,10 +109,10 @@ class joborderSavedListByViewDataGrid extends JobOrdersDataGrid
 
         $this->defaultSortBy = 'dateCreatedSort';
         $this->defaultSortDirection = 'DESC';
-   
+
         $this->_defaultColumns = array(
             array('name' => 'Attachments', 'width' => 10),
-            array('name' => 'ID', 'width' => 26),   
+            array('name' => 'ID', 'width' => 26),
             array('name' => 'Title', 'width' => 170),
             array('name' => 'Company', 'width' => 135),
             array('name' => 'Type', 'width' => 30),
@@ -124,21 +124,21 @@ class joborderSavedListByViewDataGrid extends JobOrdersDataGrid
             array('name' => 'Recruiter', 'width' => 65),
             array('name' => 'Owner', 'width' => 55),
         );
-   
+
         if (!eval(Hooks::get('JOBORDERS_DATAGRID_DEFAULTS'))) return;
-   
-        parent::__construct("joborders:joborderSavedListByViewDataGrid", 
+
+        parent::__construct("joborders:joborderSavedListByViewDataGrid",
                              $siteID, $parameters, $misc
                         );
     }
-    
+
 
     /**
-     * Adds more options to the action area on the pager.  Overloads 
+     * Adds more options to the action area on the pager.  Overloads
      * DataGrid Inner Action Area function.
      *
      * @return html innerActionArea commands.
-     */    
+     */
     public function getInnerActionArea()
     {
         $html = '';

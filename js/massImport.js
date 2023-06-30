@@ -114,7 +114,7 @@ function parseDocument()
 {
     var ajaxObj;
     var d = new Date();
-    
+
     var url = parseURL + '&name=' + urlEncode(documentName[currentDocument])
         + '&realName=' + urlEncode(documentRealName[currentDocument])
         + '&ext=' + urlEncode(documentExt[currentDocument])

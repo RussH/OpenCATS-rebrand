@@ -76,7 +76,7 @@ class SecurityContext extends MinkContext implements Context, SnippetAcceptingCo
             default:
                 throw new PendingException();
         }
-        
+
         $this->visitPath('/index.php?m=login&a=logout');
         $this->visitPath('/index.php?m=login');
         $this->fillField('username', $username);
@@ -98,10 +98,10 @@ class SecurityContext extends MinkContext implements Context, SnippetAcceptingCo
                 break;
             default:
                 throw new PendingException();
-                
+
         }
     }
-    
+
     /**
      * @When I do POST request :url
      */
@@ -171,8 +171,8 @@ class SecurityContext extends MinkContext implements Context, SnippetAcceptingCo
     public function iShouldHavePermission()
     {
         $this->theResponseShouldNotContain("You don't have permission");
-        $this->theResponseShouldNotContain("Invalid user level for action");      
-        $this->theResponseShouldNotContain("opencats - Login");      
+        $this->theResponseShouldNotContain("Invalid user level for action");
+        $this->theResponseShouldNotContain("opencats - Login");
     }
 
     /**
@@ -180,7 +180,7 @@ class SecurityContext extends MinkContext implements Context, SnippetAcceptingCo
      */
     public function iShouldNotHavePermission()
     {
-        
+
         if($this->accessLevel == "DISABLED")
         {
             $this->theResponseShouldContain("opencats - Login");
@@ -198,7 +198,7 @@ class SecurityContext extends MinkContext implements Context, SnippetAcceptingCo
             }
         }
         throw new ExpectationException("'".$expectedTexts[0]."' was not found in the response from this request and it should be", $this->getSession());
-    }    
+    }
 
     /**
      * @When I follow link :name

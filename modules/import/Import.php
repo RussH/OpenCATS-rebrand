@@ -389,7 +389,7 @@ class JobOrdersImport
     public function add($dataNamed, $userID, $importID)
     {
         $sql = sprintf(
-            "SELECT 
+            "SELECT
                 company.company_id AS companyID
             FROM
                 company
@@ -400,9 +400,9 @@ class JobOrdersImport
             $this->_siteID,
             $this->_db->makeQueryString($dataNamed['company'])
         );
-        
+
         $rs = $this->_db->getAllAssoc($sql);
-        
+
         if(!$rs)
         {
             $companyID = -1;
@@ -412,7 +412,7 @@ class JobOrdersImport
             $companyID = $rs[0]['companyID'];
         }
         unset($dataNamed['company']);
-        
+
         $dataColumns = array();
         $data = array();
 
@@ -425,7 +425,7 @@ class JobOrdersImport
             }
             else
             {
-                $data[] = $this->_db->makeQueryStringOrNULL($d);   
+                $data[] = $this->_db->makeQueryStringOrNULL($d);
             }
         }
 

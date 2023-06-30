@@ -37,10 +37,10 @@ if( !defined('LEGACY_ROOT') )
 }
 
 /* Database configuration. */
-define('DATABASE_USER', 'cats');
+define('DATABASE_USER', 'opencats');
 define('DATABASE_PASS', 'password');
 define('DATABASE_HOST', 'localhost');
-define('DATABASE_NAME', 'cats_dev');
+define('DATABASE_NAME', 'opencats');
 
 /* Authentication Configuration
  * Options are sql, ldap, sql+ldap
@@ -51,7 +51,7 @@ define ('AUTH_MODE', 'sql');
 define('PARSING_ENABLED', false);
 
 /* If you have an SSL compatible server, you can enable SSL for all of CATS. */
-define('SSL_ENABLED', false);
+define('SSL_ENABLED', true);
 
 /* Text parser settings. Remember to use double backslashes (\) to represent
  * one backslash (\). On Windows, installing in C:\antiword\ is
@@ -177,7 +177,7 @@ define('FORGOT_PASSWORD_BODY',      'You recently requested that your OpenCATS: 
 define('ENABLE_DEMO_MODE', false);
 
 /* Offset to GMT Time. */
-define('OFFSET_GMT', 2);
+define('OFFSET_GMT', 0);
 
 /* Should we enforce only one session per user (excluding demo)? */
 define('ENABLE_SINGLE_SESSION', false);
@@ -216,11 +216,11 @@ define('MAIL_SENDMAIL_PATH', "/usr/sbin/sendmail");
  * set to 3. If your server requires authentication, set MAIL_SMTP_AUTH to
  * true and configure MAIL_SMTP_USER and MAIL_SMTP_PASS.
  */
-define('MAIL_SMTP_HOST', "localhost");
+define('MAIL_SMTP_HOST', "smtp.gmail.com");
 define('MAIL_SMTP_PORT', 587);
 define('MAIL_SMTP_AUTH', true);
-define('MAIL_SMTP_USER', "user");
-define('MAIL_SMTP_PASS', "password");
+define('MAIL_SMTP_USER', "russellh@ysmail.net");
+define('MAIL_SMTP_PASS', "fmxuwwjtghxibqkk");
 //Options: '', 'ssl' or 'tls'
 define('MAIL_SMTP_SECURE', "tls");
 
@@ -350,8 +350,8 @@ class ACL_SETUP {
         'candidate' => array('Candidate', 'candidate', 'This is a candidate.', ACCESS_LEVEL_SA, ACCESS_LEVEL_READ),
         'demo' => array('Demo', 'demo', 'This is a demo user.', ACCESS_LEVEL_SA, ACCESS_LEVEL_READ)
     );
-   
-    // defining access levels different from the default access level    
+
+    // defining access levels different from the default access level
     public static $ACCESS_LEVEL_MAP = array(
         'candidate' => array(
         ),
@@ -367,7 +367,7 @@ class ACL_SETUP {
 };
 */
 
-/* All possible secure object names 
+/* All possible secure object names
             'candidates.history'
             'settings.administration'
             'joborders.editRating'

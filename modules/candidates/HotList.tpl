@@ -57,9 +57,9 @@
             <p class="note">All Candidates - Page <?php echo($this->currentPage); ?> <?php if ($this->pager->getSortBy() == 'dateModifiedSort'): ?>(Most Recently Modified First)<?php endif; ?> <?php if ($this->onlyMyCandidates): ?>(Only My Candidates)<?php endif; ?></p>
 
                         <?php if (!empty($this->rs)): ?><?php echo($this->exportForm['formHead']); ?><?php endif; ?>
-            
+
             <?php $this->pager->drawPager();  ?>
-            
+
             <?php if (!empty($this->rs)): ?><?php echo($this->exportForm['formFooter']); ?><?php endif; ?>
 
         </div>

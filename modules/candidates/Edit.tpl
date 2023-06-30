@@ -31,7 +31,7 @@
                             <img title="Unchecking this box indicates the candidate is inactive, and will no longer display on the resume search results." src="images/information.gif" alt="" width="16" height="16" />
                         </td>
                     </tr>
-                    
+
                     <tr>
                         <td class="tdVertical">
                             <label id="firstNameLabel" for="firstName">First Name:</label>
@@ -168,7 +168,7 @@
 
                         </td>
                     </tr>
-                            
+
                     <tr>
                         <td class="tdVertical">
                             <label id="sourceLabel" for="source">Source:</label>
@@ -225,7 +225,7 @@
                         </td>
                     </tr>
                 </table>
-               
+
                 <?php if($this->EEOSettingsRS['enabled'] == 1): ?>
                     <?php if(!$this->EEOSettingsRS['canSeeEEOInfo']): ?>
                         <table class="editTable" width="700">
@@ -238,7 +238,7 @@
                         <table class="editTable" width="700" style="display:none;">
                     <?php else: ?>
                         <table class="editTable" width="700">
-                    <?php endif; ?>               
+                    <?php endif; ?>
 
                          <?php if ($this->EEOSettingsRS['genderTracking'] == 1): ?>
                              <tr>
@@ -305,7 +305,7 @@
                 <?php endif; ?>
 
                 <table class="editTable" width="700">
-                    
+
                     <?php for ($i = 0; $i < count($this->extraFieldRS); $i++): ?>
                         <tr>
                             <td class="tdVertical" id="extraFieldTd<?php echo($i); ?>">

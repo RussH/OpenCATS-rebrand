@@ -106,7 +106,7 @@ class ListEditor
 
         return $tArray;
     }
-    
+
     /**
      * Returns an CSV list from a 2 dimensional array with parameter 2 being
      * the index value for dimension 2.
@@ -213,13 +213,13 @@ class ListEditor
     {
         /* Safeguard:  Do not delete anything unless we KNOW that the user did a delete. */
         $allowDelete = false;
-        
+
         if (strpos($stringListEditor, '&DELETEALLOWED&') !== false)
         {
             $allowDelete = true;
             $stringListEditor = substr($stringListEditor, 0, strpos($stringListEditor, '&DELETEALLOWED&'));
         }
-        
+
         $arrayDiff = array();
 
         $values = self::getArrayVaulesfromCSV($stringListEditor);

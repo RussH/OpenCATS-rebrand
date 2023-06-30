@@ -193,7 +193,7 @@ function urlEncode(text)
 
     /* encodeURIComponent() doesn't handle the ' character. */
     text = text.replace(/\'/g, '%27');
-    
+
     /* Don't use escape(), as it doesn't properly handle UTF-8. */
     text = encodeURIComponent(text);
 
@@ -212,7 +212,7 @@ function urlDecode(text)
 	{
     	text = text.replace('+', '%20');
 	}
-	
+
     /* Don't use unescape(), as it doesn't properly handle UTF-8. */
 	text = decodeURIComponent(text);
 
@@ -231,13 +231,13 @@ function urlDecode(text)
 function serializeArray(array)
 {
     var string = 'a:' + array.length + ':{';
-    
+
     for (var i = 0; i < array.length; ++i)
     {
         string += 'i:' + i + ';s:' + String(array[i]).length + ':"'
             + String(array[i]) + '";';
     }
-    
+
     return string + '}';
 }
 
@@ -1080,7 +1080,7 @@ var md5 = function (string) {
 /* End of MD5. */
 
 function rot13(theString)
-{ 
+{
 	return theString.replace(/[a-zA-Z]/g, function(c)
 	    {
 		    return String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);

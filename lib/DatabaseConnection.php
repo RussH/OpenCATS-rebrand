@@ -362,7 +362,7 @@ class DatabaseConnection
 
         /* Make sure we always return an array. */
         $recordSetArray = array();
-        
+
         if($this->_queryResult)
         {
             /* Store all rows in $recordSetArray; */

@@ -99,7 +99,7 @@
                                             <option value="<?php echo($data['emailTemplateID']); ?>"><?php echo($data['emailTemplateTitle']); ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                
+
                                     <label id="emailPreviewLabel" for="candidateName">Preview for:</label>
                                     <select id="candidateName" tabindex="<?php echo($tabIndex++); ?>" onchange="replaceTemplateTags('<?php echo($this->sessionCookie); ?>')">
                                         <option selected="selected" value="-1">----</option>

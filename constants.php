@@ -31,7 +31,7 @@ $coreModules = array(
     'home'       => '1',
     'activity'   => '2',
     'joborders'  => '3',
-    'candidates' => '4',  
+    'candidates' => '4',
     'companies'  => '5',
     'contacts'   => '6',
     'lists'      => '7',
@@ -42,7 +42,7 @@ $coreModules = array(
 
 /* CATS Version */
 
-define('CATS_VERSION', '0.9.7.2');
+define('CATS_VERSION', '0.9.7.2.1');
 
 
 /* Copyright information at bottom of pages. */

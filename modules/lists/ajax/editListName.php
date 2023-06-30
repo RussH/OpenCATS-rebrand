@@ -63,8 +63,8 @@ if ($savedLists->getIDByDescription($savedListName) != -1 && $savedLists->getIDB
         "    <errormessage></errormessage>\n" .
         "    <response>collision</response>\n" .
         "</data>\n"
-    );  
-    die;  
+    );
+    die;
 }
 
 if ($savedListName == '')
@@ -75,8 +75,8 @@ if ($savedListName == '')
         "    <errormessage></errormessage>\n" .
         "    <response>badName</response>\n" .
         "</data>\n"
-    );  
-    die;  
+    );
+    die;
 }
 
 /* Write changes. */

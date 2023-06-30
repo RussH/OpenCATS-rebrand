@@ -42,10 +42,10 @@ function doPrepareAndDownload(getVars, url, spanObject, sessionCookie)
         }
         return;
     }
-    
+
     downloadBlock = true;
     downloadBlockUrl = url;
-    
+
     spanObject.innerHTML = "<br /><div class=\"downloadSpan\"><nobr><img src=\"images/indicator.gif\">&nbsp;Preparing Download... <input type=\"button\" class=\"button\" onclick=\"_spanObject.innerHTML = ''; downloadCancel = true;\" value=\"Cancel\"></nobr></div>";
 
     _spanObject = spanObject;
@@ -70,7 +70,7 @@ function doPrepareAndDownload(getVars, url, spanObject, sessionCookie)
             var errorMessage = "An error occurred while receiving a response from the server.\n\n"
                              + http.responseText;
             alert(errorMessage);
-            downloadBlock = false; 
+            downloadBlock = false;
             return;
         }
 
@@ -82,21 +82,21 @@ function doPrepareAndDownload(getVars, url, spanObject, sessionCookie)
             var errorMessage = "An error occurred while receiving a response from the server.\n\n"
                              + errorMessageNode.firstChild.nodeValue;
             alert(errorMessage);
-            downloadBlock = false; 
+            downloadBlock = false;
             return;
         }
-            
+
         if (!downloadCancel)
         {
             window.location.href = url;
         }
-        
+
         downloadCancel = false;
-        
+
         setTimeout('downloadBlock = false; if(typeof(_spanObject != "undefined") && typeof(_spanObject.innerHTML != "undefined")) _spanObject.innerHTML = \'\';', 500);
 
     }
-    
+
     AJAX_callCATSFunction(
         http,
         'getAttachmentLocal',

@@ -102,7 +102,7 @@ class NewVersionCheck
 
         $users = new Users(1);
         $numberOfActiveUsers = $users->getUsageData();
-        
+
         $licenseKey = LICENSE_KEY;
 
         /* Build POST data. */
@@ -114,7 +114,7 @@ class NewVersionCheck
         $postData .= '&SiteName='       . urlencode($siteName);
         $postData .= '&activeUsers='    . urlencode($numberOfActiveUsers);
         $postData .= '&licenseKey='     . urlencode($licenseKey);
- 
+
         /* Hack for compatability with older CATS versions. */
         $postData .= '&CatsVersionAgain=' . urlencode($catsVersion);
 

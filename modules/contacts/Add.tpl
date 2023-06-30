@@ -95,7 +95,7 @@
                                         &nbsp; <img src="images/indicator2.gif" alt="AJAX" id="ajaxIndicatorReportsTo" style="vertical-align: middle; visibility: hidden; margin-left: 5px;" />
                                     </td>
                                 </tr>
-                                
+
                                <tr>
                                     <td class="tdVertical">
                                         <label id="isHotLabel" for="isHot">Hot Contact:</label>
@@ -209,7 +209,7 @@
                 <p class="note">Other</p>
 
                 <table class="editTable">
-                    
+
                     <?php for ($i = 0; $i < count($this->extraFieldRS); $i++): ?>
                         <tr>
                             <td class="tdVertical" id="extraFieldTd<?php echo($i); ?>">

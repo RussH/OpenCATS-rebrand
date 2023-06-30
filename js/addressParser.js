@@ -64,7 +64,7 @@ function AddressParser_parse(editBoxID, mode, indicatorID, arrowButtonID)
             alert(errorMessage);
             return;
         }
-    
+
         var firstNameField  = document.getElementById('firstName');
         var middleNameField = document.getElementById('middleName');
         var lastNameField   = document.getElementById('lastName');
@@ -80,7 +80,7 @@ function AddressParser_parse(editBoxID, mode, indicatorID, arrowButtonID)
         var faxField        = document.getElementById('faxNumber');
 
         //alert(http.responseText);
-        
+
         /* Return if we have any errors. */
         var errorCodeNode = http.responseXML.getElementsByTagName('errorcode').item(0);
         var errorMessageNode = http.responseXML.getElementsByTagName('errormessage').item(0);
@@ -149,7 +149,7 @@ function AddressParser_parse(editBoxID, mode, indicatorID, arrowButtonID)
         {
             nameField.value = '';
         }
-        
+
         if (firstNameField && firstNameNode.firstChild)
         {
             firstNameField.value = firstNameNode.firstChild.nodeValue;
@@ -158,7 +158,7 @@ function AddressParser_parse(editBoxID, mode, indicatorID, arrowButtonID)
         {
             firstNameField.value = '';
         }
-        
+
         if (middleNameField && middleNameNode.firstChild)
         {
             middleNameField.value = middleNameNode.firstChild.nodeValue;
@@ -182,7 +182,7 @@ function AddressParser_parse(editBoxID, mode, indicatorID, arrowButtonID)
             if (addressLineOneNode.firstChild)
             {
                 addressField.value = addressLineOneNode.firstChild.nodeValue;
-                
+
                 if (addressLineTwoNode.firstChild && addressLineOneNode.firstChild != '')
                 {
                     addressField.value += "\n" + addressLineTwoNode.firstChild.nodeValue;
@@ -260,13 +260,13 @@ function AddressParser_parse(editBoxID, mode, indicatorID, arrowButtonID)
         if (emailField && emailNode.firstChild)
         {
             emailField.value = emailNode.firstChild.nodeValue;
-            
+
             /* Check for duplicate candidate records for candidates page. */
             if (typeof(document.getElementById('candidateAlreadyInSystemTable')) != 'undefined')
             {
                 checkEmailAlreadyInSystem(emailNode.firstChild.nodeValue);
             }
-            
+
         }
         else if (emailField)
         {

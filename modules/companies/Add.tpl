@@ -40,7 +40,7 @@
                         </td>
                         <td width="200"></td>
                     </tr>
-                    
+
                     <tr>
                         <td class="tdVertical">
                             <label id="phone1Label" for="phone1">Primary Phone:</label>
@@ -116,7 +116,7 @@
                             <input type="text" name="url" id="url" class="inputbox" style="width: 150px" />
                         </td>
                     </tr>
-                
+
                     <tr>
                         <td class="tdVertical">
                             <label id="departmentsLabel" for="departmentsSelect">Departments:</label>
@@ -144,7 +144,7 @@
                 <p class="noteUnsized" style="margin-top: 5px;">Other</p>
 
                 <table class="editTable" width="100%">
-                    
+
                     <?php for ($i = 0; $i < count($this->extraFieldRS); $i++): ?>
                         <tr>
                             <td class="tdVertical" id="extraFieldTd<?php echo($i); ?>">

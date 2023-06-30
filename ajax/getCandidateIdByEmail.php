@@ -56,7 +56,7 @@ if ($candidateID == -1)
 else
 {
     $candidateRS = $candidates->get($candidateID);
-    
+
     $output .=
         "    <candidate>\n" .
         "        <id>"         . $candidateID . "</id>\n" .

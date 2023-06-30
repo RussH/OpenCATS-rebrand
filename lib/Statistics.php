@@ -329,7 +329,7 @@ class Statistics
 
         return $this->_db->getAllAssoc($sql);
     }
-    
+
     /**
      * Returns all job orders with placements created in the given period.
      *
@@ -378,7 +378,7 @@ class Statistics
 
         return $this->_db->getAllAssoc($sql);
     }
-    
+
     /**
      * Returns all placements for the specified job order created in the
      * given period.
@@ -439,7 +439,7 @@ class Statistics
 
         return $this->_db->getAllAssoc($sql);
     }
-    
+
     // FIXME: Document me.
     public function getActivitiesByPeriod($period)
     {
@@ -690,7 +690,7 @@ class Statistics
 
         return $this->_db->getAssoc($sql);
     }
-    
+
     public function getEEOReport($modePeriod, $modeStatus)
     {
         switch ($modePeriod)
@@ -698,16 +698,16 @@ class Statistics
             case 'month':
                 $periodChriterion = 'AND TO_DAYS(candidate.date_modified) >= TO_DAYS(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))';
                 break;
-                
+
             case 'week':
                 $periodChriterion = 'AND TO_DAYS(candidate.date_modified) >= TO_DAYS(DATE_SUB(CURDATE(), INTERVAL 7 DAY))';
                 break;
-            
+
             default:
                 $periodChriterion = '';
                 break;
         }
-        
+
         switch ($modeStatus)
         {
             case 'placed':
@@ -718,7 +718,7 @@ class Statistics
                             AND candidate_joborder_status.site_id = '.$this->_siteID.'
                         ';
                 break;
-                
+
             case 'rejected':
                 $statusChriterion = 'AND IF(candidate_joborder_status.candidate_joborder_id, 1, 0) = 1';
                 $join = 'LEFT JOIN candidate_joborder AS candidate_joborder_status
@@ -727,19 +727,19 @@ class Statistics
                             AND candidate_joborder_status.site_id = '.$this->_siteID.'
                         ';
                 break;
-            
+
             default:
                 $statusChriterion = '';
                 $join = '';
                 break;
         }
-        
+
         $chriterion = $periodChriterion . $statusChriterion;
-        
+
         $sql = sprintf(
             "SELECT
                 COUNT(candidate.candidate_id) AS totalCandidates
-             FROM   
+             FROM
                 candidate
                 %s
              WHERE
@@ -750,15 +750,15 @@ class Statistics
             $this->_siteID,
             $chriterion
         );
-        
+
         $statistics['rsTotalCandidates'] = $this->_db->getAssoc($sql);
-        
+
         $sql = sprintf(
             "SELECT
                 (
                     SELECT
                         COUNT(candidate.candidate_id)
-                    FROM 
+                    FROM
                         candidate
                         %s
                     WHERE
@@ -769,14 +769,14 @@ class Statistics
                 ) AS numberOfCandidates,
                 eeo_ethnic_type.eeo_ethnic_type_id as EEOEthnicTypeID,
                 eeo_ethnic_type.type as EEOEthnicType
-             FROM   
+             FROM
                 eeo_ethnic_type
             ",
             $join,
             $this->_siteID,
             $chriterion
         );
-             
+
         $statistics['rsEthnicStatistics'] = $this->_db->getAllAssoc($sql);
 
         $sql = sprintf(
@@ -784,7 +784,7 @@ class Statistics
                 (
                     SELECT
                         COUNT(candidate.candidate_id)
-                    FROM 
+                    FROM
                         candidate
                         %s
                     WHERE
@@ -795,14 +795,14 @@ class Statistics
                 ) AS numberOfCandidates,
                 eeo_veteran_type.eeo_veteran_type_id as EEOVeteranTypeID,
                 eeo_veteran_type.type as EEOVeteranType
-             FROM   
+             FROM
                 eeo_veteran_type
             ",
             $join,
             $this->_siteID,
             $chriterion
         );
-             
+
         $statistics['rsVeteranStatistics'] = $this->_db->getAllAssoc($sql);
 
         $sql = sprintf(
@@ -810,7 +810,7 @@ class Statistics
                 (
                     SELECT
                         COUNT(candidate.candidate_id)
-                    FROM 
+                    FROM
                         candidate
                         %s
                     WHERE
@@ -822,7 +822,7 @@ class Statistics
                 (
                     SELECT
                         COUNT(candidate.candidate_id)
-                    FROM 
+                    FROM
                         candidate
                         %s
                     WHERE
@@ -831,7 +831,7 @@ class Statistics
                         candidate.site_id = %s
                         %s
                 ) AS numberOfCandidatesNonDisabled
-             FROM   
+             FROM
                 candidate
             ",
             $join,
@@ -841,15 +841,15 @@ class Statistics
             $this->_siteID,
             $chriterion
         );
-             
+
         $statistics['rsDisabledStatistics'] = $this->_db->getAssoc($sql);
-        
+
         $sql = sprintf(
             "SELECT
                 (
                     SELECT
                         COUNT(candidate.candidate_id)
-                    FROM 
+                    FROM
                         candidate
                         %s
                     WHERE
@@ -861,7 +861,7 @@ class Statistics
                 (
                     SELECT
                         COUNT(candidate.candidate_id)
-                    FROM 
+                    FROM
                         candidate
                         %s
                     WHERE
@@ -870,7 +870,7 @@ class Statistics
                         candidate.site_id = %s
                         %s
                 ) AS numberOfCandidatesFemale
-             FROM   
+             FROM
                 candidate
             ",
             $join,
@@ -880,12 +880,12 @@ class Statistics
             $this->_siteID,
             $chriterion
         );
-             
+
         $statistics['rsGenderStatistics'] = $this->_db->getAssoc($sql);
-        
+
         return $statistics;
     }
-    
+
 
     /**
      * Returns an array containing the number of candidates currently in each

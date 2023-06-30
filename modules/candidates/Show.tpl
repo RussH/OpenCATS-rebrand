@@ -7,7 +7,7 @@ use OpenCATS\UI\CandidateDuplicateQuickActionMenu;
     <?php TemplateUtility::printHeader('Candidate - '.$this->data['firstName'].' '.$this->data['lastName'], array( 'js/activity.js', 'js/sorttable.js', 'js/match.js', 'js/lib.js', 'js/pipeline.js', 'js/attachment.js', 'modules/candidates/quickAction-candidates.js')); ?>
 <?php else: ?>
     <?php TemplateUtility::printHeader('Candidate - '.$this->data['firstName'].' '.$this->data['lastName'], array( 'js/activity.js', 'js/sorttable.js', 'js/match.js', 'js/lib.js', 'js/pipeline.js', 'js/attachment.js', 'modules/candidates/quickAction-candidates.js', 'modules/candidates/quickAction-duplicates.js')); ?>
-    
+
     <?php TemplateUtility::printHeaderBlock(); ?>
     <?php TemplateUtility::printTabs($this->active); ?>
         <div id="main">
@@ -21,7 +21,7 @@ use OpenCATS\UI\CandidateDuplicateQuickActionMenu;
                         <img src="images/candidate.gif" width="24" height="24" border="0" alt="Candidates" style="margin-top: 3px;" />&nbsp;
                     </td>
                     <td><h2>Candidates: Candidate Details
-                        <?php if($_SESSION['CATS']->getAccessLevel('candidates.duplicates') >= ACCESS_LEVEL_SA): ?>    
+                        <?php if($_SESSION['CATS']->getAccessLevel('candidates.duplicates') >= ACCESS_LEVEL_SA): ?>
                             <?php if(!empty($this->data['isDuplicate'])): ?>
                                 <img src="images/wf_error.gif" alt="duplicate_warning" width="20" height="20" border="0" title="Possible duplicate" />
                                 <?php foreach($this->data['isDuplicate'] as $item): ?>
@@ -631,5 +631,5 @@ use OpenCATS\UI\CandidateDuplicateQuickActionMenu;
     </div>
 
 <?php endif; ?>
-	
+
 <?php TemplateUtility::printFooter(); ?>

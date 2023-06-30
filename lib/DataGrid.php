@@ -253,14 +253,14 @@ class DataGrid
                 }
 
                 $parameters[$index] = $_REQUEST['dynamicArgument' . md5($indentifier)];
-                
+
                 if ($index = 'exportIDs')
                 {
                    $parameters['exportIDs'] = json_decode(urldecode($parameters['exportIDs']), true);
                 }
             }
         }
-        
+
         /* Split function parameter into module name and function name. */
         $indentifierParts = explode(':', $indentifier, 3);
 
@@ -283,7 +283,7 @@ class DataGrid
 
         return $dg;
     }
-    
+
     /**
      * Static function returns an object to the DataGrid that is indicated by the request
      * variables i and p.
@@ -296,13 +296,13 @@ class DataGrid
         {
             trigger_error('getFromRequest datagrid failed : no request variables i or p set.');
         }
-        
+
         $indentifier = $_REQUEST['i'];
         $parameters = json_decode($_REQUEST['p'], true);
 
         return self::get($indentifier, $parameters);
     }
-    
+
     public function getInstanceName(){
     	return $this->_instanceName;
     }
@@ -320,10 +320,10 @@ class DataGrid
         {
             $indentifier .= ':' . json_encode($misc);
         }
-        
+
         return $_SESSION['CATS']->getDataGridParameters($indentifier);
     }
-    
+
     // TODO:  Document me.
     protected function getParamater($paramater)
     {
@@ -331,10 +331,10 @@ class DataGrid
         {
             return $this->_parameters[$paramater];
         }
-        
+
         return '';
     }
-    
+
     /**
      * A datagrid which is called with a serialized parameter (such as an
      * integer to specify the saved list ID) follows the instance naming format:
@@ -372,7 +372,7 @@ class DataGrid
          $this->_rs = false;
 
          $this->_instanceName = $instanceName;
-         
+
          if ($misc != 0)
          {
             $this->_instanceName .= ':'.json_encode($misc);
@@ -387,7 +387,7 @@ class DataGrid
          {
              $this->_parameters = $parameters;
          }
-         
+
          /* Allow _GET['dynamicArgument'.instance] to override <dynamic> */
          if (isset($_GET['dynamicArgument' . $this->_instanceName]))
          {
@@ -527,17 +527,17 @@ class DataGrid
 
          /* ---------- GET DATA (also populates total entries) -------- */
          $this->_getData();
-         
+
          /* If current page < 1 or current page > total pages, move around current page and get data again. */
          /* Set properties */
          $this->_currentPage = $this->getCurrentPage();
          $this->_totalPages = floor($this->_totalEntries / $this->_parameters['maxResults']) + ($this->_totalEntries % $this->_parameters['maxResults'] == 0 ? 0 : 1);
-         
+
          if ($this->_currentPage < 1)
          {
              $this->_currentPage = 1;
          }
-         
+
          if ($this->_currentPage > $this->_totalPages)
          {
              $this->_currentPage = $this->_totalPages;
@@ -546,10 +546,10 @@ class DataGrid
          if ($this->_currentPage != $this->getCurrentPage())
          {
              $this->_parameters['rangeStart'] = ($this->_currentPage - 1) * $this->_parameters['maxResults'];
-             
+
              $this->_rs = false;
              $this->_getData();
-             
+
              /* Reset properties */
              $this->_currentPage = $this->getCurrentPage();
              $this->_totalPages = floor($this->_totalEntries / $this->_parameters['maxResults']) + ($this->_totalEntries % $this->_parameters['maxResults'] == 0 ? 0 : 1);
@@ -561,7 +561,7 @@ class DataGrid
          {
              $_SESSION['CATS']->setDataGridParameters($this->_instanceName, $this->_parameters);
          }
-         
+
          /* If no globalStyle set, set one. */
          if (!isset($this->globalStyle))
          {
@@ -909,7 +909,7 @@ class DataGrid
         /* Get the current preferences from SESSION. */
         if (!isset($this->ignoreSavedColumnLayouts) || $this->ignoreSavedColumnLayouts == false)
         {
-            $this->_currentColumns = $_SESSION['CATS']->getColumnPreferences($this->_instanceName);   
+            $this->_currentColumns = $_SESSION['CATS']->getColumnPreferences($this->_instanceName);
         }
         else
         {
@@ -1142,7 +1142,7 @@ class DataGrid
                             }
                         }
                         else
-                        {                            
+                        {
                             if (isset($this->_classColumns[$columnName]['filter']))
                             {
                                 $whereSQL_or[] = $this->_classColumns[$columnName]['filter'] . ' = ' . $db->makeQueryString($argument) . ' ';
@@ -1222,42 +1222,42 @@ class DataGrid
                             $havingSQL_or[] = $this->_classColumns[$columnName]['filterHaving'] . ' = ' . $db->makeQueryString($argument) . ' ';
                         }
                     }
-                    
+
                     /* Near Zipcode (=@) */
                     if (strpos($data, '=@') !== false)
                     {
                         /* Try to determine lat/lng of provided zipcode, if can't find abort. */
                         $parts = explode(',', $argument);
-                        
+
                         if (count($parts) != 2)
                         {
                             continue;
                         }
-                        
+
                         $zipcode = (int) $parts[0];
                         $distance = (int) $parts[1];
-                        
+
                         $zipcodeData = $db->getAssoc('SELECT * FROM zipcodes WHERE zipcode = '. $db->makeQueryInteger($zipcode));
-                        
+
                         if (!isset($zipcodeData['lat']))
                         {
                             continue;
                         }
-                        
+
                         $zipcodeLat = $zipcodeData['lat'];
                         $zipcodeLng = $zipcodeData['lng'];
-                        
+
                         $joinSQL['zipsearching'] = 'LEFT JOIN zipcodes AS zipcode_search ON zipcode_search.zipcode = '.$this->_classColumns[$columnName]['filter'];
-                        
+
                         // Boundaries
                         $whereSQL[] = 'zipcode_search.lat > '.($zipcodeLat - (float) $distance / MILES_PER_LATLNG);
                         $whereSQL[] = 'zipcode_search.lat < '.($zipcodeLat + (float) $distance / MILES_PER_LATLNG);
                         $whereSQL[] = 'zipcode_search.lng > '.($zipcodeLng - (float) $distance / MILES_PER_LATLNG);
                         $whereSQL[] = 'zipcode_search.lng < '.($zipcodeLng + (float) $distance / MILES_PER_LATLNG);
-                        
+
                         // Abs Distance
                         $whereSQL[] = 'sqrt(pow((zipcode_search.lng - '.$zipcodeLng.'),2) + pow((zipcode_search.lat - '.$zipcodeLat.'),2)) < '.((float) $distance / MILES_PER_LATLNG);
-                        
+
                         // TODO:  Actual geographic search?
                     }
 
@@ -1303,7 +1303,7 @@ class DataGrid
             {
                 $this->_parameters['rangeStart'] = 0;
             }
-            
+
             $limitSQL = 'LIMIT ' . $this->_parameters['rangeStart'] . ', ' . $this->_parameters['maxResults'];
         }
         else
@@ -1346,7 +1346,7 @@ class DataGrid
     public function getNumberOfRows()
     {
         $this->_getData();
-        
+
         return $this->_totalEntries;
     }
 
@@ -1359,17 +1359,17 @@ class DataGrid
     {
         // TODO:  Is this going to be too memory intensive?
         $this->_getData();
-        
+
         $exportableIDs = array();
-        
+
         foreach ($this->_rs as $rowIndex => $rsData)
         {
             $exportableIDs[] = $rsData['exportID'];
         }
-        
+
         /* Free up the potentially massive result set. */
         unset($this->_rs);
-        
+
         return $exportableIDs;
     }
 
@@ -1679,7 +1679,7 @@ class DataGrid
         else
         {
             /* Ajax indicator. */
-            echo ('<span style="display:none;" id="ajaxTableIndicator'.$md5InstanceName.'"></span>');   
+            echo ('<span style="display:none;" id="ajaxTableIndicator'.$md5InstanceName.'"></span>');
         }
 
         /* Column headers */
@@ -1700,7 +1700,7 @@ class DataGrid
 
            /* Opening of header cell. */
            echo ('<th align="left" style="width:'.$data['width'].'px; border-collapse: collapse; ' . $this->globalStyle);
-           
+
 	   $currentColumnsKeys = array_keys($this->_currentColumns);
            if (end($currentColumnsKeys) != $index && !$sizable)
            {
@@ -1929,7 +1929,7 @@ echo ('<script type="text/javascript">setTableWidth("table'.$md5InstanceName.'",
             echo ('</div>');
         }
     }
-    
+
     /**
      * echos the action area.
      * @return void
@@ -1965,7 +1965,7 @@ echo ('<script type="text/javascript">setTableWidth("table'.$md5InstanceName.'",
     public function getInnerActionAreaItem($actionTitle, $actionURL, $allowAll = true)
     {
         //TODO:  If nothing is selected, display an error popup.
-        
+
         $newParameterArraySelected = $this->_parameters;
         $newParameterArraySelected['rangeStart'] = 0;
         $newParameterArraySelected['maxResults'] = 100000000;
@@ -1991,7 +1991,7 @@ echo ('<script type="text/javascript">setTableWidth("table'.$md5InstanceName.'",
                 $actionURL,
                 urlencode($this->_instanceName),
                 urlencode(serialize($newParameterArrayAll))
-            );        
+            );
         }
         else
         {
@@ -2004,12 +2004,12 @@ echo ('<script type="text/javascript">setTableWidth("table'.$md5InstanceName.'",
                 urlencode(json_encode($newParameterArraySelected)),
                 md5($this->_instanceName),
                 md5($this->_instanceName)
-            );        
+            );
         }
-        
+
         return $html;
     }
-    
+
     /**
      * Returns HTML to render an action under the action menu which generates
      * a popup rather than a new page.
@@ -2022,9 +2022,9 @@ echo ('<script type="text/javascript">setTableWidth("table'.$md5InstanceName.'",
      * @return string generated HTML
      */
     public function getInnerActionAreaItemPopup($actionTitle, $actionURL, $width, $height, $allowAll = true)
-    {   
+    {
         //TODO:  If nothing is selected, display an error popup.
-        
+
         $newParameterArraySelected = $this->_parameters;
         $newParameterArraySelected['rangeStart'] = 0;
         $newParameterArraySelected['maxResults'] = 100000000;
@@ -2054,7 +2054,7 @@ echo ('<script type="text/javascript">setTableWidth("table'.$md5InstanceName.'",
                 urlencode(json_encode($newParameterArrayAll)),
                 $width,
                 $height
-            );        
+            );
         }
         else
         {
@@ -2069,14 +2069,14 @@ echo ('<script type="text/javascript">setTableWidth("table'.$md5InstanceName.'",
                 md5($this->_instanceName),
                 $width,
                 $height
-            );      
+            );
         }
-        
+
         return $html;
     }
 
     /**
-     * This is an empty function which is overloaded by child classes.  It 
+     * This is an empty function which is overloaded by child classes.  It
      * outputs extra actions for each specific datagrid.
      *
      * @return string generated HTML
@@ -2110,7 +2110,7 @@ echo ('<script type="text/javascript">setTableWidth("table'.$md5InstanceName.'",
             urlencode($this->_instanceName),
             urlencode($this->getInnerActionArea())
         );
-        
+
         /*if ($this->_totalPages == 1)
         {
             $this->_drawUpdatedNavigationSet('pageInputArea', '');
@@ -2184,7 +2184,7 @@ echo ('<script type="text/javascript">setTableWidth("table'.$md5InstanceName.'",
                     $this->_currentPage,
                     $this->_totalPages,
                     "\n"
-                );  
+                );
             }
             else
             {
@@ -2471,7 +2471,7 @@ echo ('<script type="text/javascript">setTableWidth("table'.$md5InstanceName.'",
 
         $newParameterArray = $this->_parameters;
         $newParameterArray['rangeStart'] += $newParameterArray['maxResults'];
-        
+
         $newParameterArray2 = $this->_parameters;
         $newParameterArray2['rangeStart'] = ($this->_totalPages - 1) * $newParameterArray2['maxResults'];
         if ($newParameterArray2['rangeStart'] < 0)

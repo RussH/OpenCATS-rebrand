@@ -10,11 +10,11 @@
     </table>
 
     <p class="noteUnsized">Add Job Order</p>
-            
+
         <script type="text/javascript">
             var typeOfAdd="new";
         </script>
-            
+
         <table class="editTable" width="100%">
             <tr>
                 <td class="tdData"><input type="radio" name="typeOfAddElement" onclick="document.getElementById('copyFrom').disabled=true; typeOfAdd='new';" checked>&nbsp;Empty Job Order</td>

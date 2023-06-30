@@ -412,12 +412,12 @@ class GraphsUI extends UserInterface
         {
             $view = DASHBOARD_GRAPH_WEEKLY;
         }
-        
+
         $dashboard = new Dashboard($this->_siteID);
         $pipelineRS = $dashboard->getPipelineData($view);
-        
+
         $noData = true;
-        
+
         $y = array();
         $x = array();
         foreach ($pipelineRS as $index => $data)
@@ -427,18 +427,18 @@ class GraphsUI extends UserInterface
             $y[] = "";
             $y[] = "";
             $y[] = "";
-            
+
             $x[] = $data['submitted'];
             $x[] = $data['interviewing'];
             $x[] = $data['placed'];
             $x[] = 0;
-            
+
             if ($data['submitted'] != 0 || $data['interviewing'] != 0 || $data['placed'] != 0)
             {
                 $noData = false;
             }
         }
-        
+
         /* Last column is useless... */
         unset ($x[15]);
 
@@ -452,15 +452,15 @@ class GraphsUI extends UserInterface
             $colorArray[] = new LinearGradient(new MidGreen, new White, 0);
             $colorArray[] = new LinearGradient(new DarkGreen, new White, 0);
         }
-        
+
         $graph = new pipelineStatisticsGraph(
             $y, $x, $colorArray, $this->width, $this->height, "Submissions", "Interviews", "Hires", $view, $noData
         );
-        
+
         $graph->draw();
         die();
     }
-    
+
 
     private function miniJobOrderPipeline()
     {
@@ -533,7 +533,7 @@ class GraphsUI extends UserInterface
         die();
     }
 
- 
+
     private function newSubmissions()
     {
         /* Grab an instance of Statistics. */

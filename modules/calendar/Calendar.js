@@ -796,7 +796,7 @@ function setCalendarViewWeek(year, month, week)
     currentYear = year;
     currentMonth = month;
     currentWeek = week;
-    
+
 
     updateCalendarViewWeek();
     setSideFormActions();

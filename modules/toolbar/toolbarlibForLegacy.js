@@ -56,7 +56,7 @@ cats_debug = function (msg)
 		{
 			var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
 				.getService(Components.interfaces.nsIConsoleService);
-				
+
 			consoleService.logStringMessage('CATS: ' + msg);
 		}
     }
@@ -108,9 +108,9 @@ cats_toolbarAddButton = function(buttonLabel, toolTip, buttonAction,
 cats_makeDefaultEnvironment = function()
 {
 	cats_debug ('cats_makeDefaultEnvironment()');
-	
+
     cats_toolbarClear();
-    
+
     document.getElementById('CATSTB-Options').setAttribute('hidden', true);
 
     if (cats_connected)
@@ -137,7 +137,7 @@ cats_makeDefaultEnvironment = function()
 cats_doAuthenticated = function(jsCode)
 {
 	cats_debug ('cats_doAuthenticated("'+jsCode+'");');
-	
+
     if (cats_connected)
     {
         outerEval(jsCode);
@@ -239,7 +239,7 @@ cats_responseAuthenticate = function()
 cats_authenticationFailed = function(message)
 {
     cats_toolbarClear();
-    
+
     if (typeof(message) != 'undefined')
     {
         cats_toolbarAddButton(
@@ -259,10 +259,10 @@ cats_authenticationFailed = function(message)
             'cats-buttonLeftDisc',
             'cats_mainButton'
         );
-        
+
         document.getElementById('CATSTB-Options').setAttribute('hidden', false);
     }
-    
+
 }
 
 /* Show the "Authenticated" main button image. */

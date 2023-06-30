@@ -15,7 +15,7 @@
     function showNewFilter<?=$this->md5InstanceName?>() {
         newFilterCounter<?=$this->md5InstanceName?>++;
         showNewFilter(
-            newFilterCounter<?=$this->md5InstanceName?>, 
+            newFilterCounter<?=$this->md5InstanceName?>,
             'filterResultsAreaTable<?=$this->md5InstanceName?>',
             <?=$this->arrayKeysString?>,
             '<?=$this->md5InstanceName?>'

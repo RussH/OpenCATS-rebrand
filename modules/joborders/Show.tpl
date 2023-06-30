@@ -287,7 +287,7 @@ use OpenCATS\UI\QuickActionMenu;
                                 </td>
 
                             </tr>
-                
+
                             <?php for ($i = (intval(count($this->extraFieldRS))/2); $i < (count($this->extraFieldRS)); $i++): ?>
                                 <?php if(($this->extraFieldRS[$i]['extraFieldType']) == EXTRA_FIELD_TEXTAREA): ?>
                                     <tr>

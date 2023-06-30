@@ -61,8 +61,8 @@
                 {
                     var onEven = 1;
                     <?php foreach($this->savedListsRS as $index => $data): ?>
-                        if (document.getElementById("savedListRow<?php echo($data['savedListID']); ?>").style.display == '' || 
-                            document.getElementById("savedListRowEditing<?php echo($data['savedListID']); ?>").style.display == '' || 
+                        if (document.getElementById("savedListRow<?php echo($data['savedListID']); ?>").style.display == '' ||
+                            document.getElementById("savedListRowEditing<?php echo($data['savedListID']); ?>").style.display == '' ||
                             document.getElementById("savedListRowAjaxing<?php echo($data['savedListID']); ?>").style.display == '')
                         {
                             if (onEven == 1)
@@ -100,8 +100,8 @@
                         {
                             checked += "<?php echo($data['savedListID']); ?>,";
                         }
-                    <?php endforeach; ?>  
-                    return checked;                 
+                    <?php endforeach; ?>
+                    return checked;
                 }
             </script>
     </body>

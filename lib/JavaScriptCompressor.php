@@ -29,7 +29,7 @@
  * @copyright Copyright (C) 2005 - 2007 Cognizo Technologies, Inc.
  * @version    $Id: JavaScriptCompressor.php 3587 2007-11-13 03:55:57Z will $
  */
- 
+
 include_once(LEGACY_ROOT . '/lib/StringUtility.php');
 
 /**
@@ -53,10 +53,10 @@ class JavaScriptCompressor
         {
             return false;
         }
-        
+
         return $this->compress($string);
     }
-    
+
     /**
      * Compresses a string of JavaScript code, removing whitespace, extra
      * newlines, and extra whitespace.
@@ -68,7 +68,7 @@ class JavaScriptCompressor
     {
         return $this->compress($string);
     }
-    
+
     /**
      * Compresses a string of JavaScript code, removing whitespace, extra
      * newlines, and extra whitespace.

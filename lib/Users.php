@@ -32,7 +32,7 @@
 
 include_once(LEGACY_ROOT . '/lib/License.php');
 
-if (AUTH_MODE == "ldap" || AUTH_MODE == "sql+ldap") 
+if (AUTH_MODE == "ldap" || AUTH_MODE == "sql+ldap")
 {
     require_once(LEGACY_ROOT . '/lib/LDAP.php');
 }
@@ -52,7 +52,7 @@ define('ADD_USER_BAD_PASS',          -1);
 define('ADD_USER_EXISTS',            -2);
 define('ADD_USER_DB_ERROR',          -3);
 
-/* Password for user authenticated against LDAP */ 
+/* Password for user authenticated against LDAP */
 define('LDAPUSER_PASSWORD',          '_LDAPUSER_');
 
 /**
@@ -783,7 +783,7 @@ class Users
     {
         $existsInLDAP = false;
         $existsInDB = false;
-        
+
         if (empty($username))
         {
             return LOGIN_INVALID_USER;
@@ -814,8 +814,8 @@ class Users
             {
                 return LOGIN_INVALID_USER;
             }
-        } 
-        else 
+        }
+        else
         {
             $existsInDB = true;
         }
@@ -827,10 +827,10 @@ class Users
             {
                 return LOGIN_INVALID_USER;
             }
-            if(!$this->_ldap->authenticate($username, $password)) 
+            if(!$this->_ldap->authenticate($username, $password))
             {
                 return LOGIN_INVALID_PASSWORD;
-            } 
+            }
             $existsInLDAP = true;
         } else if(AUTH_MODE == 'ldap'){
             /*  incorrect LDAP user in db */
@@ -842,11 +842,11 @@ class Users
                 return LOGIN_INVALID_PASSWORD;
             }
         }
-        
+
         if (!$existsInDB && $existsInLDAP) {
             /* ldap user not created in local db -> create one as disabled */
             $userInfo = $this->_ldap->getUserInfo($username);
-            $userID = $this->add($userInfo[0], $userInfo[1], $userInfo[2], $userInfo[3], LDAPUSER_PASSWORD, '0', false, LDAP_SITEID);            
+            $userID = $this->add($userInfo[0], $userInfo[1], $userInfo[2], $userInfo[3], LDAPUSER_PASSWORD, '0', false, LDAP_SITEID);
             return LOGIN_PENDING_APPROVAL;
         }
 
@@ -1248,10 +1248,10 @@ class Users
                 $this->_db->makeQueryString($userID)
                 );
         $rs = $this->_db->getAssoc($sql);
-        
+
         return ($rs['password'] == LDAPUSER_PASSWORD);
     }
-    
+
 }
 
 ?>

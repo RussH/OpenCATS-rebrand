@@ -169,10 +169,10 @@ function CompanyLocation_populate(companySelectID, sessionCookie)
  */
 function CompanyContacts_populate(companySelectID, contactSelectID, indicatorID,
     sessionCookie)
-{    
+{
     var companySelectList = document.getElementById(companySelectID);
     var companyID         = companySelectList.value;
-    
+
     CompanyContacts_populate_byCompanyID(companyID, contactSelectID, indicatorID,
     sessionCookie);
 }

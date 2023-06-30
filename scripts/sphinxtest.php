@@ -72,7 +72,7 @@ do
     {
         sleep(1);
     }
-    
+
     $results = $sphinx->Query(TEST_QUERY, SPHINX_INDEX);
     $errorMessage = $sphinx->GetLastError();
 }

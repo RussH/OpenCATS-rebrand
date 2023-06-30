@@ -179,13 +179,13 @@ class CATSSession
         {
             return true;
         }
-        
+
         /* Sanity check. */
         if ($this->getUnixName() == '')
         {
             return false;
         }
-        
+
         /* Forced logouts can only occur if Single Session mode is enabled. */
         if (!ENABLE_SINGLE_SESSION)
         {
@@ -774,13 +774,13 @@ class CATSSession
                 }
 
                 break;
-                
+
             case LOGIN_PENDING_APPROVAL:
                 $this->_isLoggedIn = false;
                 $this->_loginError = 'Your account has been created and is pending approval.';
 
                 break;
-                
+
             case LOGIN_SUCCESS:
                 $this->_username               = $rs['username'];
                 $this->_password               = $rs['password'];
@@ -811,7 +811,7 @@ class CATSSession
                 $this->_dateDMY                = ($rs['dateFormatDMY'] == 0 ? false : true);
                 $this->_canSeeEEOInfo          = ($rs['canSeeEEOInfo'] == 0 ? false : true);
                 $this->_pipelineEntriesPerPage = $rs['pipelineEntriesPerPage'];
-                $this->_loggedInScript         = CATSUtility::getDirectoryName(); 
+                $this->_loggedInScript         = CATSUtility::getDirectoryName();
 
                 /* SA's can always see EEO Info. */
                 if ($this->_accessLevel >= ACCESS_LEVEL_SA)

@@ -145,9 +145,9 @@ class BrowserDetection
                 }
             }
             else
-            { 
+            {
                 switch ($build)
-                {   
+                {
                     case '412':
                     case '412.2':
                     case '412.2.2':
@@ -228,7 +228,7 @@ class BrowserDetection
                         break;
                 }
             }
-            
+
             return array(
                 'name' => 'Safari', 'version' => $version
             );

@@ -140,7 +140,7 @@
                         <td class="tdData">
                             <select tabindex="15" id="type" name="type" class="inputbox" style="width: 150px;">
                                 <?php foreach($this->jobTypes as $jobTypeShort => $jobTypeLong): ?>
-                                    <option value="<?php echo $jobTypeShort;?>" 
+                                    <option value="<?php echo $jobTypeShort;?>"
                                             <?php if($this->data['type'] == $jobTypeShort): ?>
                                                 selected="selected"
                                             <?php endif; ?>

@@ -563,7 +563,7 @@ class StringUtility
         $string = preg_replace_callback(
             '/[^\x21-\x3C\x3E-\x7E\x09\x20]/',
             function($result) {
-                return sprintf("=%02X", ord($result[0])); 
+                return sprintf("=%02X", ord($result[0]));
             },
             $string
         );

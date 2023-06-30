@@ -37,9 +37,9 @@
                    }
                    var inlineEditIDCounter = 0;
                 </script>
-                    <?php foreach (array(array("name" => "Job Orders", "RS" => $this->extraFieldSettingsJobOrdersRS, "type" => DATA_ITEM_JOBORDER), 
-                                         array("name" => "Candidates", "RS" => $this->extraFieldSettingsCandidatesRS, "type" => DATA_ITEM_CANDIDATE), 
-                                         array("name" => "Companies", "RS" => $this->extraFieldSettingsCompaniesRS, "type" => DATA_ITEM_COMPANY), 
+                    <?php foreach (array(array("name" => "Job Orders", "RS" => $this->extraFieldSettingsJobOrdersRS, "type" => DATA_ITEM_JOBORDER),
+                                         array("name" => "Candidates", "RS" => $this->extraFieldSettingsCandidatesRS, "type" => DATA_ITEM_CANDIDATE),
+                                         array("name" => "Companies", "RS" => $this->extraFieldSettingsCompaniesRS, "type" => DATA_ITEM_COMPANY),
                                          array("name" => "Contacts", "RS" => $this->extraFieldSettingsContactsRS, "type" => DATA_ITEM_CONTACT)) as $index => $data): ?>
                         <tr>
                             <td style="width:150px;">
@@ -47,7 +47,7 @@
                             </td>
                             <td>
                                 <script type="text/javascript">
-                                
+
                                     //TODO: Document me.
                                     var alternatingClassVariable<?php echo($index); ?> = "<?php TemplateUtility::printAlternatingRowClass(count($data['RS'])); ?>";
                                     var onIndex<?php echo($index); ?> = <?php echo(count($data['RS'])); ?>;
@@ -61,10 +61,10 @@
                                         else
                                         {
                                             alternatingClassVariable<?php echo($index); ?> = "evenTableRow";
-                                        }    
+                                        }
                                         return r;
                                     }
-                                    
+
                                     //TODO: Document me.
                                     function checkForDuplicateRowOnTable<?php echo($index); ?>(rowName)
                                     {
@@ -77,31 +77,31 @@
                                           {
                                              continue;
                                           }
-                                          
+
                                           var col = row.getElementsByTagName('td')[1];
                                           var html = col.innerHTML;
-                                          
+
                                           if (html.indexOf('<') != -1)
                                           {
                                              html = html.substr(0,html.indexOf('<'));
                                           }
-                                          
+
                                           //html.trim();
                                           html = html.replace(/^\s+|\s+$/g,"");
-                                          
-                                          if (html == rowName) 
+
+                                          if (html == rowName)
                                           {
                                              return true;
                                           }
                                        }
-                                       
+
                                        return false;
                                     }
-                                    
+
                                     function getRowNameByRowIndex<?php echo($index); ?>(rowIndex)
                                     {
                                        tbl = document.getElementById('extraFieldsTable<?php echo($index); ?>');
-                                       
+
                                        var row = tbl.rows[rowIndex+1];
 
                                        var col = row.getElementsByTagName('td')[1];
@@ -117,7 +117,7 @@
 
                                        return html;
                                     }
-                                    
+
                                     function getRowIndexByRowName<?php echo($index); ?>(rowName)
                                     {
                                        tbl = document.getElementById('extraFieldsTable<?php echo($index); ?>');
@@ -129,27 +129,27 @@
                                           {
                                              continue;
                                           }
-                                          
+
                                           var col = row.getElementsByTagName('td')[1];
                                           var html = col.innerHTML;
-                                          
+
                                           if (html.indexOf('<') != -1)
                                           {
                                              html = html.substr(0,html.indexOf('<'));
                                           }
-                                          
+
                                           //html.trim();
                                           html = html.replace(/^\s+|\s+$/g,"");
-                                          
-                                          if (html == rowName) 
+
+                                          if (html == rowName)
                                           {
                                              return i;
                                           }
                                        }
-                                       
+
                                        return 0;
                                     }
-                                    
+
                                     //TODO: Document me.
                                     function addRowToTable<?php echo($index); ?>(rowName, rowTypeName, rowIndex)
                                     {
@@ -168,76 +168,76 @@
                                         hyperlink.onclick=function() { deleteRow<?php echo($index); ?>(rowIndex, rowName); };
                                         hyperlink.appendChild(image);
                                         cellLeft.appendChild(hyperlink);
- 
+
                                         var cellLeft = row.insertCell(1);
                                         var textNode = document.createTextNode(rowName);
                                         cellLeft.appendChild(textNode);
-                                        
+
                                         var cellLeft = row.insertCell(2);
                                         var textNode = document.createTextNode(rowTypeName);
-                                        cellLeft.appendChild(textNode);                                            
+                                        cellLeft.appendChild(textNode);
                                     }
-                                    
+
                                     //TODO: Document me.
                                     function deleteRowFromTable<?php echo($index); ?>(rowIndex)
                                     {
                                         row = document.getElementById("table<?php echo($index); ?>row" + rowIndex);
                                         row.style.display='none';
-                                        
+
                                         //TODO: BH: (optional) Reset all the even/odd classes for this entire table.
                                     }
-                                    
+
                                     //TODO: Document me.
                                     function addOptionsAreaToTable<?php echo($index); ?>(rowIndex, rowName)
                                     {
                                         tbl = document.getElementById('extraFieldsTable<?php echo($index); ?>');
                                         var row = tbl.rows[rowIndex+1];
                                         var col = row.getElementsByTagName('td')[1];
-                                        
+
                                         var brTag = document.createElement('br');
                                         col.appendChild(brTag);
-                                        
+
                                         var tbl2 = document.createElement('table');
                                         tbl2.width='300';
                                         tbl2.id = 'optionsTable<?php echo($index); ?>row' + rowIndex;
                                         tbl2.className='sortable';
                                         col.appendChild(tbl2);
-                                        
+
                                         var headerTr = tbl2.insertRow(0);
-                                       
+
                                         var headerTh = document.createElement('th');
                                         headerTh.width="20";
                                         headerTr.appendChild(headerTh);
-                                        
+
                                         var headerTh2 = document.createElement('th');
                                         headerTh2.align = 'left';
                                         headerTh2.innerHTML = 'Options';
                                         headerTr.appendChild(headerTh2);
 
-                                        
+
                                         var addOptionDiv = document.createElement('div');
-                                        
-                                        addOptionDiv.innerHTML = 
+
+                                        addOptionDiv.innerHTML =
                                             '<a href="javascript:void(0);" id="addOptionLine<?php echo($index); ?>row' + rowIndex + '" onclick="document.getElementById(&quot;addOption<?php echo($index); ?>row' + rowIndex + '&quot;).style.display=&quot;&quot;; document.getElementById(&quot;addOptionLine<?php echo($index); ?>row' + rowIndex + '&quot;).style.display=&quot;none&quot;; document.getElementById(&quot;addOptionInput<?php echo($index); ?>row' + rowIndex +'&quot;).focus(); document.getElementById(&quot;addOptionInput<?php echo($index); ?>row' + rowIndex +'&quot;).value = &quot;&quot;;">' +
                                                 '<img src="images/actions/add_small.gif" border="0" />&nbsp;Add option to ' + rowName +
-                                            '</a>' + 
-                                            '<span style="display:none;" id="addOption<?php echo($index); ?>row' + rowIndex + '">' + 
+                                            '</a>' +
+                                            '<span style="display:none;" id="addOption<?php echo($index); ?>row' + rowIndex + '">' +
                                                 'Name:&nbsp;<input id="addOptionInput<?php echo($index); ?>row' + rowIndex + '" style="width:200px;" value="" class="inputbox" /><br />' +
                                                 '<input type="button" class="button" value="Add Field" onclick="addOption<?php echo($index); ?>(document.getElementById(&quot;addOptionInput<?php echo($index); ?>row' + rowIndex + '&quot;).value, document.getElementById(&quot;optionsTable<?php echo($index); ?>row' + rowIndex + '&quot;), &quot;' + rowName + '&quot;);  document.getElementById(&quot;addOption<?php echo($index); ?>row' + rowIndex + '&quot;).style.display=&quot;none&quot;; document.getElementById(&quot;addOptionLine<?php echo($index); ?>row' + rowIndex + '&quot;).style.display=&quot;&quot;;" />&nbsp;' +
                                                 '<input type="button" class="button" value="Cancel" onclick="document.getElementById(&quot;addOption<?php echo($index); ?>row' + rowIndex + '&quot;).style.display=&quot;none&quot;; document.getElementById(&quot;addOptionLine<?php echo($index); ?>row' + rowIndex + '&quot;).style.display=&quot;&quot;;" />' +
                                             '</span>';
-                                        
+
                                         col.appendChild(addOptionDiv);
-                                        
+
                                         tbl2.usingEvenOdd = "evenTableRow";
-                                                       
+
                                         return tbl2;
                                     }
-                                    
+
                                     function addOptionToTable<?php echo($index); ?>(optionName, tbl, fieldName)
                                     {
                                         r = tbl.usingEvenOdd;
-                                
+
                                         if (tbl.usingEvenOdd == "evenTableRow")
                                         {
                                             tbl.usingEvenOdd = "oddTableRow";
@@ -245,13 +245,13 @@
                                         else
                                         {
                                             tbl.usingEvenOdd = "evenTableRow";
-                                        }    
-                                        
+                                        }
+
                                         var lastRow = tbl.rows.length;
                                         var row = tbl.insertRow(lastRow);
                                         row.className = r;
                                         row.id = tbl.id + 'option'+lastRow;
-                                        
+
                                         var cellLeft = row.insertCell(0);
                                         var image = document.createElement('img');
                                         image.src = 'images/actions/delete.gif';
@@ -260,23 +260,23 @@
                                         hyperlink.href='javascript:deleteOption<?php echo($index); ?>('+getRowIndexByRowName<?php echo($index); ?>(fieldName)+', '+lastRow+', "'+optionName+'", "'+fieldName+'"); void(0);';
                                         hyperlink.appendChild(image);
                                         cellLeft.appendChild(hyperlink);
-                                        
+
                                         var cellLeft = row.insertCell(1);
                                         var textNode = document.createTextNode(optionName);
                                         cellLeft.appendChild(textNode);
                                     }
-                                    
+
                                     function deleteOptionFromTable<?php echo($index); ?>(rowObject, optionName, fieldName)
                                     {
                                         rowObject.style.display = 'none';
                                     }
-                                    
+
                                     //TODO: Document me.
                                     function addRow<?php echo($index); ?>(rowName, rowType, rowTypeName)
                                     {
                                         thisIndex = onIndex<?php echo($index); ?>;
                                         onIndex<?php echo($index); ?>++;
-                                        
+
                                         if (checkForDuplicateRowOnTable<?php echo($index); ?>(rowName))
                                         {
                                            while (checkForDuplicateRowOnTable<?php echo($index); ?>(rowName))
@@ -284,20 +284,20 @@
                                               rowName = rowName + ' (2)';
                                            }
                                         }
-                                        
+
                                         addRowToTable<?php echo($index); ?>(rowName, rowTypeName, thisIndex);
-                                        
+
                                         if(<?php foreach($this->extraFieldTypes as $efi => $eft): ?><?php if($eft['hasOptions']): ?>rowType == <?php echo($efi); ?> || <?php endif; ?><?php endforeach; ?> false)
                                         {
                                             addOptionsAreaToTable<?php echo($index); ?>(thisIndex, rowName);
                                         }
-                                        
+
                                         appendCommandList('ADDFIELD <?php echo(urlencode($data['type'])); ?> '+encodeURI(rowType)+' '+encodeURI(rowName));
                                     }
-                                    
+
                                     //TODO: Document me.
                                     function deleteRow<?php echo($index); ?>(rowIndex, rowName)
-                                    {                                      
+                                    {
                                         //FIXME: Do we really need this?
                                         /*
                                         var c= confirm("Do you really want to delete the field "+rowName+"?");
@@ -306,9 +306,9 @@
                                             return;
                                         }
                                         */
-                                        
+
                                         deleteRowFromTable<?php echo($index); ?>(rowIndex);
-                                        
+
                                         appendCommandList('DELETEFIELD <?php echo(urlencode($data['type'])); ?> '+encodeURI(rowName));
                                     }
 
@@ -319,41 +319,41 @@
                                         {
                                             return;
                                         }
-                                        
+
                                         var rowName1 = getRowNameByRowIndex<?php echo($index); ?>(rowIndex1);
                                         var rowName2 = getRowNameByRowIndex<?php echo($index); ?>(rowIndex2);
                                         tbl = document.getElementById('extraFieldsTable<?php echo($index); ?>');
-                                        
+
                                         var row = tbl.rows[rowIndex1+1];
                                         var col = row.getElementsByTagName('td')[1];
-                                        var html = col.innerHTML;                     
+                                        var html = col.innerHTML;
 
                                         var row2 = tbl.rows[rowIndex2+1];
                                         var col2 = row2.getElementsByTagName('td')[1];
                                         var html2 = col2.innerHTML;
-                                        
+
                                         while(html.indexOf("row"+rowIndex1) != -1)
                                         {
                                             html = html.replace("row"+rowIndex1, "row"+rowIndex2);
                                         }
-                                        
+
                                         while(html.indexOf("deleteOption<?php echo($index); ?>("+(rowIndex1+1)) != -1)
-                                        {                                        
+                                        {
                                             html = html.replace("deleteOption<?php echo($index); ?>("+(rowIndex1+1), "deleteOption<?php echo($index); ?>("+(rowIndex2+1));
                                         }
-                                        
+
                                         while(html2.indexOf("row"+rowIndex2) != -1)
                                         {
                                             html2 = html2.replace("row"+rowIndex2, "row"+rowIndex1);
-                                        }                                        
+                                        }
 
                                         while(html2.indexOf("deleteOption<?php echo($index); ?>("+(rowIndex1+1)) != -1)
-                                        {                                        
+                                        {
                                             html2 = html2.replace("deleteOption<?php echo($index); ?>("+(rowIndex1+1), "deleteOption<?php echo($index); ?>("+(rowIndex2+1));
                                         }
                                         col.innerHTML = html2;
-                                        col2.innerHTML = html;    
-                                        
+                                        col2.innerHTML = html;
+
                                         appendCommandList('SWAPFIELDS <?php echo(urlencode($data['type'])); ?> '+encodeURI(rowName1)+':'+encodeURI(rowName2));
                                     }
 
@@ -361,19 +361,19 @@
                                     function editRow<?php echo($index); ?>(rowIndex)
                                     {
                                          var rowName = getRowNameByRowIndex<?php echo($index); ?>(rowIndex);
-                                         
+
                                          tbl = document.getElementById('extraFieldsTable<?php echo($index); ?>');
 
                                          var row = tbl.rows[rowIndex+1];
                                          var col = row.getElementsByTagName('td')[1];
-                                         var html = col.innerHTML;                     
+                                         var html = col.innerHTML;
 
                                         inlineEditIDCounter++;
 
                                         html = html.replace(rowName, "<!--inline--><input type=\"hidden\" id=\"inlineEditOrg"+inlineEditIDCounter+"\"><input id=\"inlineEdit"+inlineEditIDCounter+"\"><input type=\"button\" onclick=\"saveRow<?php echo($index); ?>("+rowIndex+", "+inlineEditIDCounter+")\" value=\"Save\"><!--/inline-->");
 
                                         col.innerHTML = html;
-                                         
+
                                         document.getElementById('inlineEdit'+inlineEditIDCounter).value = rowName;
                                         document.getElementById('inlineEditOrg'+inlineEditIDCounter).value = rowName;
                                      }
@@ -383,12 +383,12 @@
                                      {
                                           var rowNameOrg = document.getElementById('inlineEditOrg'+inlineID).value;
                                           var rowNameNew = document.getElementById('inlineEdit'+inlineID).value;
-                                          
+
                                           appendCommandList('RENAMEROW <?php echo(urlencode($data['type'])); ?> '+encodeURI(rowNameOrg)+':'+encodeURI(rowNameNew));
 
                                           document.getElementById('editSettingsForm').submit();
-                                      }                                    
-                                    
+                                      }
+
                                     //TODO: Document me.
                                     function onAddField<?php echo($index); ?>()
                                     {
@@ -396,54 +396,54 @@
                                        {
                                           return;
                                        }
-                                       
-                                        addRow<?php echo($index); ?>(document.getElementById('addFieldName<?php echo($index); ?>').value, 
-                                                                     document.getElementById('addFieldSelect<?php echo($index); ?>').value, 
+
+                                        addRow<?php echo($index); ?>(document.getElementById('addFieldName<?php echo($index); ?>').value,
+                                                                     document.getElementById('addFieldSelect<?php echo($index); ?>').value,
                                                                      document.getElementById('addFieldSelect<?php echo($index); ?>').options[
                                                                             document.getElementById('addFieldSelect<?php echo($index); ?>').selectedIndex
                                                                         ].text
                                                                     );
-                                                                    
-                                        onHideAddArea<?php echo($index); ?>();                             
+
+                                        onHideAddArea<?php echo($index); ?>();
                                     }
-                                    
+
                                     //TODO: Document me.
                                     function addOption<?php echo($index); ?>(optionName, tbl, fieldName)
-                                    {   
+                                    {
                                         if (optionName == '')
                                         {
                                            return;
                                         }
-                                        
+
                                         addOptionToTable<?php echo($index); ?>(optionName, tbl, fieldName);
-                                        
+
                                         appendCommandList('ADDOPTION <?php echo(urlencode($data['type'])); ?> '+encodeURI(fieldName)+':'+encodeURI(optionName));
                                     }
-                                    
+
                                     //TODO: Document me.
                                     function deleteOption<?php echo($index); ?>(rowIndex, optionIndex, optionName, fieldName)
-                                    {   
+                                    {
                                         tbl = document.getElementById('extraFieldsTable<?php echo($index); ?>');
-                                        
+
                                         var row = tbl.rows[rowIndex];
                                         var cell = row.getElementsByTagName('td')[1];
-                                        
+
                                         var tblOptions = cell.getElementsByTagName('table')[0];
                                         var rowOptions = tblOptions.rows[optionIndex];
-                                        
+
                                         deleteOptionFromTable<?php echo($index); ?>(rowOptions, optionName, fieldName);
-                                        
+
                                         appendCommandList('DELETEOPTION <?php echo(urlencode($data['type'])); ?> '+encodeURI(fieldName)+':'+encodeURI(optionName));
-                                    }                                    
-                                    
+                                    }
+
                                     //TODO: Document me.
                                     function onHideAddArea<?php echo($index); ?>()
                                     {
-                                        document.getElementById('addField<?php echo($index); ?>').style.display='none'; 
+                                        document.getElementById('addField<?php echo($index); ?>').style.display='none';
                                         document.getElementById('addFieldOption<?php echo($index); ?>').style.display='';
                                     }
                                 </script>
-                                
+
                                 <table class="sortable" width="560" id="extraFieldsTable<?php echo($index); ?>">
                                     <thead>
                                         <tr>
@@ -465,7 +465,7 @@
                                                 </a>
                                                 <a href="javascript:void(0);" onclick="swapRows<?php echo($index); ?>(<?php echo($rsIndex); ?>, <?php echo($rsIndex-1); ?>);"  style="padding:0px;">
                                                     <img src="images/scrollTop.jpg" border="0"  style="padding:0px;"/>
-                                                </a>                                                 
+                                                </a>
                                                 <a href="javascript:void(0);" onclick="swapRows<?php echo($index); ?>(<?php echo($rsIndex); ?>, <?php echo($rsIndex+1); ?>);"  style="padding:0px;">
                                                     <img src="images/scrollBottom.jpg" border="0"  style="padding:0px;"/>
                                                 </a>
@@ -490,12 +490,12 @@
                                           <?php foreach($options as $option): ?>
                                              <?php if($option != ''): ?>
                                                 addOptionToTable<?php echo($index); ?>(urlDecode("<?php echo ($option); ?>"), t, urlDecode("<?php echo (urlencode($rsData['fieldName'])); ?>"));
-                                             <?php endif; ?>   
+                                             <?php endif; ?>
                                           <?php endforeach; ?>
                                        </script>
-                                    <?php endif; ?>   
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
-                                                                
+
                                 <div id="addField<?php echo($index); ?>" style="display:none;">
                                     <table>
                                         <tr>
@@ -516,7 +516,7 @@
                                                </select>
                                             </td>
                                         </tr>
-                                    </table>                                    
+                                    </table>
                                     <input type="button" class="button" value="Add Field" onclick="onAddField<?php echo($index); ?>();" />&nbsp;
                                     <input type="button" class="button" value="Cancel" onclick="onHideAddArea<?php echo($index); ?>();" />
                                 </div>
@@ -530,7 +530,7 @@
                             </td>
                         </tr>
                     <?php endforeach; ?>
-                    
+
                 </table>
                 <input type="submit" class="button" value="Save" style="display:none;" id="buttonSave" />
                 <input type="button" name="back" class = "button" value="Done" id="buttonDone"  onclick="document.location.href='<?php echo(CATSUtility::getIndexName()); ?>?m=settings&amp;a=administration';" />

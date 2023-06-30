@@ -38,14 +38,14 @@ function saveListRow(rowNumber, sessionCookie)
     document.getElementById('savedListRowAjaxing'+rowNumber).style.display = '';
     document.getElementById('savedListRowEditing'+rowNumber).style.display = 'none';
     document.getElementById('savedListRow'+rowNumber).style.display = 'none';
-    
+
     /* Write change to database. */
-    
+
     var http = AJAX_getXMLHttpObject();
 
     /* Build HTTP POST data. */
     var POSTData = '&savedListID='+rowNumber+'&savedListName='+encodeURIComponent(document.getElementById('savedListRowInput'+rowNumber).value);
-    
+
     /* Anonymous callback function triggered when HTTP response is received. */
     var callBack = function ()
     {
@@ -59,7 +59,7 @@ function saveListRow(rowNumber, sessionCookie)
             var errorMessage = "An error occurred while receiving a response from the server.\n\n"
                              + http.responseText;
             alert(errorMessage);
-            downloadBlock = false; 
+            downloadBlock = false;
             return;
         }
 
@@ -73,9 +73,9 @@ function saveListRow(rowNumber, sessionCookie)
             alert(errorMessage);
             return;
         }
-        
+
         var response = http.responseXML.getElementsByTagName('response').item(0).firstChild.nodeValue;
-        
+
         switch(response)
         {
             case "success":
@@ -100,7 +100,7 @@ function saveListRow(rowNumber, sessionCookie)
                 break;
         }
     }
-    
+
     AJAX_callCATSFunction(
         http,
         'lists:editListName',
@@ -123,9 +123,9 @@ function addListRow(sessionCookie)
 function commitNewList(sessionCookie, dataItemType)
 {
     /* Write change to database. */
-    
+
     var http = AJAX_getXMLHttpObject();
-    
+
     var POSTData = '&dataItemType='+dataItemType+'&description='+document.getElementById('savedListNewInput').value;
 
     /* Anonymous callback function triggered when HTTP response is received. */
@@ -141,7 +141,7 @@ function commitNewList(sessionCookie, dataItemType)
             var errorMessage = "An error occurred while receiving a response from the server.\n\n"
                              + http.responseText;
             alert(errorMessage);
-            downloadBlock = false; 
+            downloadBlock = false;
             return;
         }
 
@@ -155,9 +155,9 @@ function commitNewList(sessionCookie, dataItemType)
             alert(errorMessage);
             return;
         }
-        
+
         var response = http.responseXML.getElementsByTagName('response').item(0).firstChild.nodeValue;
-        
+
         switch(response)
         {
             case "success":
@@ -167,7 +167,7 @@ function commitNewList(sessionCookie, dataItemType)
                 {
                     newDoc = newDoc.substr(0,newDoc.indexOf('&scrolldown=true&timePreventsCacheing'));
                 }
-                
+
                 newDoc += '&scrolldown=true&timePreventsCacheing='+currTime.getTime();
                 document.location = newDoc;
                 break;
@@ -185,7 +185,7 @@ function commitNewList(sessionCookie, dataItemType)
                 break;
         }
     }
-    
+
     AJAX_callCATSFunction(
         http,
         'lists:newList',
@@ -200,17 +200,17 @@ function commitNewList(sessionCookie, dataItemType)
 
 function deleteListFromListView(savedListID, numberEntries)
 {
-    if (numberEntries != 0 && !confirm("Do you really want to delete this saved list with "+numberEntries+" entries?")) 
+    if (numberEntries != 0 && !confirm("Do you really want to delete this saved list with "+numberEntries+" entries?"))
     {
          return;
     }
-    
+
     document.location.href = CATSIndexName + '?m=lists&a=deleteStaticList&savedListID=' + savedListID;
 }
 
 function deleteListRow(savedListID, sessionCookie, numberEntries)
 {
-    if (numberEntries != 0 && !confirm("Do you really want to delete this saved list with "+numberEntries+" entries?")) 
+    if (numberEntries != 0 && !confirm("Do you really want to delete this saved list with "+numberEntries+" entries?"))
     {
          return;
     }
@@ -218,9 +218,9 @@ function deleteListRow(savedListID, sessionCookie, numberEntries)
     document.getElementById('savedListRowAjaxing'+savedListID).style.display = '';
     document.getElementById('savedListRowEditing'+savedListID).style.display = 'none';
     document.getElementById('savedListRow'+savedListID).style.display = 'none';
-    
+
     /* Write change to database. */
-    
+
     var http = AJAX_getXMLHttpObject();
 
     /* Build HTTP POST data. */
@@ -239,7 +239,7 @@ function deleteListRow(savedListID, sessionCookie, numberEntries)
             var errorMessage = "An error occurred while receiving a response from the server.\n\n"
                              + http.responseText;
             alert(errorMessage);
-            downloadBlock = false; 
+            downloadBlock = false;
             return;
         }
 
@@ -253,9 +253,9 @@ function deleteListRow(savedListID, sessionCookie, numberEntries)
             alert(errorMessage);
             return;
         }
-        
+
         var response = http.responseXML.getElementsByTagName('response').item(0).firstChild.nodeValue;
-        
+
         switch(response)
         {
             case "success":
@@ -266,7 +266,7 @@ function deleteListRow(savedListID, sessionCookie, numberEntries)
                 break;
         }
     }
-    
+
     AJAX_callCATSFunction(
         http,
         'lists:deleteList',
@@ -287,13 +287,13 @@ function addItemsToList(sessionCookie, dataItemType)
     {
         return;
     }
-    
+
     document.getElementById('actionArea').style.display = 'none';
     document.getElementById('addToListBox').style.display = 'none';
     document.getElementById('addingToListAjaxing').style.display = '';
-    
+
     /* Write change to database. */
-    
+
     var http = AJAX_getXMLHttpObject();
 
     /* Build HTTP POST data. */
@@ -312,7 +312,7 @@ function addItemsToList(sessionCookie, dataItemType)
             var errorMessage = "An error occurred while receiving a response from the server.\n\n"
                              + http.responseText;
             alert(errorMessage);
-            downloadBlock = false; 
+            downloadBlock = false;
             return;
         }
 
@@ -326,19 +326,19 @@ function addItemsToList(sessionCookie, dataItemType)
             alert(errorMessage);
             return;
         }
-        
+
         var response = http.responseXML.getElementsByTagName('response').item(0).firstChild.nodeValue;
-        
+
         switch(response)
         {
             case "success":
-                document.getElementById('addingToListAjaxing').style.display = 'none';     
-                document.getElementById('addingToListAjaxingComplete').style.display = '';            
+                document.getElementById('addingToListAjaxing').style.display = 'none';
+                document.getElementById('addingToListAjaxingComplete').style.display = '';
                 setTimeout('parentHidePopWinRefresh();', 1500);
                 break;
         }
     }
-    
+
     AJAX_callCATSFunction(
         http,
         'lists:addToLists',

@@ -35,13 +35,13 @@
  */
 
 function BackupDBErrorHandler ($errno, $errstr, $errfile, $errline, $errcontext)
-{    
+{
       echo ('An error has occoured.');
 
       $errorMessage = "An error has occoured in __BACKUP__.  Line $errline of file '$errfile'.\n";
       $errorMessage .= "Script: '{$_SERVER['PHP_SELF']}'.\n\n";
       $errorMessage .= $errstr;
-    
+
       if (file_exists('catsErrors.txt'))
       {
           $errorHandlerEmail = @file_get_contents('catsErrors.txt');
@@ -50,14 +50,14 @@ function BackupDBErrorHandler ($errno, $errstr, $errfile, $errline, $errcontext)
       {
           $errorHandlerEmail = '';
       }
-  
+
       if ($errorHandlerEmail != '')
       {
           $errorHandlerEmail .= '-----------------------------------------------'."\n\n";
       }
-  
+
       $errorHandlerEmail .= $errorMessage;
-  
+
       @file_put_contents('catsErrors.txt', $errorHandlerEmail);
 
     die();
@@ -66,12 +66,12 @@ function BackupDBErrorHandler ($errno, $errstr, $errfile, $errline, $errcontext)
 function dumpDB($db, $file, $useStatus = false, $splitFiles = true, $siteID = -1)
 {
     set_error_handler('BackupDBErrorHandler');
-    
+
     if ($siteID == -1)
     {
         $siteID = $_SESSION['CATS']->getSiteID();
     }
-    
+
     $len = 0;
     $fileNumber = 0;
 
@@ -86,7 +86,7 @@ function dumpDB($db, $file, $useStatus = false, $splitFiles = true, $siteID = -1
     {
         $tables[] = $row[0];
     }
-    
+
     if ($splitFiles) $fh = fopen($file . '.' . $fileNumber, 'w');
     $fh2 = fopen($file, 'w');
 
@@ -95,7 +95,7 @@ function dumpDB($db, $file, $useStatus = false, $splitFiles = true, $siteID = -1
     foreach ($tables as $table)
     {
         ++$tableCounter;
-        
+
         if ($table == 'arb_queue') continue;
         if ($table == 'prepaid_payment') continue;
         if ($table == 'monthly_payment') continue;
@@ -132,14 +132,14 @@ function dumpDB($db, $file, $useStatus = false, $splitFiles = true, $siteID = -1
         $isSiteIdColumn = false;
         $sql = sprintf("SHOW COLUMNS FROM %s", $table);
         $rs = mysqli_query($connection, $sql);
-        while ($recordSet = mysqli_fetch_assoc($rs))    
+        while ($recordSet = mysqli_fetch_assoc($rs))
         {
             if ($recordSet['Field'] == 'site_id')
             {
                 $isSiteIdColumn = true;
             }
-        }    
-        
+        }
+
         if ($isSiteIdColumn)
         {
             $sql = 'SELECT * FROM ' . $table . ' WHERE site_id = '.$siteID;
@@ -236,9 +236,9 @@ function dumpDB($db, $file, $useStatus = false, $splitFiles = true, $siteID = -1
                 }
                 $text .= ")";
                 $index++;
-                
-                
-                
+
+
+
                 if ($splitFiles) fwrite($fh, $text);
                 $len += strlen($text);
                 $text = str_replace('((ENDOFQUERY))', ';', $text);

@@ -147,13 +147,13 @@ function startMassImport()
 	abortImport = false;
     if (confirm("Are you sure you want to import the files?  The source files will be deleted!"))
     {
-        document.getElementById('startImport').style.display='none'; 
-        document.getElementById('pleaseWaitImport').style.display=''; 
+        document.getElementById('startImport').style.display='none';
+        document.getElementById('pleaseWaitImport').style.display='';
         document.getElementById('back').style.display='none';
         document.getElementById('foundFilesSpan').style.display='none';
         totalFilesTried = 0;
-        numberOfImports = 0; 
-        numberOfDuplicates = 0; 
+        numberOfImports = 0;
+        numberOfDuplicates = 0;
         importFile();
     }
 }
@@ -179,18 +179,18 @@ function importFile()
         }
 
         var result = http.responseText;
-        
+
         if (result != 'done')
         {
 			var args = result.split(',');
-			
+
 			if (!args || args.length != 3)
 			{
 			    alert('Error: Invalid response from server: ' + result);
             	finishImportNotice('pleaseWaitImport', totalFilesTried);
 			    return;
 		    }
-			
+
 			numberOfDuplicates += (args[0] * 1);
 			numberOfImports += (args[1] * 1);
 			totalFilesTried += (args[2] * 1);
@@ -201,7 +201,7 @@ function importFile()
             	finishImportNotice('pleaseWaitImport', totalFilesTried);
 			    return;
             }
-            
+
 			if (abortImport == false)
 			{
 				setTimeout("importFile();", 500);
@@ -209,7 +209,7 @@ function importFile()
 			else
 			{
             	finishImportNotice('pleaseWaitImport', totalFilesTried);
-            	alert("Import interupted.");				
+            	alert("Import interupted.");
 			}
         }
         else
@@ -233,21 +233,21 @@ function importFile()
 function finishImportNotice(importStatusID, totalPossibleResumes)
 {
     importStatus = document.getElementById(importStatusID);
-    
+
     var html = '<br /><br /><span style="font-weight:bold;">Resume import complete!<br />' +
                '<br />' +
                'Out of '+totalPossibleResumes+' possible resumes, '+numberOfImports+
                ' new resumes were added';
-    
+
     if (numberOfDuplicates > 0)
     {
         html += ' and '+numberOfDuplicates+' already exsisted in the system';
     }
-    
+
     html += '.</span>';
-    
+
     importStatus.innerHTML = html;
-                             
+
     document.getElementById('back').style.display='';
 }
 

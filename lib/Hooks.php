@@ -51,11 +51,11 @@ class Hooks
      */
     public static function get($hookName)
     {
-        if (!isset($_SESSION['hooks'])) 
+        if (!isset($_SESSION['hooks']))
         {
             return 'return true;';
-        }        
-        
+        }
+
         $hooks = @$_SESSION['hooks'];
 
         $hookCommands = '';

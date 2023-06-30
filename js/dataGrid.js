@@ -25,7 +25,7 @@
  *
  * $Id: dataGrid.js 3500 2007-11-08 18:22:40Z brian $
  */
- 
+
 /* FIXME:  Too many globals!  This code needs cleanup. */
 /* Set to true when we are resizing a column. */
 var _isResizing = false;
@@ -97,19 +97,19 @@ function startResize(objectResizingID, objectTableResizingID,
      _objectTableResizing = document.getElementById(objectTableResizingID);
      _objectOverrideCell = document.getElementById(objectOverrideCellID);
      _objectOverrideDiv = document.getElementById(objectOverrideCellID + 'div');
-     
+
      _instance = instance;
      _sessionCookie = sessionCookie;
      _columnName = columnName;
      _minimumTableWidth = minimumTableWidth;
      _sizeOfResizingCell = sizeOfResizingCell;
-     
+
      _startWidthResizing = _objectResizing.offsetWidth;
      _startTableWidthResizing = _objectTableResizing.offsetWidth;
      _mouseStartPos = _mouse_x;
      _isResizing = true;
      _isMoving = false;
-     
+
      var filterRow = document.getElementById('filterRow' + instance);
 }
 
@@ -124,16 +124,16 @@ function startMove(objectResizingID, objectTableResizingID,
     _objectOverrideCell = document.getElementById(objectOverrideCellID);
     _objectOverrideDiv = document.getElementById(objectOverrideCellID + 'div');
     _objectMovableCell = document.getElementById(objectMovableCellID);
-    
+
     _instance = instance;
     _sessionCookie = sessionCookie;
     _columnName = columnName;
     _baseParameters = baseParameters;
     _unrelatedRequestString = unrelatedRequestString;
-    
+
     _mouseStartPos = _mouse_x;
     _isResizing = false;
- 
+
     window.setTimeout('startMoveAfterDelay();', 450)
 }
 
@@ -168,7 +168,7 @@ function handleMouseDown()
 function handleMouseUp()
 {
     _mouse_down = false;
-    
+
     if (_isResizing)
     {
         if (_objectOverrideCell == _objectResizing)
@@ -179,7 +179,7 @@ function handleMouseUp()
         enforceMinimumTableWidth();
         saveColumnSize();
     }
-    
+
     if (_isMoving)
     {
         finishMoving();
@@ -192,26 +192,26 @@ function finishMoving()
     _isMoving = false;
 
     var middleOfCell = docjslib_getRealLeft(_objectMovableCell) + (_objectMovableCell.offsetWidth / 2) + _objectOverflow.scrollLeft;
-    
+
     var tblHeadObj = _objectTableResizing.tHead;
     var tblHeadRowObj = tblHeadObj.rows[0];
     var cellPositions = Array();
     var cellActions = Array();
     var positionArrayCounter = 0;
-    
+
     /* Create 2 arrays containing cell positions and actions for moving to that position */
-    for (var i=0; i < tblHeadRowObj.cells.length; i++) 
+    for (var i=0; i < tblHeadRowObj.cells.length; i++)
     {
-        if ((' ' + tblHeadRowObj.cells[i].className + ' ').indexOf('resizeableCell') == -1 && 
-            docjslib_getRealLeft(tblHeadRowObj.cells[i]) != 0 && 
+        if ((' ' + tblHeadRowObj.cells[i].className + ' ').indexOf('resizeableCell') == -1 &&
+            docjslib_getRealLeft(tblHeadRowObj.cells[i]) != 0 &&
             tblHeadRowObj.cells[i].id != '')
         {
             cellPositions[positionArrayCounter] = docjslib_getRealLeft(tblHeadRowObj.cells[i]);
-            
+
             if (tblHeadRowObj.cells[i].id == _objectResizing.id)
             {
                 cellActions[positionArrayCounter] = 'nothing - left side';
-            } 
+            }
             else if (positionArrayCounter != 0 && cellActions[positionArrayCounter - 1] == 'nothing - left side')
             {
                 cellActions[positionArrayCounter] = 'nothing - right side';
@@ -223,18 +223,18 @@ function finishMoving()
             positionArrayCounter++;
         }
     }
-    
+
     /* Create an action for the very end of the grid (move to last slot) */
     if (positionArrayCounter != 0)
     {
         cellPositions[positionArrayCounter] = docjslib_getRealLeft(_objectOverrideCell) + _objectOverrideCell.offsetWidth;
         cellActions[positionArrayCounter] = 'moveToEnd';
     }
-    
+
     /* Determine smallest distance away from middle of cell. */
     var smallestIndex = 0;
     var smallestValue = 100000;
-    
+
     for (var i = 0; i < cellPositions.length; i++)
     {
         if (Math.abs(cellPositions[i] - middleOfCell) < smallestValue)
@@ -316,7 +316,7 @@ function handleMouseMove(e)
     {
         var e = window.event;
     }
-    
+
     if (e.pageX || e.pageY)
     {
         _mouse_x = e.pageX;
@@ -334,7 +334,7 @@ function handleMouseMove(e)
     {
         updateResize();
     }
-    
+
     if (_isMoving)
     {
         updateMove();
@@ -359,7 +359,7 @@ function updateMove()
     newXPos = _start_x - (_mouseStartPos - _mouse_x) - _objectOverflow.scrollLeft ;
     _objectMovableCell.style.left = (newXPos) + 'px';
 }
- 
+
 
 /* Called when a table is done being output by DynamicPager, forces the table
  * to be the correct calculated size.
@@ -368,7 +368,7 @@ function setTableWidth(tableID, tableWidth, objectOverrideCell,
     objectOverrideDiv, minimumTableWidth, objectTableResizing)
 {
     document.getElementById(tableID).style.width = tableWidth;
-    
+
     _objectTableResizing = document.getElementById(tableID);
     _minimumTableWidth = minimumTableWidth;
     _objectOverrideCell = objectOverrideCell;
@@ -386,7 +386,7 @@ function enforceMinimumTableWidth()
     {
         tableWidth = _objectTableResizing.width;
     }
-    
+
     var cellCurrentWidth = _objectOverrideCell.offsetWidth;
     if (cellCurrentWidth == 0)
     {
@@ -394,30 +394,30 @@ function enforceMinimumTableWidth()
     }
 
     var overflow = true;
-    
+
     if (_lastCellRealWidth != null && tableWidth > _minimumTableWidth &&
-        cellCurrentWidth - (tableWidth - _minimumTableWidth) > _lastCellRealWidth) 
+        cellCurrentWidth - (tableWidth - _minimumTableWidth) > _lastCellRealWidth)
     {
         var sizeMod = _minimumTableWidth - tableWidth;
         var newCellWidth = cellCurrentWidth + sizeMod;
-        _objectOverrideCell.style.width = newCellWidth + 'px'; 
+        _objectOverrideCell.style.width = newCellWidth + 'px';
         _objectOverrideDiv.style.width = newCellWidth + 'px';
         _objectTableResizing.style.width = (tableWidth + sizeMod) + 'px';
         overflow = false;
     }
-    
+
     if (_lastCellRealWidth != null && tableWidth > _minimumTableWidth &&
-        cellCurrentWidth - (tableWidth - _minimumTableWidth) < _lastCellRealWidth) 
+        cellCurrentWidth - (tableWidth - _minimumTableWidth) < _lastCellRealWidth)
     {
         var sizeMod = _lastCellRealWidth - cellCurrentWidth;
         if (_lastCellRealWidth-4 > 10)
         {
-            _objectOverrideCell.style.width = (_lastCellRealWidth-4) + 'px'; 
-            _objectOverrideDiv.style.width = (_lastCellRealWidth-4) + 'px';  
-            _objectTableResizing.style.width = (tableWidth + sizeMod) + 'px';   
-        }          
+            _objectOverrideCell.style.width = (_lastCellRealWidth-4) + 'px';
+            _objectOverrideDiv.style.width = (_lastCellRealWidth-4) + 'px';
+            _objectTableResizing.style.width = (tableWidth + sizeMod) + 'px';
+        }
     }
-    
+
     if (_lastCellRealWidth == null)
     {
 
@@ -430,7 +430,7 @@ function enforceMinimumTableWidth()
         _objectOverrideDiv.style.width = (cellCurrentWidth + (_minimumTableWidth - tableWidth)) + 'px';
         overflow = false;
     }
-    
+
     if (overflow)
     {
         /* TODO:  DETECT BROWSER, IF IE BROWSER ADD EXTRA SPACE TO PREVENT VERT SCROLLBAR. */
@@ -438,18 +438,18 @@ function enforceMinimumTableWidth()
 }
 
 /* Helper for add/remove column window. */
-function toggleHideShowControls(md5InstanceName) 
+function toggleHideShowControls(md5InstanceName)
 {
     var cellHideShow = document.getElementById('cellHideShow' + md5InstanceName);
     var ColumnBox = document.getElementById('ColumnBox' + md5InstanceName);
     var helpShim = document.getElementById('helpShim' + md5InstanceName);
-    
-    if (ColumnBox.style.display=='block') 
+
+    if (ColumnBox.style.display=='block')
     {
         ColumnBox.style.display = 'none';
         helpShim.style.display = 'none';
-    } 
-    else 
+    }
+    else
     {
         ColumnBox.style.display = 'block';
         ColumnBox.style.left = docjslib_getRealLeft(cellHideShow) + 'px';
@@ -463,18 +463,18 @@ function toggleHideShowControls(md5InstanceName)
 }
 
 /* Helper for add/remove column window. */
-function toggleHideShowAction(md5InstanceName) 
+function toggleHideShowAction(md5InstanceName)
 {
     var cellHideShow = document.getElementById('cellHideShow' + md5InstanceName);
     var ActionArea = document.getElementById('ActionArea' + md5InstanceName);
     var helpShim = document.getElementById('helpShim' + md5InstanceName);
-    
-    if (ActionArea.style.display=='block') 
+
+    if (ActionArea.style.display=='block')
     {
         ActionArea.style.display = 'none';
         helpShim.style.display = 'none';
-    } 
-    else 
+    }
+    else
     {
         ActionArea.style.display = 'block';
         ActionArea.style.left = docjslib_getRealLeft(cellHideShow) + 'px';
@@ -494,10 +494,10 @@ function showFilterSet(cellIndexes, instanceName)
     var widthEval = 0;
     filterRow.style.display = '';
     filterRow.style.height = '20px';
-    
+
     var cellIndexArray = cellIndexes.split(',');
     for (var i = 0; i < cellIndexArray.length; i++)
-    {        
+    {
         if (i < cellIndexArray.length - 1)
         {
             //FIXME: Clean up.
@@ -525,7 +525,7 @@ function showFilterSet(cellIndexes, instanceName)
 function hideFilterSet(instanceName)
 {
     var filterRow = document.getElementById('filterRow' + instanceName);
-    filterRow.style.display = 'none';      
+    filterRow.style.display = 'none';
 }
 
 /* Called by stopResize to store in the database the new column widths. */
@@ -533,24 +533,24 @@ function hideFilterSet(instanceName)
 function populateAjaxPager(instance, parameters, sessionCookie, dynamicArgument, unrelatedRequestString)
 {
     md5instance = md5(urlDecode(instance));
-    
+
     if (document.getElementById('exportBoxLink' + md5instance) != null)
     {
         document.getElementById('exportBoxLink' + md5instance).style.display = 'none';
     }
-    
+
     document.getElementById('ajaxTableIndicator' + md5instance).style.display = '';
-    
+
     var http = AJAX_getXMLHttpObject();
 
     /* Build HTTP POST data. */
     var POSTData = '&i=' + instance + '&p=' + parameters;
-    
+
     if (typeof(dynamicArgument) != 'undefined')
     {
         POSTData += '&dynamicArgument=' + urlEncode(dynamicArgument);
     }
-    
+
     if (typeof(unrelatedRequestString) != 'undefined')
     {
         POSTData += '&unrelatedRequestString=' + urlEncode(unrelatedRequestString);
@@ -565,7 +565,7 @@ function populateAjaxPager(instance, parameters, sessionCookie, dynamicArgument,
         }
 
         document.getElementById('OverflowDiv' + md5instance).innerHTML = http.responseText;
-        
+
         execJS(http.responseText);
     }
 
@@ -592,7 +592,7 @@ function addRemoveFromExportArray(arrayObject, theValue)
             inArray = true;
         }
     }
-    
+
     if (!inArray)
     {
         arrayObject.push(theValue);
@@ -604,15 +604,15 @@ function removeColumnFromFilter(filterElementID, columnName)
 {
     var arguments = document.getElementById(filterElementID).value.split(',');
     var newArguments = '';
-    
+
     for (var i = 0; i < arguments.length; i++)
-    {   
+    {
         if ((arguments[i].indexOf('=') == -1 || urlDecode(arguments[i].substr(0, arguments[i].indexOf('='))) != columnName) && arguments[i] != '')
         {
             newArguments += arguments[i] + ',';
         }
     }
-    
+
     document.getElementById(filterElementID).value = newArguments;
 }
 
@@ -620,7 +620,7 @@ function removeColumnFromFilter(filterElementID, columnName)
 function addColumnToFilter(filterElementID, columnName, operator, value)
 {
     removeColumnFromFilter(filterElementID, columnName);
-    
+
     document.getElementById(filterElementID).value += urlEncode(columnName) + operator + urlEncode(value) + ',';
 }
 

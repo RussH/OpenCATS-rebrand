@@ -54,7 +54,7 @@ for ($i = 0; $i < 50; ++$i)
     {
         continue;
     }
-    
+
     $fileName = array_pop($_SESSION['CATS']->massImportFiles);
 
     $fullFilename = $_SESSION['CATS']->massImportDirectory . '/' . $fileName;
@@ -80,7 +80,7 @@ for ($i = 0; $i < 50; ++$i)
     {
         ++$success;
     }
-    
+
     ++$processed;
 }
 

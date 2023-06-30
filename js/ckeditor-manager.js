@@ -1,7 +1,7 @@
 
 function placeCkEditorIn(nodeId)
 {
-    CKEDITOR.replace(nodeId, { extraPlugins: 'font' } );
+    CKEDITOR.replace(editor1, { extraPlugins: 'font', disallowedContent: 'script, iframe, img' });
     CKEDITOR.on('instanceReady', function(ev)
     {
         var tags = ['p', 'ol', 'ul', 'li']; // etc.
@@ -14,7 +14,7 @@ function placeCkEditorIn(nodeId)
                     breakBeforeOpen : false,
                     breakAfterOpen : false,
                     breakBeforeClose : false,
-                    breakAfterClose : false, 
+                    breakAfterClose : false,
                 });
         }
     });

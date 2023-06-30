@@ -277,7 +277,7 @@ class JOB_TYPES {
         'H' => 'Hire',
         'C' => 'Contract',
         'C2H' => 'Contract To Hire',
-        'FL' => 'Freelance'       
+        'FL' => 'Freelance'
     );
 };
 

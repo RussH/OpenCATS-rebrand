@@ -109,7 +109,7 @@ class awBorder {
 	 */
 	public function rectangle(awDrawer $drawer, awPoint $p1, awPoint $p2) {
 
-        
+
 
 		// Border is hidden
 		if($this->hide) {

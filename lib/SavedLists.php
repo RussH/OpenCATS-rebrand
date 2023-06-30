@@ -90,7 +90,7 @@ class SavedLists
      * @param flag data item type
      * @return array saved lists data
      */
-     
+
     public function getAll($dataItemType = -1, $listType = ALL_LISTS)
     {
         if ($dataItemType != -1)
@@ -104,7 +104,7 @@ class SavedLists
         {
             $typeCriterion = '';
         }
-        
+
         if ($listType == STATIC_LISTS)
         {
             $typeCriterion .= ' AND is_dynamic = false';
@@ -193,8 +193,8 @@ class SavedLists
             $this->_siteID
         );
         $rs = $this->_db->query($sql);
-    }     
-    
+    }
+
     /**
      * Adds a list.
      *
@@ -220,7 +220,7 @@ class SavedLists
             $this->_siteID,
             $_SESSION['CATS']->getUserID()
         );
-        $rs = $this->_db->query($sql);       
+        $rs = $this->_db->query($sql);
     }
 
     /**
@@ -241,8 +241,8 @@ class SavedLists
             $savedListID,
             $this->_siteID
         );
-        $rs = $this->_db->query($sql);       
-        
+        $rs = $this->_db->query($sql);
+
         $sql = sprintf(
             "DELETE FROM
                 saved_list_entry
@@ -253,7 +253,7 @@ class SavedLists
             $savedListID,
             $this->_siteID
         );
-        $rs = $this->_db->query($sql);    
+        $rs = $this->_db->query($sql);
     }
 
     /**
@@ -384,10 +384,10 @@ class SavedLists
             }
         }
     }
-    
+
     /*
      * TODO: Document Me!
-     */ 
+     */
     function addEntryMany($savedListID, $dataItemType, $dataItemIDs)
     {
         $sql = sprintf(
@@ -406,13 +406,13 @@ class SavedLists
             implode(',', $dataItemIDs)
         );
 
-        $rs = $this->_db->getAssoc($sql);     
-        
+        $rs = $this->_db->getAssoc($sql);
+
         if (isset($rs['savedListID']))
         {
             return;
-        }  
-        
+        }
+
         $valuesArray = array();
         foreach ($dataItemIDs as $dataItemID)
         {
@@ -422,7 +422,7 @@ class SavedLists
                                   $this->_siteID .','.
                                   'NOW())';
         }
-        
+
         $sql = sprintf(
             "INSERT INTO saved_list_entry (
                 saved_list_id,
@@ -435,18 +435,18 @@ class SavedLists
             implode(',', $valuesArray)
         );
         $this->_db->query($sql);
-        
+
         $this->updateSavedListItemCountAndTimeStamp($savedListID);
     }
-    
+
     /*
      * TODO: Document Me!
-     */ 
+     */
     function removeEntryMany($savedListID, $dataItemIDs)
-    {        
+    {
         $sql = sprintf(
             "DELETE FROM
-                saved_list_entry 
+                saved_list_entry
              WHERE
                 saved_list_id = %s
              AND
@@ -459,10 +459,10 @@ class SavedLists
             implode(',', $dataItemIDs)
         );
         $this->_db->query($sql);
-        
+
         $this->updateSavedListItemCountAndTimeStamp($savedListID);
-    }    
-    
+    }
+
     /*
      * Immediantly regenerates the number of entries count for a static list.
      * Execute this EVERY TIME any change is made to the static list (except for
@@ -479,7 +479,7 @@ class SavedLists
                 saved_list_id = %s",
              $savedListID
         );
-                         
+
         $countRS = $this->_db->getAssoc($sql);
 
         $sql = sprintf(
@@ -492,11 +492,11 @@ class SavedLists
             $countRS['numberOfEntries'],
             $savedListID
         );
-        
+
         $this->_db->query($sql);
-        
+
         $sql = sprintf(
-            "UPDATE 
+            "UPDATE
                 saved_list
              SET
                 date_modified = NOW()
@@ -507,7 +507,7 @@ class SavedLists
             $this->_siteID,
             $savedListID
         );
-        
+
         $this->_db->query($sql);
     }
 
@@ -556,14 +556,14 @@ class SavedLists
                         $this->_siteID
                     );
                     $this->_db->query($sql);
-                    
+
                     $this->updateSavedListItemCountAndTimeStamp($savedListID);
 
                     break;
 
                 case LIST_EDITOR_REMOVE:
                     $sql = sprintf(
-                        "SELECT 
+                        "SELECT
                             saved_list_id AS savedListID
                         FROM
                             saved_list_entry
@@ -574,9 +574,9 @@ class SavedLists
                          $this->_db->makeQueryInteger($update[1]),
                          $this->_siteID
                     );
-                    
+
                     $rs = $this->_db->getAssoc($sql);
-                
+
                     $sql = sprintf(
                         "DELETE FROM
                             saved_list_entry
@@ -589,7 +589,7 @@ class SavedLists
                     );
 
                     $this->_db->query($sql);
-                    
+
                     if (isset($rs['savedListID']))
                     {
                         $this->updateSavedListItemCountAndTimeStamp($rs['savedListID']);

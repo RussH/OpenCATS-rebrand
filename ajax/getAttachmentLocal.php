@@ -33,7 +33,7 @@ $interface = new SecureAJAXInterface();
 include_once(LEGACY_ROOT . '/lib/CommonErrors.php');
 include_once(LEGACY_ROOT . '/lib/Attachments.php');
 
-@ini_set('memory_limit', '256M'); 
+@ini_set('memory_limit', '256M');
 
 if (!isset($_POST['id']) || !$interface->isRequiredIDValid('id'))
 {

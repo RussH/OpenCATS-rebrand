@@ -87,14 +87,14 @@ class DocumentToText
             {
                 $header = fread($handle, 5);
                 fclose($handle);
-                
+
                 if ($header == '{\rtf')
                 {
                     $documentType = DOCUMENT_TYPE_RTF;
                 }
             }
         }
-        
+
         /* Find the absolute path to the filename and escape it for use in a
          * system command.
          */
@@ -136,7 +136,7 @@ class DocumentToText
 
                 $nativeEncoding = 'ISO-8859-1';
                 $convertEncoding = false;
-                
+
                 if (SystemUtility::isWindows())
                 {
                     $command = 'TYPE ' . $escapedFilename . ' | "'. HTML2TEXT_PATH . '" -nobs ';
@@ -144,7 +144,7 @@ class DocumentToText
                 else
                 {
                     $command = '"'. HTML2TEXT_PATH . '" -nobs ' . $escapedFilename;
-                }                
+                }
                 break;
 
             case DOCUMENT_TYPE_TEXT:
@@ -158,8 +158,8 @@ class DocumentToText
                     return false;
                 }
                 $this->_linesString = $this->_rawOutput;
-                
-                return true;                
+
+                return true;
                 break;
 
             case DOCUMENT_TYPE_ODT:
@@ -200,7 +200,7 @@ class DocumentToText
         $this->_returnCode = $commandResult['returnCode'];
 
         /* Store the raw output for getRawOutput(). */
-        
+
         $commandResult['output'] = array_map(
             'rtrim', $commandResult['output']
         );
@@ -208,7 +208,7 @@ class DocumentToText
 
         /* Fix encoding issues. */
         if ($nativeEncoding == 'ISO-8859-1' && function_exists('iconv'))
-        {   
+        {
             $this->_rawOutput = iconv(
                 $nativeEncoding, 'UTF-8', $this->_rawOutput
             );
@@ -330,7 +330,7 @@ class DocumentToText
         }
 
         $contents = array_map('rtrim', $contents);
-        
+
         $this->_rawOutput = implode("\n", $contents);
         $this->_linesArray  = $contents;
         $this->_linesString = $this->_rawOutput;
@@ -416,7 +416,7 @@ class DocumentToText
                 $xml = new DOMDocument();
                 $xml->loadXML($data, LIBXML_NOENT | LIBXML_XINCLUDE | LIBXML_NOERROR | LIBXML_NOWARNING);
                 $raw_text = $xml->saveXML();
-                // We need to add a space where end-of-line and end-of-paragraphs present 
+                // We need to add a space where end-of-line and end-of-paragraphs present
                 $raw_text_patched = str_replace(
                         array('<w:br/>', '</w:p>', '<text:line-break', '<text:p'),
                         array("\n<w:br/>", "\n</w:p>", "\n<text:line-break", "\n<text:p"), $raw_text);

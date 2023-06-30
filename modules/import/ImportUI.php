@@ -176,12 +176,12 @@ class ImportUI extends UserInterface
             $this->import();
             return;
         }
-    
+
         $import = new Import($this->_siteID);
         $importData = $import->get($importID);
-    
+
         if (!eval(Hooks::get('IMPORT_VIEW_ERRORS'))) return;
-    
+
         if (isset($importData['importErrors']))
         {
             $importErrors = htmlspecialchars($importData['importErrors'], ENT_QUOTES, 'UTF-8');
@@ -191,12 +191,12 @@ class ImportUI extends UserInterface
         {
             $this->_template->assign('importErrors', '');
         }
-    
+
         $importID = htmlspecialchars($importID, ENT_QUOTES, 'UTF-8');
         $this->_template->assign('importID', $importID);
         $this->viewPending();
         return;
-    }    
+    }
 
    /*
     * Called by handleRequest() and viewErrors() to view pending imports and to display relavent information.
@@ -245,7 +245,7 @@ class ImportUI extends UserInterface
             'Web Site',         'web_site',
             'Key Skills',       'key_skills'
         );
-        
+
         $this->jobOrdersTypes = array(
             'Reference',        'client_job_id',
             'Title',            'title',
@@ -259,7 +259,7 @@ class ImportUI extends UserInterface
             'Public',           'public',
             'Is Hot',           'is_hot'
         );
-        
+
         $this->contactsTypes = array(
             'Company',      'company_id',
             'Full Name',   'name',
@@ -312,7 +312,7 @@ class ImportUI extends UserInterface
             $this->jobOrdersTypes[] = $data['fieldName'];
             $this->jobOrdersTypes[] = '#' . $data['fieldName'];
         }
-        
+
         $rs = $candidates->extraFields->getSettings();
         foreach ($rs as $data)
         {
@@ -639,7 +639,7 @@ class ImportUI extends UserInterface
             case 'Candidates':
                 $types = $this->candidatesTypes;
                 break;
-            
+
             case 'JobOrders':
                 $types = $this->jobOrdersTypes;
                 break;
@@ -812,7 +812,7 @@ class ImportUI extends UserInterface
                 $types = $this->candidatesTypes;
                 $importID = $import->add('candidate');
                 break;
-                
+
             case 'JobOrders':
                 $types = $this->jobOrdersTypes;
                 $importID = $import->add('joborder');
@@ -912,7 +912,7 @@ class ImportUI extends UserInterface
                                 case 'Candidates':
                                     $import->addForeignSettingUnique(DATA_ITEM_CANDIDATE, $theFields[$fieldID], $importID);
                                     break;
-                                    
+
                                  case 'JobOrders':
                                     $import->addForeignSettingUnique(DATA_ITEM_JOBORDER, $theFields[$fieldID], $importID);
                                     break;
@@ -950,7 +950,7 @@ class ImportUI extends UserInterface
                 case 'Candidates':
                     $result = $this->addToCandidates($catsEntriesRows, $catsEntriesValuesNamed, $foreignEntries, $importID);
                     break;
-                    
+
                 case 'JobOrders':
                     $result = $this->addToJobOrders($catsEntriesRows, $catsEntriesValuesNamed, $foreignEntries, $importID);
                     break;
@@ -1091,7 +1091,7 @@ class ImportUI extends UserInterface
 
         return '';
     }
-    
+
     /*
     * Inserts a record into job orders.
     */

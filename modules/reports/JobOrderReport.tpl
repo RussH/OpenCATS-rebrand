@@ -142,7 +142,7 @@
 
                 <input type="submit" class="button" name="submit" value="Generate Report" />&nbsp;
                 <input type="reset"  class="button" name="reset"  value="Reset" />&nbsp;
-                
+
                 <!-- IE PDF Hack -->
                 <input type="hidden" name="ext" value=".pdf" />
             </form>

@@ -51,11 +51,11 @@ else
 include_once(LEGACY_ROOT . '/lib/Attachments.php');
 
 $db = DatabaseConnection::getInstance();
- 
+
 include_once(LEGACY_ROOT . '/lib/Attachments.php');
 
 $db->query('ALTER IGNORE TABLE `attachment` CHANGE `directory_name` `directory_name` VARCHAR(64);');
- 
+
 $rs = $db->getAllAssoc('SELECT site_id, attachment_id, directory_name FROM attachment');
 
 foreach ($rs as $index => $data)
@@ -64,32 +64,32 @@ foreach ($rs as $index => $data)
     {
         continue;
     }
-    
+
     $siteDirectory = 'site_'.$data['site_id'];
     $idDirectory = ((int) ($data['attachment_id'] / 1000)) . 'xxx';
-    
+
     $newFileDirectory = './attachments/' . $siteDirectory;
-    
+
     if (!is_dir($newFileDirectory))
     {
         @mkdir($newFileDirectory, 0777);
-        
+
         /* Prevent listing of new directory. */
         @file_put_contents($newFileDirectory . '/index.php', '');
     }
 
     $newFileDirectory = './attachments/' . $siteDirectory . '/' . $idDirectory;
-    
+
     if (!is_dir($newFileDirectory))
     {
         @mkdir($newFileDirectory, 0777);
-        
+
          /* Prevent listing of new directory. */
         @file_put_contents($newFileDirectory . '/index.php', '');
     }
 
     $fullDirectoryPath = $newFileDirectory . '/' . $data['directory_name'];
-    
+
     if (@rename('./attachments/' . $data['directory_name'], $fullDirectoryPath) === true)
     {
         $newDirectoryEntry = $siteDirectory.'/'.$idDirectory.'/'.$data['directory_name'];

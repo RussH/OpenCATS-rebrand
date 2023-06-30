@@ -263,15 +263,15 @@ function checkOpeningsAvailable()
     {
         fieldLabel.style.color = '#000';
     }
-    
+
     fieldValueToCompare = document.getElementById('openings').value;
     if (stringIsNumeric(fieldValueToCompare) && stringIsNumeric(fieldValue) &&
-        fieldValue > fieldValueToCompare) 
+        fieldValue > fieldValueToCompare)
     {
         errorMessage = "    - Remaining Openings can not be more than "+fieldValueToCompare+".\n";
 
-        fieldLabel.style.color = '#ff0000';            
-    }    
+        fieldLabel.style.color = '#ff0000';
+    }
 
     return errorMessage;
 }

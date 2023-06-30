@@ -65,7 +65,7 @@ function checkEmailAlreadyInSystem(email, sessionCookie)
             candidateIsAlreadyInSystem = true;
             candidateIsAlreadyInSystemID = idNode.firstChild.nodeValue;
             candidateIsAlreadyInSystemName = http.responseXML.getElementsByTagName('name').item(0).firstChild.nodeValue;
-            
+
             document.getElementById('candidateAlreadyInSystemName').innerHTML = candidateIsAlreadyInSystemName;
             document.getElementById('candidateAlreadyInSystemTable').style.display = '';
         }
@@ -135,7 +135,7 @@ function checkPhoneAlreadyInSystem(phone, sessionCookie)
             candidateIsAlreadyInSystem = true;
             candidateIsAlreadyInSystemID = idNode.firstChild.nodeValue;
             candidateIsAlreadyInSystemName = http.responseXML.getElementsByTagName('name').item(0).firstChild.nodeValue;
-            
+
             document.getElementById('candidateAlreadyInSystemName').innerHTML = candidateIsAlreadyInSystemName;
             document.getElementById('candidateAlreadyInSystemTable').style.display = '';
         }

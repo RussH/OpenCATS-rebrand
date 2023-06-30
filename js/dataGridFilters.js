@@ -19,7 +19,7 @@ var filter = {
         {
             filterBr = document.createElement('br');
             filterBr.clear = 'all';
-        
+
             filterArea.appendChild(filterBr);
 
             for (var i = 1; i < filterCounter; i++)
@@ -80,7 +80,7 @@ filter.Filter.prototype.createOption = function(value, innerHtml, isSelected) {
     option.innerHTML = innerHtml;
     if (isSelected) {
         option.selected = 'selected';
-    } 
+    }
     return option;
 }
 
@@ -153,11 +153,11 @@ filter.Filter.prototype.createSelectAreaChangeHandler = function(
 filter.DefaultFilter.prototype.createInputAreaChangeHandler = function(instanceName, filterAreaID, filterCounter) {
     return function() {
         addColumnToFilter(
-            'filterArea' + instanceName, 
+            'filterArea' + instanceName,
             getFilterColumnNameFromOptionValue(document.getElementById(filterAreaID+filterCounter+'columnName').value),
             document.getElementById(filterAreaID+filterCounter+'operator').value,
             document.getElementById(filterAreaID+filterCounter+'value').value
-        ); 
+        );
     };
 }
 
@@ -222,9 +222,9 @@ filter.NearZipCodeFilter.prototype.render = function() {
             id: this.filterAreaID + this.filterCounter + 'zip1',
             innerHTML: 'Zipcode:'
         }
-    )); 
+    ));
     var inputAreaChangeHandlerZip = function() {
-        addColumnToFilter('filterArea' + this.instanceName, 
+        addColumnToFilter('filterArea' + this.instanceName,
             getFilterColumnNameFromOptionValue(document.getElementById(this.filterAreaID+this.filterCounter+'columnName').value),
             document.getElementById(this.filterAreaID+this.filterCounter+'operator').value,
             document.getElementById(this.filterAreaID+this.filterCounter+'zipInput1').value + ',' + document.getElementById(this.filterAreaID+this.filterCounter+'zipInput2').value

@@ -375,7 +375,7 @@ class SearchCandidates
         //FIXME: Library code Session dependencies suck.
         $this->_userID = $_SESSION['CATS']->getUserID();
     }
-    
+
      /**
      * Returns all candidates.
      *
@@ -735,8 +735,8 @@ class SearchCompanies
         //FIXME: Library code Session dependencies suck.
         $this->_userID = $_SESSION['CATS']->getUserID();
     }
-    
-    
+
+
     /**
      * Returns all companies with names matching $wildCardString.
      *
@@ -852,8 +852,8 @@ class SearchJobOrders
         //FIXME: Library code Session dependencies suck.
         $this->_userID = $_SESSION['CATS']->getUserID();
     }
-    
-    
+
+
     /**
      * Returns all job orders with titles matching $wildCardString. If
      * activeOnly is true, only Open(defined in config, or default as 'Active', 'On Hold', 'Full') job orders will be shown.
@@ -1013,9 +1013,9 @@ class SearchJobOrders
 
         return $this->_db->getAllAssoc($sql);
     }
-    
+
     /**
-     * Returns all recently modified job orders. If activeOnly is true, 
+     * Returns all recently modified job orders. If activeOnly is true,
      * only Open(defined in config, or default as 'Active', 'On Hold', 'Full') job orders will be shown.
      *
      * @param boolean return active job orders only
@@ -1110,8 +1110,8 @@ class ContactsSearch
         //FIXME: Library code Session dependencies suck.
         $this->_userID = $_SESSION['CATS']->getUserID();
     }
-    
-    
+
+
     /**
      * Returns all contacts with full names matching $wildCardString.
      *
@@ -1317,8 +1317,8 @@ class QuickSearch
         //FIXME: Library code Session dependencies suck.
         $this->_userID = $_SESSION['CATS']->getUserID();
     }
-    
-    
+
+
     /**
      * Support function for Quick Search code. Searches all relevant fields for
      * $wildCardString.
@@ -1395,7 +1395,7 @@ class QuickSearch
 
         return $this->_db->getAllAssoc($sql);
     }
-    
+
     /**
      * Support function for Quick Search code. Searches all relevant fields for
      * $wildCardString.
@@ -1450,7 +1450,7 @@ class QuickSearch
 
         return $this->_db->getAllAssoc($sql);
     }
-    
+
     /**
      * Support function for Quick Search code. Searches all relevant fields for
      * $wildCardString.
@@ -1538,7 +1538,7 @@ class QuickSearch
 
         return $this->_db->getAllAssoc($sql);
     }
-    
+
     /**
      * Support function for Quick Search code. Searches all relevant fields for
      * $wildCardString.
@@ -1631,8 +1631,8 @@ class SavedSearches
         //FIXME: Library code Session dependencies suck.
         $this->_userID = $_SESSION['CATS']->getUserID();
     }
-    
-    
+
+
     /**
      * Removes a saved search entry.
      *
@@ -1884,7 +1884,7 @@ class SearchByResumePager extends Pager
 
             /* Create the Sphinx query string. */
             $wildCardString = DatabaseSearch::humanToSphinxBoolean($wildCardString);
-            
+
             /* Execute the Sphinx query. Sphinx can ask us to retry if its
              * maxed out. Retry up to 5 times.
              */
@@ -1896,7 +1896,7 @@ class SearchByResumePager extends Pager
                 {
                     sleep(1);
                 }
-                
+
                 $results = $sphinx->Query($wildCardString, SPHINX_INDEX);
                 $errorMessage = $sphinx->GetLastError();
             }
@@ -1908,7 +1908,7 @@ class SearchByResumePager extends Pager
 
             /* Throw a fatal error if Sphinx errors occurred. */
             if ($results === false)
-            {   
+            {
                 $this->fatal('Sphinx Error: ' . ucfirst($errorMessage) . '.');
             }
 

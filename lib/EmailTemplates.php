@@ -48,13 +48,13 @@ class EmailTemplates
         $this->_siteID = $siteID;
         $this->_db = DatabaseConnection::getInstance();
     }
-    
+
     public function delete($templateID)
     {
         $sql = sprintf(
             "DELETE FROM
                 email_template
-            WHERE 
+            WHERE
                 site_id = %s
             AND
                 email_template_id = %s
@@ -64,20 +64,20 @@ class EmailTemplates
             $this->_db->makeQueryInteger($templateID),
             $this->_db->makeQueryString("CUSTOM")
         );
-        
+
         $this->_db->query($sql);
     }
-    
+
     public function add($text, $title, $tag, $siteID, $possibleVariables)
     {
         $sql = sprintf(
             "INSERT INTO email_template(
-                text, 
-                allow_substitution, 
-                site_id, 
-                tag, 
-                title, 
-                possible_variables, 
+                text,
+                allow_substitution,
+                site_id,
+                tag,
+                title,
+                possible_variables,
                 disabled
             )
             VALUES (
@@ -102,10 +102,10 @@ class EmailTemplates
         }
 
         $templateID = $this->_db->getLastInsertID();
-        
+
         return $templateID;
     }
-    
+
     /**
      * Updates an e-mail template.
      *
@@ -135,7 +135,7 @@ class EmailTemplates
                 $this->_siteID
             );
         }
-        else 
+        else
         {
             $sql = sprintf(
                 "UPDATE
@@ -153,7 +153,7 @@ class EmailTemplates
                 $this->_siteID
             );
         }
-        
+
 
         $queryResult = $this->_db->query($sql);
         if (!$queryResult)
@@ -193,7 +193,7 @@ class EmailTemplates
         }
 
         return true;
-    }    
+    }
 
     /**
      * Returns all relevent template data for a given e-mail template ID.
@@ -349,7 +349,7 @@ class EmailTemplates
             $mailerSettings = new MailerSettings($this->_siteID);
             $mailerSettingsRS = $mailerSettings->getAll();
 
-            if ($mailerSettingsRS['configured'] == '0' || 
+            if ($mailerSettingsRS['configured'] == '0' ||
                 MAIL_MAILER == 0 || (
                     isset($rs['disabled']) && $rs['disabled'] == '1'))
             {
@@ -391,7 +391,7 @@ class EmailTemplates
 
         return $this->_db->getAllAssoc($sql);
     }
-    
+
     public function getAllCustom()
     {
         $sql = sprintf(

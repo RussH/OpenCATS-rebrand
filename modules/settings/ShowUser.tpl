@@ -61,10 +61,10 @@
                                 <td class="vertical">Access Level:</td>
                                 <td class="data"><?php $this->_($this->data['accessLevelLongDescription']); ?></td>
                             </tr>
-                            
+
                             <?php if($this->EEOSettingsRS['enabled'] == 1): ?> <tr>
                                 <td class="vertical">Can See EEO Info:</td>
-                                    <td class="data">                                       
+                                    <td class="data">
                                         This user is <?php if ($this->data['canSeeEEOInfo'] == 0): ?>not <?php endif; ?>allowed to edit and view candidate's EEO information.
                                     </td>
                                 </tr>

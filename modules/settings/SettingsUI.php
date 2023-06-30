@@ -80,7 +80,7 @@ class SettingsUI extends UserInterface
         );
 
         $this->_subTabs = $mp;
-        
+
         $this->_hooks = $this->defineHooks();
     }
 
@@ -97,7 +97,7 @@ class SettingsUI extends UserInterface
                     }
                 }
             ',
-            
+
             /* Home goes to settings in career portal mode. */
             'HOME' => '
                 if ($_SESSION[\'CATS\']->hasUserCategory(\'careerportal\'))
@@ -106,7 +106,7 @@ class SettingsUI extends UserInterface
                     return false;
                 }
             ',
-            
+
             /* My Profile goes to administration in career portal mode. */
             'SETTINGS_DISPLAY_PROFILE_SETTINGS' => '
                 if ($_SESSION[\'CATS\']->hasUserCategory(\'careerportal\'))
@@ -126,7 +126,7 @@ class SettingsUI extends UserInterface
             'REPORTS_HANDLE_REQUEST' =>    'if ($_SESSION[\'CATS\']->hasUserCategory(\'careerportal\')) $this->fatal("' . ERROR_NO_PERMISSION . '");'
         );
     }
-    
+
     private function onAddNewTag()
     {
         if (!isset($_SESSION['CATS']) || empty($_SESSION['CATS']))
@@ -160,13 +160,13 @@ class SettingsUI extends UserInterface
 						</li>
 					</ul>
 				</li>',
-	        $arr['id'],$arr['id'],$arr['tag_title'], CATSUtility::getIndexName(), $arr['id']);        	
+	        $arr['id'],$arr['id'],$arr['tag_title'], CATSUtility::getIndexName(), $arr['id']);
         }
-        
-        
-        return; 
+
+
+        return;
     }
-    
+
     private function onRemoveTag()
     {
         if (!isset($_SESSION['CATS']) || empty($_SESSION['CATS']))
@@ -176,9 +176,9 @@ class SettingsUI extends UserInterface
         }
         $tags = new Tags($this->_siteID);
         $tags->delete($_POST['tag_id']);
-        return; 
+        return;
     }
-    
+
     private function onChangeTag()
     {
         if (!isset($_SESSION['CATS']) || empty($_SESSION['CATS']))
@@ -192,8 +192,8 @@ class SettingsUI extends UserInterface
         echo htmlspecialchars($_POST['tag_title'], ENT_QUOTES, 'UTF-8');
         return;
     }
-    
-    
+
+
     /**
      * This function make changes to tags
      * @return unknown_type
@@ -201,7 +201,7 @@ class SettingsUI extends UserInterface
     private function onChangeTags()
     {
         // TODO: Add tags changing code
- 
+
     }
 
     /**
@@ -244,7 +244,7 @@ class SettingsUI extends UserInterface
                     $this->changeTags();
                 }
                 break;
-            
+
             case 'changePassword':
                 /* Bail out if the user is demo. */
                 if ($this->getUserAccessLevel('settings.changePassword') == ACCESS_LEVEL_DEMO)
@@ -431,7 +431,7 @@ class SettingsUI extends UserInterface
                 break;
 
             case 'customizeExtraFields':
-                
+
                 if ($this->isPostBack())
                 {
                     if ($this->getUserAccessLevel('settings.customizeExtraFields.POST') < ACCESS_LEVEL_SA)
@@ -451,7 +451,7 @@ class SettingsUI extends UserInterface
                 break;
 
             case 'customizeCalendar':
-                
+
                 if ($this->isPostBack())
                 {
                     if ($this->getUserAccessLevel('settings.customizeCalendar.POST') < ACCESS_LEVEL_SA)
@@ -486,7 +486,7 @@ class SettingsUI extends UserInterface
                 break;
 
             case 'emailSettings':
-                
+
                 if ($this->isPostBack())
                 {
                     if ($this->getUserAccessLevel('settings.emailSettings.POST') < ACCESS_LEVEL_SA)
@@ -538,7 +538,7 @@ class SettingsUI extends UserInterface
                 break;
 
             case 'careerPortalTemplateEdit':
-                
+
                 if ($this->isPostBack())
                 {
                     if ($this->getUserAccessLevel('settings.careerPortalTemplateEdit.POST') < ACCESS_LEVEL_SA && !$_SESSION['CATS']->hasUserCategory('careerportal'))
@@ -581,7 +581,7 @@ class SettingsUI extends UserInterface
                 break;
 
             case 'eeo':
-                
+
                 if ($this->isPostBack())
                 {
                     if ($this->getUserAccessLevel('settings.eeo.POST') < ACCESS_LEVEL_SA)
@@ -619,7 +619,7 @@ class SettingsUI extends UserInterface
                 break;
 
             case 'emailTemplates':
-                
+
                 if ($this->isPostBack())
                 {
                     if ($this->getUserAccessLevel('settings.emailTemplates.POST') < ACCESS_LEVEL_SA && !$_SESSION['CATS']->hasUserCategory('careerportal'))
@@ -680,7 +680,7 @@ class SettingsUI extends UserInterface
                 }
                 $this->onAddNewTag();
                 break;
-            
+
             case 'ajax_tags_del':
                 if (!isset($_SESSION['CATS']) || empty($_SESSION['CATS']))
                 {
@@ -698,7 +698,7 @@ class SettingsUI extends UserInterface
                 }
                 $this->onChangeTag();
                 break;
-               
+
             case 'ajax_wizardAddUser':
                 if (!isset($_SESSION['CATS']) || empty($_SESSION['CATS']))
                 {
@@ -871,11 +871,11 @@ class SettingsUI extends UserInterface
                     $this->administration();
                 }
                 break;
-            
+
             case 'addEmailTemplate':
                 $this->addEmailTemplate();
                 break;
-                
+
             case 'deleteEmailTemplate':
                 $this->deleteEmailTemplate();
                 break;
@@ -892,21 +892,21 @@ class SettingsUI extends UserInterface
         }
     }
 
-    private function deleteEmailTemplate() 
+    private function deleteEmailTemplate()
     {
         if ($this->_realAccessLevel < ACCESS_LEVEL_SA)
         {
             CommonErrors::fatal(COMMONERROR_PERMISSION, $this);
             return;
         }
-        
+
         $emailTemplates = new EmailTemplates($this->_siteID);
         $templateID = $_GET['id'];
         $emailTemplates->delete($templateID);
-       
+
         $this->emailTemplates();
     }
-    
+
     private function addEmailTemplate()
     {
         if ($this->_realAccessLevel < ACCESS_LEVEL_SA)
@@ -914,7 +914,7 @@ class SettingsUI extends UserInterface
             CommonErrors::fatal(COMMONERROR_PERMISSION, $this);
             return;
         }
-        
+
         $possibleVariables = "%CANDSTATUS%%CANDOWNER%%CANDFIRSTNAME%%CANDFULLNAME%%CANDPREVSTATUS%";
         $emailTemplates = new EmailTemplates($this->_siteID);
         $emailTemplateID = $emailTemplates->add("", "New Email Template", "CUSTOM", $this->_siteID, $possibleVariables);
@@ -927,7 +927,7 @@ class SettingsUI extends UserInterface
             $this->emailTemplates();
         }
     }
-    
+
     /*
      * Called by handleRequest() to process loading the get firefox modal dialog.
      */
@@ -1593,7 +1593,7 @@ class SettingsUI extends UserInterface
         }
 
         $templateID = $_POST['templateID'];
-        
+
         if(isset($_POST['emailTemplateTitle']))
         {
              $templateTitle = $_POST['emailTemplateTitle'];
@@ -1602,7 +1602,7 @@ class SettingsUI extends UserInterface
         {
              $templateTitle = "";
         }
-        
+
         $useThisTemplate = isset($_POST['useThisTemplate']);
 
         if ($useThisTemplate)

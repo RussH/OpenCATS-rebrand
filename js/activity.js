@@ -282,7 +282,7 @@ function Activity_editEntry(activityID, dataItemID, dataItemType, sessionCookie)
         var minuteString = timeString.substr(0,timeString.indexOf(' '));
         var timeString = timeString.substr(timeString.indexOf(' ')+1);
         var amPmString = timeString.substr(0,timeString.indexOf(')'));
-        
+
         /* Time editor. */
         var hourSelect = document.createElement('select');
         hourSelect.setAttribute('id', 'hourEditActivity' + activityID);
@@ -297,7 +297,7 @@ function Activity_editEntry(activityID, dataItemID, dataItemType, sessionCookie)
             }
             hourSelect.appendChild(hourSelectOption);
         }
-        
+
         var minuteSelect = document.createElement('select');
         minuteSelect.setAttribute('id', 'minuteEditActivity' + activityID);
         for (var i = 0; i<= 59; ++i)
@@ -311,10 +311,10 @@ function Activity_editEntry(activityID, dataItemID, dataItemType, sessionCookie)
             }
             minuteSelect.appendChild(minuteSelectOption);
         }
-        
+
         var AMPMSelect = document.createElement('select');
         AMPMSelect.setAttribute('id', 'ampmEditActivity' + activityID);
-        
+
         var AMPMSelectOptionAM = document.createElement('option');
         AMPMSelectOptionAM.value = 'AM';
         AMPMSelectOptionAM.innerHTML = 'AM';
@@ -323,7 +323,7 @@ function Activity_editEntry(activityID, dataItemID, dataItemType, sessionCookie)
             AMPMSelectOptionAM.selected = true;
         }
         AMPMSelect.appendChild(AMPMSelectOptionAM);
-        
+
         var AMPMSelectOptionPM = document.createElement('option');
         AMPMSelectOptionPM.value = 'PM';
         AMPMSelectOptionPM.innerHTML = 'PM';
@@ -332,20 +332,20 @@ function Activity_editEntry(activityID, dataItemID, dataItemType, sessionCookie)
             AMPMSelectOptionPM.selected = true;
         }
         AMPMSelect.appendChild(AMPMSelectOptionPM);
-        
+
         var dateTimeTable = document.createElement('table');
         var dateTimeTableTr = document.createElement('tr');
         var dateTimeTableTdLeft = document.createElement('td');
         var dateTimeTableTdRight = document.createElement('td');
-        
-        dateTimeTableTdLeft.appendChild(dateSpan);    
-        dateTimeTableTdRight.appendChild(hourSelect);    
-        dateTimeTableTdRight.appendChild(minuteSelect); 
-        dateTimeTableTdRight.appendChild(AMPMSelect);    
+
+        dateTimeTableTdLeft.appendChild(dateSpan);
+        dateTimeTableTdRight.appendChild(hourSelect);
+        dateTimeTableTdRight.appendChild(minuteSelect);
+        dateTimeTableTdRight.appendChild(AMPMSelect);
         dateTimeTableTr.appendChild(dateTimeTableTdLeft);
         dateTimeTableTr.appendChild(dateTimeTableTdRight);
         dateTimeTable.appendChild(dateTimeTableTr);
-        
+
         editTD.appendChild(dateTimeTable);
         editTD.appendChild(typeSelectList);
         editTD.appendChild(document.createTextNode("\u00a0"));
@@ -449,7 +449,7 @@ function Activity_submitEditedEntry(notes, date, hour, minute, ampm,
         var regardingTD = document.getElementById('activityRegarding' + activityID);
         var notesTD     = document.getElementById('activityNotes' + activityID);
         var dateTD     = document.getElementById('activityDate' + activityID);
-        
+
         /* Return if we have any errors. */
         var errorCodeNode    = http.responseXML.getElementsByTagName('errorcode').item(0);
         var errorMessageNode = http.responseXML.getElementsByTagName('errormessage').item(0);
@@ -487,12 +487,12 @@ function Activity_submitEditedEntry(notes, date, hour, minute, ampm,
         {
             notesTD.innerHTML = notesNode.firstChild.nodeValue;
         }
-        
+
         /* Replace the text inside the notes text span. */
         if (dateTD.firstChild && dateNode.firstChild)
         {
             dateTD.innerHTML = dateNode.firstChild.nodeValue;
-        }        
+        }
 
         /* Re-enable the activity entry's action icons. */
         editAction.style.visibility = 'visible';

@@ -122,8 +122,8 @@
                             <input type="radio" name="role" value="none" title="" checked /> Normal User
                         </span>
                     <?php endif; ?>
-                    
-                    <?php if($this->EEOSettingsRS['enabled'] == 1): ?>                    
+
+                    <?php if($this->EEOSettingsRS['enabled'] == 1): ?>
                          <tr>
                             <td class="tdVertical">Allowed to view EEO Information:</td>
                             <td class="tdData">
@@ -134,7 +134,7 @@
                             </td>
                         </tr>
                     <?php endif; ?>
-                    
+
 		    <?php if ($this->auth_mode != "ldap"): ?>
                     <tr id="passwordResetElement1">
                         <td class="tdVertical">

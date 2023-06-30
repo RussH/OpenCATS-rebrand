@@ -55,14 +55,14 @@ if (file_exists('INSTALL_BLOCK') && ($_SESSION['CATS']->getAccessLevel(ACL::SECO
 }
 
 $db = DatabaseConnection::getInstance();
- 
+
 $rs = $db->getAllAssoc('SELECT site_id, attachment_id, directory_name, stored_filename FROM attachment WHERE text = "" OR isnull(text) AND resume = 1');
 
 foreach ($rs as $index => $data)
 {
     /* Attempt to reindex file. */
     $storedFilename = './attachments/'.$data['directory_name'].'/'.$data['stored_filename'];
-    
+
     $documentToText = new DocumentToText();
     $documentType = $documentToText->getDocumentType(
         $storedFilename
@@ -89,9 +89,9 @@ foreach ($rs as $index => $data)
         if (!$documentToText->isError())
         {
             $extractedText = $documentToText->getString();
-            
+
             $reindexed++;
-            
+
             $db->query('UPDATE attachment SET text = '.$db->makeQueryString($extractedText).' WHERE attachment_id = '.$data['attachment_id']);
         }
     }

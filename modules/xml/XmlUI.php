@@ -243,7 +243,7 @@ class XmlUI extends UserInterface
                                 $txtJobPosting
                             );
                             break;
-                            
+
                         case 'jobID':
                             $txtJobPosting = XmlTemplate::replaceTemplateTags(
                                 $tag,
@@ -300,7 +300,7 @@ class XmlUI extends UserInterface
                                 $txtJobPosting
                             );
                             break;
-                            
+
                         case 'notes':
                             $txtJobPosting = XmlTemplate::replaceTemplateTags(
                                 $tag,
