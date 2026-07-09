@@ -1,0 +1,6 @@
+a.fb-invalid-link {
+    background-color: #fff3cd !important;
+    border-bottom: 2px solid #dc3545 !important;
+    color: #842029 !important;
+    outline: 1px dashed #dc3545 !important;
+}
